@@ -5,48 +5,30 @@
 )
 AS
 
-DECLARE @json TABLE (
-  [key]	NVARCHAR(4000)
-, [value]	NVARCHAR(MAX)
-);
-
-INSERT INTO @json (
-  [key]
-, [value]
-)
-SELECT 
-  oj.[key]
-, oj.[value]
-FROM sprockit.Execution e
-  CROSS APPLY OPENJSON(e.ExecutionProperties) oj
-WHERE e.ExecutionId = @executionId;
-
-WITH src AS (
+WITH old AS (
   SELECT 
-    @propertyName AS [key]
-  , @propertyValue AS [value]
+    t.c.value('@name', 'NVARCHAR(4000)') AS [name]
+  , t.c.value('@value', 'NVARCHAR(4000)') AS [value]
+  FROM [sprockit].[Execution] e
+    CROSS APPLY e.ExecutionProperties.nodes('//Properties/Property') t(c)
+  WHERE ExecutionId = @executionid
+), new AS (
+  SELECT
+    [name]
+  , CASE [name] WHEN @propertyName THEN @propertyValue ELSE [value] END AS [value]
+  FROM old
+  
+  UNION 
+  
+  SELECT
+    @propertyName
+  , @propertyValue
 )
-MERGE INTO @json tgt
-USING src
-  ON src.[key] = tgt.[key]
-WHEN MATCHED THEN
-  UPDATE
-  SET [value] = src.[value]
-WHEN NOT MATCHED BY TARGET THEN
-  INSERT (
-    [key]
-  , [value]
-  ) VALUES (
-    src.[key]
-  , src.[value]
-  )
-;
-
 UPDATE e
-SET ExecutionProperties = (
-  SELECT 
-    '{' + STRING_AGG(QUOTENAME([key], '"') + ':' + QUOTENAME([value], '"'), ',') + '}'
-  FROM @json
-)
+SET ExecutionProperties = '<Properties>' + (
+  SELECT *
+  FROM new AS Property
+  FOR XML AUTO
+) + '</Properties>'
 FROM sprockit.Execution e
-WHERE e.ExecutionId = @executionId;
+WHERE e.ExecutionId = @executionid

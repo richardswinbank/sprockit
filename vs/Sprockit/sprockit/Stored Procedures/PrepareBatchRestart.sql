@@ -3,6 +3,21 @@
 )
 AS
 
+-- delete reservations from last attempt
+DELETE r
+FROM sprockit.Reservation r
+  INNER JOIN sprockit.Process p ON p.ProcessId = r.ProcessId
+WHERE p.ProcessGroup = @processGroup
+
+-- clear up after crashed handlers
+UPDATE h
+SET EndDateTime = GETUTCDATE()
+  , [Status] = 'Unknown'
+FROM sprockit.Handler h
+  INNER JOIN sprockit.Batch b ON b.BatchId = h.BatchId
+WHERE h.EndDateTime IS NULL
+AND b.ProcessGroup = @processGroup
+
 -- reset process statuses
 UPDATE sprockit.Process
 SET [Status] = 
@@ -11,6 +26,7 @@ SET [Status] =
     ELSE 'Ready'
   END
 , LastStatusUpdate = GETUTCDATE()
+, ErrorCount = 0
 WHERE [Status] IN (
   'Starting'
 , 'Running'

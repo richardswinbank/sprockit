@@ -7,7 +7,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{04c478df-7c6e-40fc-bd03-02748bb7aefc}</ProjectGuid>
-    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.SqlAzureV12DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
@@ -63,28 +63,34 @@
     <Folder Include="sprockit\Stored Procedures\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="SyncToProject.scmp" />
-  </ItemGroup>
-  <ItemGroup>
     <Build Include="sprockit\Tables\Execution.sql" />
     <Build Include="sprockit\Tables\Reservation.sql" />
     <Build Include="sprockit\Tables\ProcessDependency.sql" />
-    <Build Include="sprockit\Tables\ExecutionError.sql" />
     <Build Include="sprockit\Tables\Handler.sql" />
     <Build Include="sprockit\Tables\Batch.sql" />
     <Build Include="sprockit\Tables\Process.sql" />
-    <Build Include="Security\RoleMemberships.sql" />
     <Build Include="sprockit\Functions\DependencyStatus.sql" />
     <Build Include="sprockit\Stored Procedures\ReserveProcess.sql" />
-    <Build Include="sprockit\Stored Procedures\LogExecutionError.sql" />
     <Build Include="sprockit\Stored Procedures\UnregisterHandler.sql" />
     <Build Include="sprockit\Stored Procedures\RegisterHandler.sql" />
     <Build Include="sprockit\Stored Procedures\EnqueueProcesses.sql" />
     <Build Include="sprockit\Stored Procedures\UpdateMetrics.sql" />
     <Build Include="sprockit\Stored Procedures\PrepareNewBatch.sql" />
     <Build Include="sprockit\Stored Procedures\PrepareBatchRestart.sql" />
-    <Build Include="sprockit\Stored Procedures\ReleaseReservation.sql" />
     <Build Include="sprockit\Stored Procedures\SetExecutionProperty.sql" />
     <Build Include="Security\sprockit.sql" />
+    <Build Include="sprockit\Tables\Event.sql" />
+    <Build Include="sprockit\Stored Procedures\Rewind.sql" />
+    <Build Include="sprockit\Stored Procedures\RethrowError.sql" />
+    <Build Include="sprockit\Stored Procedures\ResolveProcessId.sql" />
+    <Build Include="sprockit\Stored Procedures\ReleaseProcess.sql" />
+    <Build Include="sprockit\Stored Procedures\LogEvent.sql" />
+    <Build Include="sprockit\Stored Procedures\LogError.sql" />
+    <Build Include="sprockit\Stored Procedures\ConfigureProcesses.sql" />
+    <Build Include="sprockit\Tables\ProcessType.sql" />
+    <Build Include="sprockit\Tables\RetryableError.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SqlSchemaCompare1.scmp" />
   </ItemGroup>
 </Project>

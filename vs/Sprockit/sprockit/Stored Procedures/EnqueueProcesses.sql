@@ -5,6 +5,7 @@ AS
 
 SET NOCOUNT ON
 
+-- Set 'Not ready' processes to 'Ready' when predecessors are all 'Done'
 UPDATE p
 SET [Status] = 'Ready'
   , LastStatusUpdate = GETUTCDATE()
@@ -19,21 +20,39 @@ WHERE ProcessPath IN (
   AND MIN(PredecessorStatus) = MAX(PredecessorStatus)  -- has no predecessor with other status
 )
 
+-- Set 'Errored' processes to 'Ready' when error is retryable and under retry limit
+UPDATE p
+SET [Status] = 'Ready'
+  , LastStatusUpdate = GETUTCDATE()
+FROM sprockit.Process p
+  INNER JOIN sprockit.[Event] e ON e.ExecutionId = p.LastExecutionId
+  INNER JOIN sprockit.RetryableError re 
+    ON re.ProcessType = p.ProcessType
+	AND e.[Message] LIKE re.MessagePattern
+WHERE p.[Status] = 'Errored' 
+AND e.Severity >= 200
+AND p.ErrorCount <= re.MaximumRetries
+
+-- Set successors of 'Errored' processes to 'Blocked'
 UPDATE succ
 SET [Status] = 'Blocked'
+  , LastStatusUpdate = GETUTCDATE()
 FROM sprockit.DependencyStatus(@processGroup) dep
   INNER JOIN sprockit.Process succ ON succ.ProcessPath = dep.ProcessPath
 WHERE dep.PredecessorStatus = 'Errored'
 AND succ.[Status] <> 'Blocked'
 
+-- Set successors of 'Blocked' processes to 'Blocked'
 WHILE @@ROWCOUNT > 0
   UPDATE succ
   SET [Status] = 'Blocked'
+    , LastStatusUpdate = GETUTCDATE()
   FROM sprockit.DependencyStatus(@processGroup) dep
     INNER JOIN sprockit.Process succ ON succ.ProcessPath = dep.ProcessPath
   WHERE dep.PredecessorStatus = 'Blocked'
   AND succ.[Status] <> 'Blocked'
 
+-- return ready process & running handler counts
 SELECT (
   SELECT COUNT(*)
   FROM sprockit.Process

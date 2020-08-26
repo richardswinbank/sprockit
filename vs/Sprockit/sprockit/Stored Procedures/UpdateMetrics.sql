@@ -18,7 +18,7 @@ SET NOCOUNT ON
   GROUP BY e.ProcessId
 )
 UPDATE p
-SET AvgDuration = IIF(p.IsEnabled = 0, 0, ad.AvgDuration)
+SET AvgDuration = CASE p.IsEnabled WHEN 0 THEN 0 ELSE ad.AvgDuration END
 FROM sprockit.Process p
   INNER JOIN avgDurations ad ON ad.ProcessId = p.ProcessId
 WHERE p.ProcessGroup = @processGroup
@@ -28,7 +28,7 @@ WHERE p.ProcessGroup = @processGroup
  */
 CREATE TABLE #executionPaths (
   PathId INT IDENTITY PRIMARY KEY
-, ProcessPath NVARCHAR(850)
+, ProcessId INT
 , ExecutionPath NVARCHAR(1024)
 )
 
@@ -36,14 +36,14 @@ DECLARE @i INT = -1
 
 -- find leaf processes
 INSERT INTO #executionPaths (
-  ProcessPath
+  ProcessId
 , ExecutionPath
 )
 SELECT
-  p.ProcessPath
+  p.ProcessId
 , CAST(p.ProcessId AS NVARCHAR(1024)) AS ExecutionPath
 FROM sprockit.Process p
-  LEFT JOIN sprockit.DependencyStatus(@processGroup) pd ON pd.PredecessorPath = p.ProcessPath
+  LEFT JOIN sprockit.DependencyStatus(@processGroup) pd ON pd.PredecessorId = p.ProcessId
 WHERE p.ProcessGroup = @processGroup
 AND pd.PredecessorPath IS NULL  -- no dependants
 
@@ -54,14 +54,14 @@ BEGIN
   SET @i += 1
 
   INSERT INTO #executionPaths (
-    ProcessPath
+    ProcessId
   , ExecutionPath
   )
   SELECT
-    pd.PredecessorPath
+    pd.PredecessorId
   , CAST(pd.PredecessorId AS NVARCHAR) + ',' + xp.ExecutionPath
   FROM #executionPaths xp
-    INNER JOIN sprockit.DependencyStatus(@processGroup) pd ON pd.ProcessPath = xp.ProcessPath
+    INNER JOIN sprockit.DependencyStatus(@processGroup) pd ON pd.ProcessId = xp.ProcessId
   WHERE LEN(xp.ExecutionPath) - LEN(REPLACE(xp.ExecutionPath, ',', '')) = @i 
 
 END
@@ -69,22 +69,22 @@ END
 ;WITH pathLengths AS (
   SELECT 
     xp.PathId
-  , xp.ProcessPath
-  , SUM(IIF(p.IsEnabled = 0, 0, p.AvgDuration)) AS PathLength
+  , xp.ProcessId
+  , SUM(CASE p.IsEnabled WHEN 0 THEN 0 ELSE p.AvgDuration END) AS PathLength
   FROM #executionPaths xp
     CROSS APPLY string_split(xp.ExecutionPath, ',') spl
     INNER JOIN sprockit.Process p ON p.ProcessId = spl.[value]
   GROUP BY 
     xp.PathId
-  , xp.ProcessPath
+  , xp.ProcessId
 ), branchWeights AS (
   SELECT
-    ProcessPath 
+    ProcessId 
   , MAX(PathLength) AS BranchWeight
   FROM pathLengths
-  GROUP BY ProcessPath
+  GROUP BY ProcessId
 )
 UPDATE p
 SET BranchWeight = bw.BranchWeight
 FROM branchWeights bw
-  INNER JOIN sprockit.Process p ON p.ProcessPath = bw.ProcessPath
+  INNER JOIN sprockit.Process p ON p.ProcessId = bw.ProcessId

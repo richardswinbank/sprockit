@@ -5,6 +5,9 @@
     [StartDateTime] DATETIME       DEFAULT (getutcdate()) NOT NULL,
     [EndDateTime]   DATETIME       NULL,
     [Status]        NVARCHAR (20)  DEFAULT ('Running') NOT NULL,
-    PRIMARY KEY CLUSTERED ([HandlerId] ASC)
+    PRIMARY KEY CLUSTERED ([HandlerId] ASC),
+    FOREIGN KEY ([BatchId]) REFERENCES [sprockit].[Batch] ([BatchId])
 );
+
+
 

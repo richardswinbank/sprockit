@@ -4,6 +4,8 @@
 )
 AS
 
+SET NOCOUNT ON
+
 INSERT INTO [sprockit].[Handler] (
   [BatchId]
 , ExternalId

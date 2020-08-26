@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [sprockit].[ReleaseReservation] (
+﻿CREATE PROCEDURE [sprockit].[ReleaseProcess] (
   @executionId INT
 , @endStatus NVARCHAR(20) = 'Done'
 )
@@ -20,6 +20,7 @@ BEGIN TRY
   UPDATE p
   SET [Status] = @endStatus
     , LastStatusUpdate = GETUTCDATE()
+	, ErrorCount += CASE @endStatus WHEN 'Errored' THEN 1 ELSE 0 END
   FROM sprockit.Execution e
     INNER JOIN sprockit.Process p ON p.ProcessId = e.ProcessId
   WHERE e.ExecutionId = @executionId
@@ -27,6 +28,7 @@ BEGIN TRY
 END TRY
 BEGIN CATCH
   
-  THROW;
+  EXEC sprockit.RethrowError
+  RETURN -1
 
 END CATCH

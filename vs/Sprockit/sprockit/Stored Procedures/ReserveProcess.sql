@@ -21,8 +21,7 @@ BEGIN
   WHERE p.[Status] = 'Ready'
   AND p.ProcessGroup = b.ProcessGroup
   ORDER BY
-    IIF(p.ProcessType IS NULL, 0, 1)
-  , p.[IsEnabled]        -- disabled processes first (zero execution time; may reveal higher-priority processes downstream)
+    p.[IsEnabled]        -- disabled processes first (zero execution time; may reveal higher-priority processes downstream)
   , p.[Priority]         -- highest priority first (low numbers = high priority; priority overrides branch weight)
   , p.BranchWeight DESC  -- then in order of branch weight (heaviest first)
   , p.AvgDuration DESC   -- then in order of average duration (longest first)
@@ -46,10 +45,10 @@ BEGIN
   END TRY
   BEGIN CATCH
 
-    IF ERROR_NUMBER() = 2627  -- PK violation - we've been beaten to it...
+    IF ERROR_NUMBER() = 2627 AND ERROR_MESSAGE() LIKE '%PRIMARY KEY%' -- PK violation - we've been beaten to it...
       CONTINUE; -- ...so try again for another process.
 
-    THROW;
+    EXEC sprockit.RethrowError;
 
   END CATCH
   
@@ -81,6 +80,7 @@ BEGIN
   UPDATE sprockit.Process
   SET [Status] = 'Running'
     , LastStatusUpdate = GETUTCDATE() 
+	, LastExecutionId = @executionId
   WHERE ProcessId = @processId
     
   BREAK
