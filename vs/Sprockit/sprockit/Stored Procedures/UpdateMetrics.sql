@@ -72,7 +72,7 @@ END
   , xp.ProcessId
   , SUM(CASE p.IsEnabled WHEN 0 THEN 0 ELSE p.AvgDuration END) AS PathLength
   FROM #executionPaths xp
-    CROSS APPLY string_split(xp.ExecutionPath, ',') spl
+    CROSS APPLY sprockit.string_split(xp.ExecutionPath, ',') spl
     INNER JOIN sprockit.Process p ON p.ProcessId = spl.[value]
   GROUP BY 
     xp.PathId

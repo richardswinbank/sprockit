@@ -11,7 +11,7 @@ WITH old AS (
   , t.c.value('@value', 'NVARCHAR(4000)') AS [value]
   FROM [sprockit].[Execution] e
     CROSS APPLY e.ExecutionProperties.nodes('//Properties/Property') t(c)
-  WHERE ExecutionId = @executionid
+  WHERE ExecutionId = @executionId
 ), new AS (
   SELECT
     [name]

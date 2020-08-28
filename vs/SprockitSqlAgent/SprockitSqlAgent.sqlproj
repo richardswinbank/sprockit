@@ -3,16 +3,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <Name>Sprockit</Name>
+    <Name>SprockitSqlAgent</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
-    <ProjectGuid>{04c478df-7c6e-40fc-bd03-02748bb7aefc}</ProjectGuid>
+    <ProjectGuid>{2d9ef994-8dee-430f-9ce3-6b807774b543}</ProjectGuid>
     <DSP>Microsoft.Data.Tools.Schema.Sql.Sql100DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
-    <RootNamespace>Sprockit</RootNamespace>
-    <AssemblyName>Sprockit</AssemblyName>
+    <RootNamespace>SprockitSqlAgent</RootNamespace>
+    <AssemblyName>SprockitSqlAgent</AssemblyName>
     <ModelCollation>1033, CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
@@ -56,49 +56,15 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
-    <Folder Include="sprockit\" />
-    <Folder Include="sprockit\Tables\" />
-    <Folder Include="Security\" />
-    <Folder Include="sprockit\Functions\" />
-    <Folder Include="sprockit\Stored Procedures\" />
-    <Folder Include="_Scripts" />
+    <Folder Include="sprockit" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="sprockit\Tables\Execution.sql" />
-    <Build Include="sprockit\Tables\Reservation.sql" />
-    <Build Include="sprockit\Tables\ProcessDependency.sql" />
-    <Build Include="sprockit\Tables\Handler.sql" />
-    <Build Include="sprockit\Tables\Batch.sql" />
-    <Build Include="sprockit\Tables\Process.sql" />
-    <Build Include="sprockit\Functions\DependencyStatus.sql" />
-    <Build Include="sprockit\Stored Procedures\ReserveProcess.sql" />
-    <Build Include="sprockit\Stored Procedures\UnregisterHandler.sql" />
-    <Build Include="sprockit\Stored Procedures\RegisterHandler.sql" />
-    <Build Include="sprockit\Stored Procedures\EnqueueProcesses.sql" />
-    <Build Include="sprockit\Stored Procedures\UpdateMetrics.sql" />
-    <Build Include="sprockit\Stored Procedures\PrepareNewBatch.sql" />
-    <Build Include="sprockit\Stored Procedures\PrepareBatchRestart.sql" />
-    <Build Include="sprockit\Stored Procedures\SetExecutionProperty.sql" />
-    <Build Include="Security\sprockit.sql" />
-    <Build Include="sprockit\Tables\Event.sql" />
-    <Build Include="sprockit\Stored Procedures\Rewind.sql" />
-    <Build Include="sprockit\Stored Procedures\RethrowError.sql" />
-    <Build Include="sprockit\Stored Procedures\ResolveProcessId.sql" />
-    <Build Include="sprockit\Stored Procedures\ReleaseProcess.sql" />
-    <Build Include="sprockit\Stored Procedures\LogEvent.sql" />
-    <Build Include="sprockit\Stored Procedures\LogError.sql" />
-    <Build Include="sprockit\Stored Procedures\ConfigureProcesses.sql" />
-    <Build Include="sprockit\Tables\ProcessType.sql" />
-    <Build Include="sprockit\Tables\RetryableError.sql" />
-    <Build Include="sprockit\Stored Procedures\string_split.sql" />
-    <Build Include="sprockit\Functions\GetProperty.sql" />
-    <Build Include="sprockit\Tables\Property.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="SqlSchemaCompare1.scmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <PostDeploy Include="_Scripts\PostDeployment.sql" />
+    <ProjectReference Include="..\Sprockit\Sprockit.sqlproj">
+      <Name>Sprockit</Name>
+      <Project>{04c478df-7c6e-40fc-bd03-02748bb7aefc}</Project>
+      <Private>True</Private>
+      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <ArtifactReference Include="$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\100\SqlSchemas\master.dacpac">
@@ -106,5 +72,14 @@
       <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
       <DatabaseVariableLiteralValue>master</DatabaseVariableLiteralValue>
     </ArtifactReference>
+    <ArtifactReference Include="$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\100\SqlSchemas\msdb.dacpac">
+      <HintPath>$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\100\SqlSchemas\msdb.dacpac</HintPath>
+      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
+      <DatabaseVariableLiteralValue>msdb</DatabaseVariableLiteralValue>
+    </ArtifactReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="sprockit\SqlAgent_ProcessManager.sql" />
+    <Build Include="sprockit\SqlAgent_StartProcessHandler.sql" />
   </ItemGroup>
 </Project>
