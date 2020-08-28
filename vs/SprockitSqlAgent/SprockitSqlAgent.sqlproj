@@ -57,6 +57,9 @@
   <ItemGroup>
     <Folder Include="Properties" />
     <Folder Include="sprockit" />
+    <Folder Include="_Scripts" />
+    <Folder Include="sprockit\Stored Procedures" />
+    <Folder Include="sprockit\_StaticData" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Sprockit\Sprockit.sqlproj">
@@ -79,7 +82,17 @@
     </ArtifactReference>
   </ItemGroup>
   <ItemGroup>
-    <Build Include="sprockit\SqlAgent_ProcessManager.sql" />
-    <Build Include="sprockit\SqlAgent_StartProcessHandler.sql" />
+    <Build Include="sprockit\Stored Procedures\SqlAgent_ProcessManager.sql" />
+    <Build Include="sprockit\Stored Procedures\SqlAgent_ProcessHandler.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="_Scripts\PostDeployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="sprockit\Stored Procedures\SqlAgent_StartProcessHandler.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="sprockit\_StaticData\Property.sql" />
+    <None Include="_Scripts\CreateProcessManager.sql" />
   </ItemGroup>
 </Project>

@@ -23,7 +23,7 @@ DECLARE @dbName NVARCHAR(128)
 
 -- get job details
 SELECT 
-  @cmd = 'EXEC sprockit.ProcessHandler @handlerId = ' + CAST(HandlerId AS VARCHAR) + ', @processGroup = ' + CAST(ProcessGroup AS VARCHAR)
+  @cmd = 'EXEC sprockit.SqlAgent_ProcessHandler @handlerId = ' + CAST(HandlerId AS VARCHAR) + ', @processGroup = ' + CAST(ProcessGroup AS VARCHAR)
 , @dbName = DB_NAME()
 FROM @handler
 
