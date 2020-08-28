@@ -1,7 +1,14 @@
-﻿CREATE PROCEDURE [sprockit].[Rewind] (
+﻿/*
+ * sprockit.[uRewind]
+ * Copyright (c) 2018-2020 Richard Swinbank (richard@richardswinbank.net) 
+ * http://richardswinbank.net/sprockit
+ *
+ * Rewind the ETL to restart from a specified process
+ */
+ 
+CREATE PROCEDURE [sprockit].[Rewind] (
   @processIdentifier NVARCHAR(1024)
 ) AS
---*/
 
 DECLARE @process TABLE (
   ProcessId INT
@@ -12,8 +19,8 @@ INSERT INTO @process (
 )
 EXEC [sprockit].[ResolveProcessId] @processIdentifier = @processIdentifier
 
---IF @@ROWCOUNT <> 1
-  --RETURN -1  -- error will be thrown from [ResolveProcessId]
+IF @@ROWCOUNT <> 1
+  RETURN -1  -- error will be thrown from [ResolveProcessId]
 
 UPDATE sprockit.Process
 SET [Status] = 'Errored'

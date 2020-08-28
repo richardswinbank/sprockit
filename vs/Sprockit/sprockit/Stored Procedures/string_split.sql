@@ -1,4 +1,12 @@
-﻿CREATE FUNCTION [sprockit].[string_split] (
+﻿/*
+ * sprockit.[string_split]
+ * Copyright (c) 2020 Richard Swinbank (richard@richardswinbank.net) 
+ * http://richardswinbank.net/sprockit
+ *
+ * Emulate string_split for pre-SQL 2016 environments
+ */
+ 
+CREATE FUNCTION [sprockit].[string_split] (
   @list VARCHAR(MAX)
 , @delim CHAR(1) = ','
 ) RETURNS TABLE
@@ -31,5 +39,6 @@ WITH cte AS (
 )
 SELECT 
   SUBSTRING(@list, Offset, [Length]) AS [value]
+, ROW_NUMBER() OVER (ORDER BY Offset) AS [index]
 FROM bounds
 

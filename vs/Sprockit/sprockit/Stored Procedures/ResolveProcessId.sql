@@ -1,4 +1,12 @@
-﻿CREATE PROCEDURE [sprockit].[ResolveProcessId] (
+﻿/*
+ * sprockit.[ResolveProcessId]
+ * Copyright (c) 2018-2019 Richard Swinbank (richard@richardswinbank.net) 
+ * http://richardswinbank.net/sprockit
+ *
+ * Identify a process using (maybe only some of) its process path.
+ */
+ 
+CREATE PROCEDURE [sprockit].[ResolveProcessId] (
   @processIdentifier NVARCHAR(1024)
 , @debug BIT = 0
 )

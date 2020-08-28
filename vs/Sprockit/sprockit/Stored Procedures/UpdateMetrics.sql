@@ -1,4 +1,12 @@
-﻿CREATE PROCEDURE [sprockit].[UpdateMetrics] (
+﻿/*
+ * sprockit.[UpdateMetrics]
+ * Copyright (c) 2015-2020 Richard Swinbank (richard@richardswinbank.net) 
+ * http://richardswinbank.net/sprockit
+ *
+ * Recalculate scheduling metrics using the most recent execution history data.
+ */
+
+CREATE PROCEDURE [sprockit].[UpdateMetrics] (
   @processGroup INT
 )
 AS

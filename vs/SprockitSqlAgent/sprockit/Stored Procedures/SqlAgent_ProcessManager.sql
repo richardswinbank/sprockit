@@ -1,4 +1,12 @@
-﻿CREATE PROCEDURE sprockit.[SqlAgent_ProcessManager] (
+﻿/*
+ * sprockit.[SqlAgent_ProcessManager]
+ * Copyright (c) 2015-2020 Richard Swinbank (richard@richardswinbank.net) 
+ * http://richardswinbank.net/sprockit
+ *
+ * Manage Sprockit process handlers
+ */
+
+CREATE PROCEDURE sprockit.[SqlAgent_ProcessManager] (
   @processGroup INT = 1
 ) AS
 

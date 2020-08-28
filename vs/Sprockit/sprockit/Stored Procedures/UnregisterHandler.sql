@@ -1,4 +1,12 @@
-﻿CREATE PROCEDURE [sprockit].[UnregisterHandler] (
+﻿/*
+ * sprockit.[RegisterHandler]
+ * Copyright (c) 2015-2020 Richard Swinbank (richard@richardswinbank.net) 
+ * http://richardswinbank.net/sprockit
+ *
+ * Unregister a completed process handler
+ */
+ 
+CREATE PROCEDURE [sprockit].[UnregisterHandler] (
   @handlerId INT 
 , @endStatus NVARCHAR(20) = 'Done'
 )

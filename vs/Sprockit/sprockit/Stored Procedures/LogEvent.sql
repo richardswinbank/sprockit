@@ -1,4 +1,12 @@
-﻿CREATE PROCEDURE [sprockit].[LogEvent] (
+﻿/*
+ * [sprockit].[LogEvent]
+ * Copyright (c) 2015-2020 Richard Swinbank (richard@richardswinbank.net) 
+ * http://richardswinbank.net/sprockit
+ *
+ * Log an event.
+ */
+ 
+CREATE PROCEDURE [sprockit].[LogEvent] (
   @message NVARCHAR(MAX)
 , @executionId INT = NULL
 , @severity TINYINT = 0

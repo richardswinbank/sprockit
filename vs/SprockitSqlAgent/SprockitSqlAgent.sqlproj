@@ -84,6 +84,8 @@
   <ItemGroup>
     <Build Include="sprockit\Stored Procedures\SqlAgent_ProcessManager.sql" />
     <Build Include="sprockit\Stored Procedures\SqlAgent_ProcessHandler.sql" />
+    <Build Include="sprockit\Stored Procedures\SqlAgent_ExecuteProcedure.sql" />
+    <Build Include="sprockit\Stored Procedures\SqlAgent_ExecuteCatalogPackage.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="_Scripts\PostDeployment.sql" />

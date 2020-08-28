@@ -1,7 +1,14 @@
-﻿CREATE PROCEDURE [sprockit].[ConfigureProcesses] (
+﻿/*
+ * sprockit.[ConfigureProcesses]
+ * Copyright (c) 2015-2020 Richard Swinbank (richard@richardswinbank.net) 
+ * http://richardswinbank.net/sprockit
+ *
+ * Install process configuration(s) from supplied XML description
+ */
+ 
+CREATE PROCEDURE [sprockit].[ConfigureProcesses] (
   @processList XML
 ) AS
---*/
 
 BEGIN TRY
 

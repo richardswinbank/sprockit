@@ -1,5 +1,12 @@
-﻿create procedure sprockit.RethrowError
-
+﻿/*
+ * [sprockit].[RethrowError] 
+ * Copyright (c) 2015-2020 Richard Swinbank (richard@richardswinbank.net) 
+ * http://richardswinbank.net/sprockit
+ *
+ * Re-throw a caught error (without THROW -- SQL pre-2012 compatible)
+ */
+ 
+CREATE PROCEDURE sprockit.RethrowError
 AS
 
 -- check that we're in an error state - if not, there's nothing to do

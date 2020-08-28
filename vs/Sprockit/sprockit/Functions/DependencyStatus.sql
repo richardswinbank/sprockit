@@ -1,4 +1,12 @@
-﻿CREATE FUNCTION [sprockit].[DependencyStatus] (
+﻿/*
+ * sprockit.[DependencyStatus]
+ * Copyright (c) 2015-2020 Richard Swinbank (richard@richardswinbank.net) 
+ * http://richardswinbank.net/sprockit
+ *
+ * Return dependencies of successor processes on their predecessor(s) for a specified process group
+ */
+ 
+ CREATE FUNCTION [sprockit].[DependencyStatus] (
   @processGroup INT
 ) RETURNS TABLE
 AS RETURN

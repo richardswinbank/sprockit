@@ -21,6 +21,8 @@ DECLARE @executionId INT;
 DECLARE @processType NVARCHAR(10);
 DECLARE @processPath NVARCHAR(1024);
 DECLARE @endStatus NVARCHAR(20);
+DECLARE @errorMessage NVARCHAR(1024);
+DECLARE @errorSource NVARCHAR(20);
 
 WHILE 1 = 1  -- keep handling processes as long as there's work to be done
 BEGIN
@@ -67,7 +69,7 @@ BEGIN
         @processPath = @processPath
       , @executionId = @executionId;
     ELSE IF @processType = 'SSIS'
-      EXEC sprockit.SqlAgent_ExecutePackage
+      EXEC sprockit.SqlAgent_ExecuteCatalogPackage
         @processPath = @processPath
       , @executionId = @executionId;
 
@@ -77,6 +79,13 @@ BEGIN
   BEGIN CATCH
 
     SET @endStatus = 'Errored';
+    SET @errorMessage = ERROR_MESSAGE() 
+    SET @errorSource = 'Line ' + CAST(ERROR_LINE() AS VARCHAR)
+
+    EXEC sprockit.LogError 
+      @executionId = @executionId
+    , @message = @errorMessage
+    , @errorSource = @errorSource
 
   END CATCH
 

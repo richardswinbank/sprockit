@@ -1,4 +1,12 @@
-﻿CREATE PROCEDURE [sprockit].[PrepareNewBatch] (
+﻿/*
+ * sprockit.[PrepareNewBatch]
+ * Copyright (c) 2015-2020 Richard Swinbank (richard@richardswinbank.net) 
+ * http://richardswinbank.net/sprockit
+ *
+ * Prepare a fresh processing run
+ */
+ 
+CREATE PROCEDURE [sprockit].[PrepareNewBatch] (
   @processGroup INT
 )
 AS

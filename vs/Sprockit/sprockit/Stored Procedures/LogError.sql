@@ -1,4 +1,11 @@
-﻿
+﻿/*
+ * [sprockit].[LogError]
+ * Copyright (c) 2015-2020 Richard Swinbank (richard@richardswinbank.net) 
+ * http://richardswinbank.net/sprockit
+ *
+ * Log an error caught by a process handler
+ */
+
 CREATE PROCEDURE [sprockit].[LogError] (
   @executionId INT
 , @message NVARCHAR(MAX)

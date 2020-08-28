@@ -1,4 +1,12 @@
-﻿CREATE PROCEDURE [sprockit].[PrepareBatchRestart] (
+﻿/*
+ * sprockit.[PrepareBatchRestart]
+ * Copyright (c) 2015-2020 Richard Swinbank (richard@richardswinbank.net) 
+ * http://richardswinbank.net/sprockit
+ *
+ * Prepare Sprockit processes to restart the current batch for a specified process group
+ */
+ 
+CREATE PROCEDURE [sprockit].[PrepareBatchRestart] (
   @processGroup INT
 )
 AS

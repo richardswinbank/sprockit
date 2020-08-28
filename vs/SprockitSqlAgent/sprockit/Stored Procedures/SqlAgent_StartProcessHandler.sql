@@ -1,4 +1,12 @@
-﻿CREATE PROCEDURE sprockit.[SqlAgent_StartProcessHandler] (
+﻿/*
+ * sprockit.[SqlAgent_StartProcessHandler]
+ * Copyright (c) 2015-2020 Richard Swinbank (richard@richardswinbank.net) 
+ * http://richardswinbank.net/sprockit
+ *
+ * Start a SQL Agent process handler
+ */
+ 
+CREATE PROCEDURE sprockit.[SqlAgent_StartProcessHandler] (
   @batchId INT
 ) AS
 

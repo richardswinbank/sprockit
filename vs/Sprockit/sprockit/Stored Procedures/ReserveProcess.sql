@@ -1,4 +1,12 @@
-﻿CREATE PROCEDURE [sprockit].[ReserveProcess] (
+﻿/*
+ * sprockit.[ReserveProcess] 
+ * Copyright (c) 2015-2020 Richard Swinbank (richard@richardswinbank.net) 
+ * http://richardswinbank.net/sprockit
+ *
+ * Reserve a process for execution by a handler
+ */
+
+CREATE PROCEDURE [sprockit].[ReserveProcess] (
   @handlerId INT
 )
 AS

@@ -1,4 +1,12 @@
-﻿CREATE PROCEDURE [sprockit].[EnqueueProcesses] (
+﻿/*
+ * sprockit.[EnqueueProcesses]
+ * Copyright (c) 2015-2020 Richard Swinbank (richard@richardswinbank.net) 
+ * http://richardswinbank.net/sprockit
+ *
+ * Update process readiness based on dependency information
+ */
+ 
+CREATE PROCEDURE [sprockit].[EnqueueProcesses] (
   @processGroup INT 
 )
 AS

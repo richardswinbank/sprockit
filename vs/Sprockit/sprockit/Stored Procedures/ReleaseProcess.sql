@@ -1,4 +1,12 @@
-﻿CREATE PROCEDURE [sprockit].[ReleaseProcess] (
+﻿/*
+ * sprockit.[ReleaseProcess] 
+ * Copyright (c) 2015-2020 Richard Swinbank (richard@richardswinbank.net) 
+ * http://richardswinbank.net/sprockit
+ *
+ * Release a process after execution by a handler
+ */
+
+CREATE PROCEDURE [sprockit].[ReleaseProcess] (
   @executionId INT
 , @endStatus NVARCHAR(20) = 'Done'
 )
