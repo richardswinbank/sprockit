@@ -6,7 +6,7 @@ trigger:
       - '*'
   paths:
     include: 
-      - vs/*
+      - 'vs/*'
 
 variables:
   SqlServerInstance: '(localdb)\MSSQLLocalDB'
@@ -14,7 +14,7 @@ variables:
 
 pool:
   vmImage: 'windows-2019'
-   
+
 - task: SqlDacpacDeploymentOnMachineGroup@0
   displayName: Enable CLR on $(SqlServerInstance)  # required for tSQLt
   inputs:
