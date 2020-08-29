@@ -24,10 +24,6 @@ steps:
     InlineSql: |
       EXEC sp_configure 'clr enabled', 1;
       RECONFIGURE;
-      EXEC sp_configure 'show advanced options', 1
-      RECONFIGURE;
-      EXEC sp_configure 'clr strict security', 0;
-      RECONFIGURE;
     ServerName: $(SqlServerInstance)
     DatabaseName: 'master'
     AuthScheme: 'windowsAuthentication'
@@ -51,7 +47,7 @@ steps:
     AdditionalArguments: '/p:IncludeCompositeObjects=true /p:CreateNewDatabase=true'
 
 - task: SqlDacpacDeploymentOnMachineGroup@0
-  displayName: Run tSQLt Tests
+  displayName: Run tSQLt tests
   inputs:
     TaskType: 'sqlInline'
     InlineSql: 'EXEC tSQLt.RunAll'
@@ -60,7 +56,7 @@ steps:
     AuthScheme: 'windowsAuthentication'
 
 - task: PowerShell@2
-  displayName: Export tSQLt Test Results
+  displayName: Export tSQLt test results
   inputs:
     targetType: 'inline'
     script: |
@@ -97,11 +93,10 @@ steps:
       }
 
 - task: PublishTestResults@2
-  displayName: Publish Test Results
+  displayName: Publish tSQLt test results
   inputs:
     testResultsFormat: 'JUnit'
     testResultsFiles: '**/test*.xml'
     mergeTestResults: true
     failTaskOnFailedTests: true
     testRunTitle: '$(TestingDbName) tSQLt Test Results'
-
