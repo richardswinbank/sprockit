@@ -43,7 +43,7 @@ steps:
   displayName: 'Deploy SprockitTests SSDT project to $(TestingDbName) DB
   inputs:
     TaskType: dacpac
-    DacpacFile: '**\SprockitTests.dacpac'
+    DacpacFile: 'vs\**\SprockitTests.dacpac'
     TargetMethod: server
     ServerName: $(SqlServerInstance)
     DatabaseName: $(TestingDbName)
