@@ -107,4 +107,4 @@ steps:
     testResultsFiles: '**/test*.xml'
     mergeTestResults: true
     failTaskOnFailedTests: true
-    testRunTitle: '$(TestingDbName) tSQLt Test Results'
+    testRunTitle: '$(TestingDbName) tSQLt test results'
