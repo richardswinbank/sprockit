@@ -9,11 +9,11 @@
 CREATE FUNCTION sprockit.[GetProperty] (
   @propertyName NVARCHAR(128)
 ) 
-RETURNS NVARCHAR(MAX)
+RETURNS NVARCHAR(4000)
 AS
 BEGIN
 
-  DECLARE @propertyValue NVARCHAR(MAX)
+  DECLARE @propertyValue NVARCHAR(4000)
 
   SELECT 
     @propertyValue = PropertyValue 

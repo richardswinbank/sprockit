@@ -1,6 +1,6 @@
 ﻿  CREATE TABLE sprockit.[Property] (
 	[PropertyName] NVARCHAR(128) PRIMARY KEY
-  , [PropertyValue] NVARCHAR(MAX) NOT NULL
+  , [PropertyValue] NVARCHAR(4000) NOT NULL
   , [DataType] NVARCHAR(128) NOT NULL
   , [Description] NVARCHAR(512) NOT NULL
   )

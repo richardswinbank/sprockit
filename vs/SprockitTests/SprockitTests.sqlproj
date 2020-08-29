@@ -59,6 +59,7 @@
     <Folder Include="_Scripts" />
     <Folder Include="_TestClasses" />
     <Folder Include="sprockit_LogError" />
+    <Folder Include="sprockit_GetProperty" />
   </ItemGroup>
   <ItemGroup>
     <ArtifactReference Include="..\tSQLt.dacpac">
@@ -82,6 +83,10 @@
   <ItemGroup>
     <Build Include="_TestClasses\sprockit_LogError.sql" />
     <Build Include="sprockit_LogError\test GIVEN called THEN calls sprockit.LogEvent.sql" />
+    <Build Include="_TestClasses\sprockit_GetProperty.sql" />
+    <Build Include="sprockit_GetProperty\test GIVEN property name exists THEN property value returned.sql" />
+    <Build Include="sprockit_GetProperty\setup.sql" />
+    <Build Include="sprockit_GetProperty\test GIVEN property name not exists THEN exception thrown.sql" />
   </ItemGroup>
   <ItemGroup>
     <SqlCmdVariable Include="Sprockit">
@@ -97,12 +102,6 @@
     <ProjectReference Include="..\Sprockit\Sprockit.sqlproj">
       <Name>Sprockit</Name>
       <Project>{04c478df-7c6e-40fc-bd03-02748bb7aefc}</Project>
-      <Private>True</Private>
-      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
-    </ProjectReference>
-    <ProjectReference Include="..\SprockitSqlAgent\SprockitSqlAgent.sqlproj">
-      <Name>SprockitSqlAgent</Name>
-      <Project>{2d9ef994-8dee-430f-9ce3-6b807774b543}</Project>
       <Private>True</Private>
       <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
     </ProjectReference>
