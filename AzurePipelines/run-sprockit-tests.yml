@@ -18,6 +18,13 @@ pool:
 
 steps:
 
+- task: CopyFiles@2
+  displayName: Copy SQL 2008 system DB dacpacs to correct location in build agent
+  inputs:
+    sourceFolder: 'vs'
+    contents: '*.dacpac' 
+    targetFolder: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\IDE\Extensions\Microsoft\SQLDB\Extensions\SqlServer\100\SqlSchemas\'
+
 - task: SqlDacpacDeploymentOnMachineGroup@0
   displayName: Enable CLR on $(SqlServerInstance)  # required for tSQLt
   inputs:
