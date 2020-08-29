@@ -1,12 +1,13 @@
 name: $(BuildDefinitionName).$(Date:yyyyMMdd)$(Rev:.r)
 
 trigger:
-  branches:
-    include:
-      - '*'
-  paths:
-    include: 
-      - 'vs/*'
+  none
+#  branches:
+#    include:
+#      - '*'
+#  paths:
+#    include: 
+#      - 'vs/*'
 
 variables:
   SqlServerInstance: '(localdb)\MSSQLLocalDB'
