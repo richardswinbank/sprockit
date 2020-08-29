@@ -37,7 +37,7 @@ steps:
     AuthScheme: 'windowsAuthentication'
 
 - task: VSBuild@1
-  displayName: 'Build testing project'
+  displayName: 'Build SprockitTests SSDT project'
   inputs:
     solution: '**\SprockitTests.sqlproj'
     configuration: 'Debug'
@@ -59,7 +59,7 @@ steps:
   inputs:
     TaskType: 'sqlInline'
     InlineSql: 'EXEC tSQLt.RunAll'
-    ServerName: $(SQL Server Instance)
+    ServerName: $(SqlServerInstance)
     DatabaseName: $(TestingDbName)
     AuthScheme: 'windowsAuthentication'
 
