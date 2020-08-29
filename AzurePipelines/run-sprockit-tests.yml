@@ -40,7 +40,7 @@ steps:
     clean: true
 
 - task: SqlDacpacDeploymentOnMachineGroup@0
-  displayName: 'Deploy SprockitTests SSDT project to $(TestingDbName) DB
+  displayName: 'Deploy SprockitTests SSDT project to $(TestingDbName) DB'
   inputs:
     TaskType: 'dacpac'
     DacpacFile: 'vs\**\SprockitTests.dacpac'
