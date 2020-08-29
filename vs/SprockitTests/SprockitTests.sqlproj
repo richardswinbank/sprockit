@@ -61,11 +61,6 @@
     <Folder Include="sprockit_LogError" />
   </ItemGroup>
   <ItemGroup>
-    <ArtifactReference Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\IDE\Extensions\Microsoft\SQLDB\Extensions\SqlServer\100\SqlSchemas\master.dacpac">
-      <HintPath>C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\IDE\Extensions\Microsoft\SQLDB\Extensions\SqlServer\100\SqlSchemas\master.dacpac</HintPath>
-      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
-      <DatabaseVariableLiteralValue>master</DatabaseVariableLiteralValue>
-    </ArtifactReference>
     <ArtifactReference Include="..\tSQLt.dacpac">
       <HintPath>..\tSQLt.dacpac</HintPath>
       <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
