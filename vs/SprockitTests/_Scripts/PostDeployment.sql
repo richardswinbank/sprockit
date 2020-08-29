@@ -10,4 +10,4 @@ Post-Deployment Script Template
 --------------------------------------------------------------------------------------
 */
 
-:r ..\..\Sprockit\_Scripts\PostDeployment.sql
+:r ..\..\SprockitSqlAgent\_Scripts\PostDeployment.sql
