@@ -60,7 +60,7 @@ steps:
     TaskType: 'sqlInline'
     InlineSql: 'EXEC tSQLt.RunAll'
     ServerName: $(SQL Server Instance)
-    DatabaseName: $(DatabaseName)
+    DatabaseName: $(TestingDbName)
     AuthScheme: 'windowsAuthentication'
 
 - task: PowerShell@2
