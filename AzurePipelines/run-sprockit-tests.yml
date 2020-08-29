@@ -1,0 +1,105 @@
+name: $(BuildDefinitionName).$(Date:yyyyMMdd)$(Rev:.r)
+
+trigger:
+  branches:
+    include:
+      - '*'
+  paths:
+    include: 
+      - vs/*
+
+variables:
+  SqlServerInstance: '(localdb)\MSSQLLocalDB'
+  TestingDbName: Sprockit
+
+pool:
+  vmImage: 'windows-2019'
+   
+- task: SqlDacpacDeploymentOnMachineGroup@0
+  displayName: Enable CLR on $(SqlServerInstance)  # required for tSQLt
+  inputs:
+    TaskType: 'sqlInline'
+    InlineSql: |
+      EXEC sp_configure 'clr enabled', 1;
+      RECONFIGURE;
+      EXEC sp_configure 'show advanced options', 1
+      RECONFIGURE;
+      EXEC sp_configure 'clr strict security', 0;
+      RECONFIGURE;
+    ServerName: $(SqlServerInstance)
+    DatabaseName: 'master'
+    AuthScheme: 'windowsAuthentication'
+
+- task: VSBuild@1
+  displayName: 'Build testing project'
+  inputs:
+    solution: '**\SprockitTests.sqlproj'
+    configuration: 'Debug'
+    clean: true
+
+- task: SqlDacpacDeploymentOnMachineGroup@0
+  displayName: 'Deploy SprockitTests SSDT project to $(TestingDbName) DB
+  inputs:
+    TaskType: dacpac
+    DacpacFile: '**\SprockitTests.dacpac'
+    TargetMethod: server
+    ServerName: $(SqlServerInstance)
+    DatabaseName: $(TestingDbName)
+    AuthScheme: 'windowsAuthentication'
+    AdditionalArguments: '/p:IncludeCompositeObjects=true /p:CreateNewDatabase=true'
+
+- task: SqlDacpacDeploymentOnMachineGroup@0
+  displayName: Run tSQLt Tests
+  inputs:
+    TaskType: 'sqlInline'
+    InlineSql: 'EXEC tSQLt.RunAll'
+    ServerName: $(SQL Server Instance)
+    DatabaseName: $(DatabaseName)
+    AuthScheme: 'windowsAuthentication'
+
+- task: PowerShell@2
+  displayName: Export tSQLt Test Results
+  inputs:
+    targetType: 'inline'
+    script: |
+      $connectionString = "Server=$(SqlServerInstance);Database=$(TestingDbName);Trusted_Connection=true;"
+      $filepath = "$(System.DefaultWorkingDirectory)/testresults.xml"
+
+      $connection = new-object system.data.SqlClient.SQLConnection($connectionString)
+      $sqlCommand = 'EXEC tSQLt.XmlResultFormatter'
+      
+      try
+      {
+        $connection.Open()
+        $command = new-object system.data.sqlclient.sqlcommand($sqlCommand,$connection)
+        $command.CommandTimeout = 60
+            
+        $xmlReader = $command.ExecuteXmlReader()
+            
+        $xmlWriterSettings = New-Object System.Xml.XmlWriterSettings
+        $xmlWriterSettings.CloseOutput = $true
+        $xmlWriter = ([System.Xml.XmlWriter]::Create($filePath, $xmlWriterSettings))
+        
+        $xmlWriter.WriteNode($xmlReader,$true)    
+        $xmlWriter.Flush()
+      }
+      catch {
+        $errorMessage = $_.Exception.Message
+        $body = "Extract failed to run for the extract: $errorMessage"
+      }
+      finally
+      {
+          $xmlWriter.Dispose()
+          $xmlReader.Dispose()
+          $connection.Dispose()
+      }
+
+- task: PublishTestResults@2
+  displayName: Publish Test Results
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: '**/test*.xml'
+    mergeTestResults: true
+    failTaskOnFailedTests: true
+    testRunTitle: '$(TestingDbName) tSQLt Test Results'
+
