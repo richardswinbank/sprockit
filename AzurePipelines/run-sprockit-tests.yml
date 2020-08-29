@@ -42,7 +42,7 @@ steps:
 - task: SqlDacpacDeploymentOnMachineGroup@0
   displayName: 'Deploy SprockitTests SSDT project to $(TestingDbName) DB
   inputs:
-    TaskType: dacpac
+    TaskType: 'dacpac'
     DacpacFile: 'vs\**\SprockitTests.dacpac'
     TargetMethod: server
     ServerName: $(SqlServerInstance)
