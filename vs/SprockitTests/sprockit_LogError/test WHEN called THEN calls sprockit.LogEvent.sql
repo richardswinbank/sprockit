@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE sprockit_LogError.[test GIVEN called THEN calls sprockit.LogEvent]
+﻿CREATE PROCEDURE sprockit_LogError.[test WHEN called THEN calls sprockit.LogEvent]
 AS
 
 -- ARRANGE

@@ -25,8 +25,10 @@ BEGIN
     @processId = p.ProcessId
   FROM sprockit.Process p WITH (READPAST)
     INNER JOIN sprockit.Handler h ON h.HandlerId = @handlerId
-	INNER JOIN sprockit.Batch b ON b.BatchId = h.BatchId    
+	INNER JOIN sprockit.Batch b ON b.BatchId = h.BatchId  
+    LEFT JOIN sprockit.Reservation r ON r.ProcessId = p.ProcessId
   WHERE p.[Status] = 'Ready'
+  AND r.ProcessId IS NULL  -- not already reserved
   AND p.ProcessGroup = b.ProcessGroup
   ORDER BY
     p.[IsEnabled]        -- disabled processes first (zero execution time; may reveal higher-priority processes downstream)

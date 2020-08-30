@@ -60,6 +60,7 @@
     <Folder Include="_TestClasses" />
     <Folder Include="sprockit_LogError" />
     <Folder Include="sprockit_GetProperty" />
+    <Folder Include="sprockit_ReserveProcess" />
   </ItemGroup>
   <ItemGroup>
     <ArtifactReference Include="..\tSQLt.dacpac">
@@ -82,11 +83,17 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="_TestClasses\sprockit_LogError.sql" />
-    <Build Include="sprockit_LogError\test GIVEN called THEN calls sprockit.LogEvent.sql" />
+    <Build Include="sprockit_LogError\test WHEN called THEN calls sprockit.LogEvent.sql" />
     <Build Include="_TestClasses\sprockit_GetProperty.sql" />
     <Build Include="sprockit_GetProperty\test GIVEN property name exists THEN property value returned.sql" />
     <Build Include="sprockit_GetProperty\setup.sql" />
     <Build Include="sprockit_GetProperty\test GIVEN property name not exists THEN exception thrown.sql" />
+    <Build Include="_TestClasses\sprockit_ReserveProcess.sql" />
+    <Build Include="sprockit_ReserveProcess\setup.sql" />
+    <Build Include="sprockit_ReserveProcess\test GIVEN ready process THEN process returned.sql" />
+    <Build Include="sprockit_ReserveProcess\test GIVEN no ready process THEN no process returned.sql" />
+    <Build Include="sprockit_ReserveProcess\test GIVEN PK violation THEN no process returned.sql" />
+    <Build Include="sprockit_ReserveProcess\test GIVEN non-PK error THEN exception rethrown.sql" />
   </ItemGroup>
   <ItemGroup>
     <SqlCmdVariable Include="Sprockit">
