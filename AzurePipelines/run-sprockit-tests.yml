@@ -63,8 +63,8 @@ steps:
     AuthScheme: 'windowsAuthentication'
 
 - task: PowerShell@2
-  condition: succeededOrFailed()
   displayName: Export tSQLt test results
+  condition: succeededOrFailed()
   inputs:
     targetType: 'inline'
     script: |
@@ -102,6 +102,7 @@ steps:
 
 - task: PublishTestResults@2
   displayName: Publish tSQLt test results
+  condition: succeededOrFailed()
   inputs:
     testResultsFormat: 'JUnit'
     testResultsFiles: '**/test*.xml'
