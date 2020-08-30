@@ -61,6 +61,7 @@
     <Folder Include="sprockit_LogError" />
     <Folder Include="sprockit_GetProperty" />
     <Folder Include="sprockit_ReserveProcess" />
+    <Folder Include="sprockit_Reservation\" />
   </ItemGroup>
   <ItemGroup>
     <ArtifactReference Include="..\tSQLt.dacpac">
@@ -92,8 +93,19 @@
     <Build Include="sprockit_ReserveProcess\setup.sql" />
     <Build Include="sprockit_ReserveProcess\test GIVEN ready process THEN process returned.sql" />
     <Build Include="sprockit_ReserveProcess\test GIVEN no ready process THEN no process returned.sql" />
-    <Build Include="sprockit_ReserveProcess\test GIVEN PK violation THEN no process returned.sql" />
+    <Build Include="sprockit_ReserveProcess\test GIVEN ready process reserved THEN no process returned.sql" />
     <Build Include="sprockit_ReserveProcess\test GIVEN non-PK error THEN exception rethrown.sql" />
+    <Build Include="sprockit_ReserveProcess\test GIVEN ready process in other group THEN no process returned.sql" />
+    <Build Include="sprockit_ReserveProcess\test GIVEN ready process THEN process reserved.sql" />
+    <Build Include="_TestClasses\sprockit_Reservation.sql" />
+    <Build Include="sprockit_ReserveProcess\test GIVEN multiple ready processes THEN highest AvgDuration returned.sql" />
+    <Build Include="sprockit_ReserveProcess\test GIVEN multiple ready processes THEN highest BranchWeight returned.sql" />
+    <Build Include="sprockit_ReserveProcess\test GIVEN multiple ready processes THEN highest priority returned.sql" />
+    <Build Include="sprockit_ReserveProcess\test GIVEN ready process disabled THEN process marked Done.sql" />
+    <Build Include="sprockit_ReserveProcess\test GIVEN ready process THEN execution created.sql" />
+    <Build Include="sprockit_ReserveProcess\test GIVEN ready process THEN process marked Running.sql" />
+    <Build Include="sprockit_Reservation\test GIVEN handler holding reservation THEN reservation fails.sql" />
+    <Build Include="sprockit_Reservation\test GIVEN process reserved THEN reservation fails.sql" />
   </ItemGroup>
   <ItemGroup>
     <SqlCmdVariable Include="Sprockit">

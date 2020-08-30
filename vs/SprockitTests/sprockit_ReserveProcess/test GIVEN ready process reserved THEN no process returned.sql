@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE sprockit_ReserveProcess.[test GIVEN PK violation THEN no process returned]
+﻿CREATE PROCEDURE sprockit_ReserveProcess.[test GIVEN ready process reserved THEN no process returned]
 AS
 
 -- ARRANGE
