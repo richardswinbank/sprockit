@@ -63,6 +63,7 @@ steps:
     AuthScheme: 'windowsAuthentication'
 
 - task: PowerShell@2
+  condition: succeededOrFailed()
   displayName: Export tSQLt test results
   inputs:
     targetType: 'inline'
