@@ -11,6 +11,7 @@ trigger:
 variables:
   SqlServerInstance: '(localdb)\MSSQLLocalDB'
   TestingDbName: Sprockit
+  TestingProjectName: SprockitSqlAgentTests
 
 pool:
   vmImage: 'windows-2019'
@@ -36,17 +37,17 @@ steps:
     AuthScheme: 'windowsAuthentication'
 
 - task: VSBuild@1
-  displayName: 'Build SprockitTests SSDT project'
+  displayName: 'Build $(TestingProjectName) SSDT project'
   inputs:
-    solution: '**\SprockitTests.sqlproj'
+    solution: '**\$(TestingProjectName).sqlproj'
     configuration: 'Debug'
     clean: true
 
 - task: SqlDacpacDeploymentOnMachineGroup@0
-  displayName: 'Deploy SprockitTests SSDT project to $(TestingDbName) DB'
+  displayName: 'Deploy $(TestingProjectName) SSDT project to $(TestingDbName) DB'
   inputs:
     TaskType: 'dacpac'
-    DacpacFile: 'vs\**\SprockitTests.dacpac'
+    DacpacFile: 'vs\**\$(TestingProjectName).dacpac'
     TargetMethod: server
     ServerName: $(SqlServerInstance)
     DatabaseName: $(TestingDbName)
