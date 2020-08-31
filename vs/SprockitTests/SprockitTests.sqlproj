@@ -62,6 +62,10 @@
     <Folder Include="sprockit_GetProperty" />
     <Folder Include="sprockit_ReserveProcess" />
     <Folder Include="sprockit_Reservation\" />
+    <Folder Include="sprockit_ReleaseProcess" />
+    <Folder Include="sprockit_Property" />
+    <Folder Include="sprockit_EnqueueProcesses" />
+    <Folder Include="sprockit_Execution" />
   </ItemGroup>
   <ItemGroup>
     <ArtifactReference Include="..\tSQLt.dacpac">
@@ -101,11 +105,20 @@
     <Build Include="sprockit_ReserveProcess\test GIVEN multiple ready processes THEN highest AvgDuration returned.sql" />
     <Build Include="sprockit_ReserveProcess\test GIVEN multiple ready processes THEN highest BranchWeight returned.sql" />
     <Build Include="sprockit_ReserveProcess\test GIVEN multiple ready processes THEN highest priority returned.sql" />
-    <Build Include="sprockit_ReserveProcess\test GIVEN ready process disabled THEN process marked Done.sql" />
+    <Build Include="sprockit_ReserveProcess\test GIVEN ready process disabled THEN process released.sql" />
     <Build Include="sprockit_ReserveProcess\test GIVEN ready process THEN execution created.sql" />
     <Build Include="sprockit_ReserveProcess\test GIVEN ready process THEN process marked Running.sql" />
     <Build Include="sprockit_Reservation\test GIVEN handler holding reservation THEN reservation fails.sql" />
     <Build Include="sprockit_Reservation\test GIVEN process reserved THEN reservation fails.sql" />
+    <Build Include="_TestClasses\sprockit_ReleaseProcess.sql" />
+    <Build Include="_TestClasses\sprockit_Property.sql" />
+    <Build Include="sprockit_Property\test ASSERT scheduler property name exists.sql" />
+    <Build Include="_TestClasses\sprockit_EnqueueProcesses.sql" />
+    <Build Include="sprockit_EnqueueProcesses\test.sql" />
+    <Build Include="sprockit_ReleaseProcess\test.sql" />
+    <Build Include="sprockit_Property\test.sql" />
+    <Build Include="_TestClasses\sprockit_Execution.sql" />
+    <Build Include="sprockit_Execution\test.sql" />
   </ItemGroup>
   <ItemGroup>
     <SqlCmdVariable Include="Sprockit">

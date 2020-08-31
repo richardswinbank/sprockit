@@ -5,7 +5,7 @@ DECLARE @batchId INT = 17
 DECLARE @processGroup INT = 4
 DECLARE @handlerId INT = 791
 
-EXEC tSQLt.FakeTable 'sprockit.Batch'
+EXEC tSQLt.FakeTable @TableName = 'sprockit.Batch', @Defaults = 1
 
 INSERT INTO sprockit.Batch (
   BatchId
@@ -15,7 +15,7 @@ INSERT INTO sprockit.Batch (
 , @processGroup
 )
 
-EXEC tSQLt.FakeTable 'sprockit.Handler'
+EXEC tSQLt.FakeTable @TableName = 'sprockit.Handler', @Defaults = 1
 
 INSERT INTO sprockit.Handler (
   HandlerId
@@ -28,3 +28,4 @@ INSERT INTO sprockit.Handler (
 EXEC tSQLt.FakeTable 
   @TableName = 'sprockit.Execution'
 , @Identity = 1
+, @Defaults = 1

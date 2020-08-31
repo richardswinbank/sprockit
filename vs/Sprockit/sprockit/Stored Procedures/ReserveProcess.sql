@@ -12,6 +12,7 @@ CREATE PROCEDURE [sprockit].[ReserveProcess] (
 AS
 
 DECLARE @processId INT 
+DECLARE @isEnabled BIT 
 DECLARE @executionId INT = -1
 
 -- loop until we've reserved a process or there's nothing available to reserve
@@ -19,10 +20,12 @@ WHILE 1 = 1
 BEGIN
 
   SET @processId = -1
+  SET @isEnabled = 1
 
   -- Choose a process
   SELECT TOP 1 
     @processId = p.ProcessId
+  , @isEnabled = p.IsEnabled
   FROM sprockit.Process p WITH (READPAST)
     INNER JOIN sprockit.Handler h ON h.HandlerId = @handlerId
     INNER JOIN sprockit.Batch b ON b.BatchId = h.BatchId  
@@ -92,11 +95,19 @@ BEGIN
     , LastStatusUpdate = GETUTCDATE() 
 	, LastExecutionId = @executionId
   WHERE ProcessId = @processId
+
+  -- if the process is disabled, release it immediately and find another one
+  IF @isEnabled = 0
+  BEGIN
+    EXEC sprockit.ReleaseProcess @executionId, 'Done'
+    CONTINUE
+  END
     
   BREAK
 
 END;
 
+-- return execution details to the calling handler
 SELECT
   x.ExecutionId
 , p.ProcessType

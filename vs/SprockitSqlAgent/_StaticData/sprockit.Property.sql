@@ -1,4 +1,6 @@
-﻿/*
+﻿GO
+
+/*
  * configure Sprockit properties
  */
 -- define properties

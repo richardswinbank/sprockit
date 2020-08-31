@@ -6,7 +6,7 @@ DECLARE @batchId INT = 17
 DECLARE @processGroup INT = 4
 DECLARE @handlerId INT = 791
 
-EXEC tSQLt.FakeTable 'sprockit.Process'
+EXEC tSQLt.FakeTable @TableName = 'sprockit.Process', @Defaults = 1
 
 INSERT INTO sprockit.Process (
   ProcessId
