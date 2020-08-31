@@ -9,6 +9,8 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "SprockitTests", "SprockitTe
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "SprockitSqlAgent", "SprockitSqlAgent\SprockitSqlAgent.sqlproj", "{2D9EF994-8DEE-430F-9CE3-6B807774B543}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "SprockitSqlAgentTests", "SprockitSqlAgentTests\SprockitSqlAgentTests.sqlproj", "{D22648D5-0A67-4085-80C2-D070398FD91C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,12 @@ Global
 		{2D9EF994-8DEE-430F-9CE3-6B807774B543}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D9EF994-8DEE-430F-9CE3-6B807774B543}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2D9EF994-8DEE-430F-9CE3-6B807774B543}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{D22648D5-0A67-4085-80C2-D070398FD91C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D22648D5-0A67-4085-80C2-D070398FD91C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D22648D5-0A67-4085-80C2-D070398FD91C}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{D22648D5-0A67-4085-80C2-D070398FD91C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D22648D5-0A67-4085-80C2-D070398FD91C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D22648D5-0A67-4085-80C2-D070398FD91C}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

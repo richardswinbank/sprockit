@@ -11,4 +11,8 @@ Post-Deployment Script Template
 */
 
 :r ..\..\Sprockit\_Scripts\PostDeployment.sql
+
 :r ..\_StaticData\sprockit.Property.sql
+:r ..\_StaticData\sprockit.ProcessType.sql
+
+:r CreateProcessManager.sql

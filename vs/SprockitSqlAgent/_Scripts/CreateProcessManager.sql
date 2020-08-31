@@ -2,7 +2,7 @@
  * create process manager agent job
  */
 DECLARE @dbName NVARCHAR(128) = DB_NAME()
-DECLARE @jobName NVARCHAR(128) = [sprockit].fn_GetProperty('SqlAgent_ProcessGroup1Manager')
+DECLARE @jobName NVARCHAR(128) = [sprockit].GetProperty('SqlAgent_ProcessGroup1Manager')
 
 IF NOT EXISTS (
   SELECT *

@@ -3,16 +3,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <Name>SprockitSqlAgent</Name>
+    <Name>SprockitSqlAgentTests</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
-    <ProjectGuid>{2d9ef994-8dee-430f-9ce3-6b807774b543}</ProjectGuid>
+    <ProjectGuid>{d22648d5-0a67-4085-80c2-d070398fd91c}</ProjectGuid>
     <DSP>Microsoft.Data.Tools.Schema.Sql.Sql100DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
-    <RootNamespace>SprockitSqlAgent</RootNamespace>
-    <AssemblyName>SprockitSqlAgent</AssemblyName>
+    <RootNamespace>SprockitSqlAgentTests</RootNamespace>
+    <AssemblyName>SprockitSqlAgentTests</AssemblyName>
     <ModelCollation>1033, CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
@@ -56,12 +56,39 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
-    <Folder Include="sprockit" />
     <Folder Include="_Scripts" />
-    <Folder Include="sprockit\Stored Procedures" />
-    <Folder Include="_StaticData" />
   </ItemGroup>
   <ItemGroup>
+    <SqlCmdVariable Include="tSQLt">
+      <DefaultValue>tSQLt</DefaultValue>
+      <Value>$(SqlCmdVar__1)</Value>
+    </SqlCmdVariable>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SprockitTests\SprockitTests.sqlproj">
+      <Name>SprockitTests</Name>
+      <Project>{a2b47ffd-a176-4d44-ab59-c6f6f406e617}</Project>
+      <Private>True</Private>
+      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
+    </ProjectReference>
+    <ProjectReference Include="..\SprockitSqlAgent\SprockitSqlAgent.sqlproj">
+      <Name>SprockitSqlAgent</Name>
+      <Project>{2d9ef994-8dee-430f-9ce3-6b807774b543}</Project>
+      <Private>True</Private>
+      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
+    </ProjectReference>
+    <ProjectReference Include="..\Sprockit\Sprockit.sqlproj">
+      <Name>Sprockit</Name>
+      <Project>{04c478df-7c6e-40fc-bd03-02748bb7aefc}</Project>
+      <Private>True</Private>
+      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ArtifactReference Include="..\tSQLt.dacpac">
+      <HintPath>..\tSQLt.dacpac</HintPath>
+      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
+    </ArtifactReference>
     <ArtifactReference Include="$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\100\SqlSchemas\master.dacpac">
       <HintPath>$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\100\SqlSchemas\master.dacpac</HintPath>
       <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
@@ -74,28 +101,6 @@
     </ArtifactReference>
   </ItemGroup>
   <ItemGroup>
-    <Build Include="sprockit\Stored Procedures\SqlAgent_ProcessManager.sql" />
-    <Build Include="sprockit\Stored Procedures\SqlAgent_ProcessHandler.sql" />
-    <Build Include="sprockit\Stored Procedures\SqlAgent_ExecuteProcedure.sql" />
-    <Build Include="sprockit\Stored Procedures\SqlAgent_ExecuteCatalogPackage.sql" />
-    <None Include="_StaticData\sprockit.Property.sql" />
-    <None Include="_StaticData\sprockit.ProcessType.sql" />
-  </ItemGroup>
-  <ItemGroup>
     <PostDeploy Include="_Scripts\PostDeployment.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <Build Include="sprockit\Stored Procedures\SqlAgent_StartProcessHandler.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="_Scripts\CreateProcessManager.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Sprockit\Sprockit.sqlproj">
-      <Name>Sprockit</Name>
-      <Project>{04c478df-7c6e-40fc-bd03-02748bb7aefc}</Project>
-      <Private>True</Private>
-      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
-    </ProjectReference>
   </ItemGroup>
 </Project>
