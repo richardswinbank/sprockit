@@ -119,6 +119,17 @@
     <Build Include="sprockit_Property\test.sql" />
     <Build Include="_TestClasses\sprockit_Execution.sql" />
     <Build Include="sprockit_Execution\test.sql" />
+    <Build Include="sprockit_ReleaseProcess\setup.sql" />
+    <Build Include="sprockit_ReleaseProcess\test GIVEN valid ExecutionId THEN execution ended.sql" />
+    <Build Include="sprockit_ReleaseProcess\test GIVEN invalid ExecutionId THEN execution not ended.sql" />
+    <Build Include="sprockit_ReleaseProcess\test GIVEN valid ExecutionId THEN reservation released.sql" />
+    <Build Include="sprockit_ReleaseProcess\test GIVEN invalid ExecutionId THEN reservation not released.sql" />
+    <Build Include="sprockit_ReleaseProcess\test GIVEN valid ExecutionId THEN process status updated.sql" />
+    <Build Include="sprockit_ReleaseProcess\test GIVEN invalid ExecutionId THEN process status not updated.sql" />
+    <Build Include="sprockit_ReleaseProcess\test GIVEN process errored THEN error count incremented.sql" />
+    <Build Include="sprockit_ReleaseProcess\test GIVEN process not errored THEN error count reset.sql" />
+    <Build Include="sprockit_ReleaseProcess\test GIVEN invalid ExecutionId THEN error count unchanged.sql" />
+    <Build Include="sprockit_ReleaseProcess\test WHEN release fails THEN error rethrown.sql" />
   </ItemGroup>
   <ItemGroup>
     <SqlCmdVariable Include="Sprockit">

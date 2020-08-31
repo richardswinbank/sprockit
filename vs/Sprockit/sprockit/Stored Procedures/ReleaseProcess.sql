@@ -31,7 +31,7 @@ BEGIN TRY  -- ensure that process status doesn't change if earlier updates fail
   UPDATE p
   SET [Status] = @endStatus
     , LastStatusUpdate = GETUTCDATE()
-	, ErrorCount += CASE @endStatus WHEN 'Errored' THEN 1 ELSE 0 END
+    , ErrorCount = CASE @endStatus WHEN 'Errored' THEN ErrorCount + 1 ELSE 0 END
   FROM sprockit.Execution e
     INNER JOIN sprockit.Process p ON p.ProcessId = e.ProcessId
   WHERE e.ExecutionId = @executionId;

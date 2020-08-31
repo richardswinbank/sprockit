@@ -48,4 +48,4 @@ FROM sprockit.Process
 -- ASSERT
 EXEC tSQLt.AssertEqualsTable 
   @Expected = '#expected'
-, @Actual = '#Actual'
+, @Actual = '#actual'
