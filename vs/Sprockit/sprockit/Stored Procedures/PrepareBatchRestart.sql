@@ -36,8 +36,7 @@ SET [Status] =
 , LastStatusUpdate = GETUTCDATE()
 , ErrorCount = 0
 WHERE [Status] IN (
-  'Starting'
-, 'Running'
+  'Running'
 , 'Errored'
 , 'Stopped'
 , 'Blocked'
