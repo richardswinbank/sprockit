@@ -47,9 +47,6 @@ END CATCH
 /*
  * call process scheduler (change to process status may mean other processes are now ready
  */
--- identify scheduler SP
-DECLARE @scheduler NVARCHAR(255) = sprockit.GetProperty('ProcessSchedulerSpName');
-
 -- get process group
 DECLARE @processGroup INT = (
   SELECT p.ProcessGroup
@@ -69,4 +66,4 @@ INSERT INTO @output (
   ReadyProcesses
 , RunningHandlers
 )
-EXEC @scheduler @processGroup = @processGroup
+EXEC sprockit.EnqueueProcesses @processGroup = @processGroup

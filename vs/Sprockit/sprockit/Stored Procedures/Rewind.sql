@@ -1,5 +1,5 @@
 ﻿/*
- * sprockit.[uRewind]
+ * sprockit.[Rewind]
  * Copyright (c) 2018-2020 Richard Swinbank (richard@richardswinbank.net) 
  * http://richardswinbank.net/sprockit
  *

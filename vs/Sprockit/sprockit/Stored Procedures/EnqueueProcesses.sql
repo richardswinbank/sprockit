@@ -27,7 +27,7 @@ WHERE ProcessPath IN (
   HAVING MIN(PredecessorStatus) = 'Done'  -- has predecessor with status 'Done'
   AND MIN(PredecessorStatus) = MAX(PredecessorStatus)  -- has no predecessor with other status
 )
-
+  
 -- Set 'Errored' processes to 'Ready' when error is retryable and under retry limit
 UPDATE p
 SET [Status] = 'Ready'
@@ -36,7 +36,7 @@ FROM sprockit.Process p
   INNER JOIN sprockit.[Event] e ON e.ExecutionId = p.LastExecutionId
   INNER JOIN sprockit.RetryableError re 
     ON re.ProcessType = p.ProcessType
-	AND e.[Message] LIKE re.MessagePattern
+    AND e.[Message] LIKE re.MessagePattern
 WHERE p.[Status] = 'Errored' 
 AND e.Severity >= 200
 AND p.ErrorCount <= re.MaximumRetries
