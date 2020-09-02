@@ -1,5 +1,5 @@
 ﻿/*
- * sprockit.[RegisterHandler]
+ * sprockit.[UnregisterHandler]
  * Copyright (c) 2015-2020 Richard Swinbank (richard@richardswinbank.net) 
  * http://richardswinbank.net/sprockit
  *

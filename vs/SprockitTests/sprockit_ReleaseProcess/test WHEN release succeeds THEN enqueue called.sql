@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE sprockit_ReleaseProcess.[test WHEN release fails THEN error rethrown]
+﻿CREATE PROCEDURE sprockit_ReleaseProcess.[test WHEN release succeeds THEN enqueue called]
 AS
 
 -- ARRANGE
@@ -24,10 +24,23 @@ DECLARE @executionId INT = (
   FROM @result
 )
 
-EXEC ('CREATE TRIGGER ForceFailure ON sprockit.Execution AFTER UPDATE AS RAISERROR(''Error!'', 11, 1)')
-EXEC tSQLt.ExpectException @ExpectedMessagePattern = '% rethrown by sprockit.usp_RethrowError:% Procedure ForceFailure%'
+EXEC tSQLt.SpyProcedure 'sprockit.EnqueueProcesses'
+
+SELECT
+  @processGroup AS processGroup
+INTO #expected
 
 -- ACT
 EXEC sprockit.ReleaseProcess 
   @executionId = @executionId
 , @endStatus = @endStatus
+
+SELECT
+  processGroup
+INTO #actual
+FROM sprockit.EnqueueProcesses_SpyProcedureLog
+
+-- ASSERT
+EXEC tSQLt.AssertEqualsTable 
+  @Expected = '#expected'
+, @Actual = '#actual'

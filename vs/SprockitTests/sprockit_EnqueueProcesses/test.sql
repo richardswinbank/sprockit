@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE sprockit_ReleaseProcess.[test]
+﻿CREATE PROCEDURE sprockit_EnqueueProcesses.[test]
 AS
 
 -- not implemented exception

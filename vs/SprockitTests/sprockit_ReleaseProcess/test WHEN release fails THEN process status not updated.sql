@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE sprockit_ReleaseProcess.[test WHEN release fails THEN error rethrown]
+﻿CREATE PROCEDURE sprockit_ReleaseProcess.[test WHEN release fails THEN process status not updated]
 AS
 
 -- ARRANGE
@@ -24,10 +24,27 @@ DECLARE @executionId INT = (
   FROM @result
 )
 
+SELECT
+  ProcessId
+, CASE ProcessId WHEN 32 THEN 'Running' ELSE [Status] END AS [Status]
+INTO #expected
+FROM sprockit.Process
+
 EXEC ('CREATE TRIGGER ForceFailure ON sprockit.Execution AFTER UPDATE AS RAISERROR(''Error!'', 11, 1)')
-EXEC tSQLt.ExpectException @ExpectedMessagePattern = '% rethrown by sprockit.usp_RethrowError:% Procedure ForceFailure%'
+EXEC tSQLt.ExpectException  -- swallow rethrown error
 
 -- ACT
 EXEC sprockit.ReleaseProcess 
   @executionId = @executionId
 , @endStatus = @endStatus
+
+SELECT
+  ProcessId
+, [Status]
+INTO #actual
+FROM sprockit.Process
+
+-- ASSERT
+EXEC tSQLt.AssertEqualsTable 
+  @Expected = '#expected'
+, @Actual = '#actual'

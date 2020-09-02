@@ -80,7 +80,11 @@ BEGIN
 
     SET @endStatus = 'Errored';
     SET @errorMessage = ERROR_MESSAGE() 
-    SET @errorSource = 'Line ' + CAST(ERROR_LINE() AS VARCHAR)
+    SET @errorSource = 
+      CASE @processType
+        WHEN 'SSIS' THEN 'See SSIS catalog errors'
+        WHEN 'SQL' THEN 'Line ' + CAST(ERROR_LINE() AS VARCHAR)
+      END
 
     EXEC sprockit.LogError 
       @executionId = @executionId

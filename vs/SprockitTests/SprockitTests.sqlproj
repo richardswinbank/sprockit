@@ -115,7 +115,6 @@
     <Build Include="sprockit_Property\test ASSERT scheduler property name exists.sql" />
     <Build Include="_TestClasses\sprockit_EnqueueProcesses.sql" />
     <Build Include="sprockit_EnqueueProcesses\test.sql" />
-    <Build Include="sprockit_ReleaseProcess\test.sql" />
     <Build Include="sprockit_Property\test.sql" />
     <Build Include="_TestClasses\sprockit_Execution.sql" />
     <Build Include="sprockit_Execution\test.sql" />
@@ -130,6 +129,9 @@
     <Build Include="sprockit_ReleaseProcess\test GIVEN process not errored THEN error count reset.sql" />
     <Build Include="sprockit_ReleaseProcess\test GIVEN invalid ExecutionId THEN error count unchanged.sql" />
     <Build Include="sprockit_ReleaseProcess\test WHEN release fails THEN error rethrown.sql" />
+    <Build Include="sprockit_ReleaseProcess\test WHEN release succeeds THEN enqueue called.sql" />
+    <Build Include="sprockit_ReleaseProcess\test WHEN release fails THEN enqueue not called.sql" />
+    <Build Include="sprockit_ReleaseProcess\test WHEN release fails THEN process status not updated.sql" />
   </ItemGroup>
   <ItemGroup>
     <SqlCmdVariable Include="Sprockit">
