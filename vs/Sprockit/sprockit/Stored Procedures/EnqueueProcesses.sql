@@ -1,4 +1,4 @@
-﻿/*
+/*
  * sprockit.[EnqueueProcesses]
  * Copyright (c) 2015-2020 Richard Swinbank (richard@richardswinbank.net) 
  * http://richardswinbank.net/sprockit
@@ -22,7 +22,7 @@ WHERE ProcessPath IN (
   SELECT
     ProcessPath
   FROM sprockit.DependencyStatus(@processGroup)
-  WHERE ProcessStatus = 'Not ready'
+  WHERE ProcessStatus IN ('Not ready', 'Blocked')
   GROUP BY ProcessPath
   HAVING MIN(PredecessorStatus) = 'Done'  -- has predecessor with status 'Done'
   AND MIN(PredecessorStatus) = MAX(PredecessorStatus)  -- has no predecessor with other status
