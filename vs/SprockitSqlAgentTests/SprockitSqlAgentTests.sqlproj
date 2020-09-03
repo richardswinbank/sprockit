@@ -57,6 +57,8 @@
   <ItemGroup>
     <Folder Include="Properties" />
     <Folder Include="_Scripts" />
+    <Folder Include="sprockit_Property" />
+    <Folder Include="sprockit_ProcessType" />
   </ItemGroup>
   <ItemGroup>
     <SqlCmdVariable Include="tSQLt">
@@ -102,5 +104,11 @@
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="_Scripts\PostDeployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="sprockit_Property\test ASSERT SqlAgent_MaxConcurrentHandlers property exists.sql" />
+    <Build Include="sprockit_Property\test ASSERT SqlAgent_ProcessGroup1Manager property exists.sql" />
+    <Build Include="sprockit_ProcessType\test ASSERT process type SSIS exists.sql" />
+    <Build Include="sprockit_ProcessType\test ASSERT process type SQL exists.sql" />
   </ItemGroup>
 </Project>

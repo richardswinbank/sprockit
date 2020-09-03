@@ -66,6 +66,9 @@
     <Folder Include="sprockit_Property" />
     <Folder Include="sprockit_EnqueueProcesses" />
     <Folder Include="sprockit_Execution" />
+    <Folder Include="sprockit_ProcessType" />
+    <Folder Include="sprockit_DependencyStatus" />
+    <Folder Include="sprockit_Process" />
   </ItemGroup>
   <ItemGroup>
     <ArtifactReference Include="..\tSQLt.dacpac">
@@ -114,10 +117,10 @@
     <Build Include="_TestClasses\sprockit_Property.sql" />
     <Build Include="sprockit_Property\test ASSERT scheduler property name exists.sql" />
     <Build Include="_TestClasses\sprockit_EnqueueProcesses.sql" />
-    <Build Include="sprockit_EnqueueProcesses\test.sql" />
-    <Build Include="sprockit_Property\test.sql" />
+    <Build Include="sprockit_EnqueueProcesses\test FAIL.sql" />
+    <Build Include="sprockit_Property\test FAIL.sql" />
     <Build Include="_TestClasses\sprockit_Execution.sql" />
-    <Build Include="sprockit_Execution\test.sql" />
+    <Build Include="sprockit_Execution\test FAIL.sql" />
     <Build Include="sprockit_ReleaseProcess\setup.sql" />
     <Build Include="sprockit_ReleaseProcess\test GIVEN valid ExecutionId THEN execution ended.sql" />
     <Build Include="sprockit_ReleaseProcess\test GIVEN invalid ExecutionId THEN execution not ended.sql" />
@@ -132,6 +135,14 @@
     <Build Include="sprockit_ReleaseProcess\test WHEN release succeeds THEN enqueue called.sql" />
     <Build Include="sprockit_ReleaseProcess\test WHEN release fails THEN enqueue not called.sql" />
     <Build Include="sprockit_ReleaseProcess\test WHEN release fails THEN process status not updated.sql" />
+    <Build Include="_TestClasses\sprockit_ProcessType.sql" />
+    <Build Include="sprockit_ProcessType\test GIVEN process type exists THEN insert fails.sql" />
+    <Build Include="sprockit_ProcessType\test GIVEN process type does not exist THEN insert succeeds.sql" />
+    <Build Include="sprockit_ProcessType\test GIVEN process type is null THEN insert fails.sql" />
+    <Build Include="_TestClasses\sprockit_DependencyStatus.sql" />
+    <Build Include="sprockit_DependencyStatus\test FAIL.sql" />
+    <Build Include="_TestClasses\sprockit_Process.sql" />
+    <Build Include="sprockit_Process\test FAIL.sql" />
   </ItemGroup>
   <ItemGroup>
     <SqlCmdVariable Include="Sprockit">
