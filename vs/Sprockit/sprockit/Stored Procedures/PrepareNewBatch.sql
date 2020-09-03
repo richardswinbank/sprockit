@@ -18,6 +18,7 @@ EXEC sprockit.UpdateMetrics @processGroup
 UPDATE p
 SET [Status] = 'Not ready'
   , LastStatusUpdate = GETUTCDATE()
+  , ErrorCount = 0
 FROM sprockit.Process p
 WHERE p.ProcessGroup = @processGroup
 
@@ -25,6 +26,7 @@ WHERE p.ProcessGroup = @processGroup
 UPDATE p
 SET [Status] = 'Ready'
   , LastStatusUpdate = GETUTCDATE()
+  , ErrorCount = 0
 FROM sprockit.Process p
   LEFT JOIN sprockit.ProcessDependency pd ON pd.ProcessId = p.ProcessId
 WHERE p.ProcessGroup = @processGroup
