@@ -112,6 +112,7 @@ SELECT
   x.ExecutionId
 , p.ProcessType
 , p.ProcessPath
+, p.DataWatermark
 FROM (
   SELECT @executionId AS ExecutionId
 ) x

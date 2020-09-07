@@ -13,6 +13,13 @@ CREATE PROCEDURE [sprockit].[SetExecutionProperty] (
 )
 AS
 
+IF @propertyName = 'SprockitProcessWatermark'
+  UPDATE p
+  SET DataWatermark = @propertyValue
+  FROM sprockit.Execution e
+    INNER JOIN sprockit.Process p ON p.ProcessId = e.ProcessId
+  WHERE e.ExecutionId = @executionId;
+
 WITH old AS (
   SELECT 
     t.c.value('@name', 'NVARCHAR(4000)') AS [name]
@@ -39,4 +46,4 @@ SET ExecutionProperties = '<Properties>' + (
   FOR XML AUTO
 ) + '</Properties>'
 FROM sprockit.Execution e
-WHERE e.ExecutionId = @executionid
+WHERE e.ExecutionId = @executionid;
