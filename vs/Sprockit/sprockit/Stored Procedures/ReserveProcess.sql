@@ -25,8 +25,9 @@ BEGIN
   -- Choose a process
   SELECT TOP 1 
     @processId = p.ProcessId
-  , @isEnabled = p.IsEnabled
+  , @isEnabled = p.IsEnabled & pt.HasHandler
   FROM sprockit.Process p WITH (READPAST)
+    INNER JOIN sprockit.ProcessType pt ON pt.ProcessType = p.ProcessType
     INNER JOIN sprockit.Handler h ON h.HandlerId = @handlerId
     INNER JOIN sprockit.Batch b ON b.BatchId = h.BatchId  
     LEFT JOIN sprockit.Reservation r ON r.ProcessId = p.ProcessId

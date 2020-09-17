@@ -13,6 +13,8 @@ CREATE PROCEDURE [sprockit].[SetExecutionProperty] (
 )
 AS
 
+SET @propertyValue = COALESCE(@propertyValue, '<null>')
+
 IF @propertyName = 'SprockitProcessWatermark'
   UPDATE p
   SET DataWatermark = @propertyValue
