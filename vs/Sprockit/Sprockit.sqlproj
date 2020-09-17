@@ -63,6 +63,7 @@
     <Folder Include="sprockit\Stored Procedures\" />
     <Folder Include="_Scripts" />
     <Folder Include="_StaticData" />
+    <Folder Include="sprockit\XMLSchemaCollections\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="sprockit\Tables\Execution.sql" />
@@ -95,6 +96,8 @@
     <Build Include="sprockit\Functions\GetProperty.sql" />
     <Build Include="sprockit\Tables\Property.sql" />
     <None Include="_StaticData\sprockit.Property.sql" />
+    <Build Include="sprockit\Functions\GetExecutionProperty.sql" />
+    <Build Include="sprockit\XMLSchemaCollections\Properties.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompare1.scmp" />
