@@ -69,6 +69,7 @@
     <Folder Include="sprockit_ProcessType" />
     <Folder Include="sprockit_DependencyStatus" />
     <Folder Include="sprockit_Process" />
+    <Folder Include="sprockit_SetExecutionProperty" />
   </ItemGroup>
   <ItemGroup>
     <ArtifactReference Include="..\tSQLt.dacpac">
@@ -117,8 +118,8 @@
     <Build Include="_TestClasses\sprockit_Property.sql" />
     <Build Include="sprockit_Property\test ASSERT scheduler property name exists.sql" />
     <Build Include="_TestClasses\sprockit_EnqueueProcesses.sql" />
-    <Build Include="sprockit_EnqueueProcesses\test FAIL.sql" />
-    <Build Include="sprockit_Property\test FAIL.sql" />
+    <Build Include="sprockit_EnqueueProcesses\test MORE TESTS REQUIRED.sql" />
+    <Build Include="sprockit_Property\test MORE TESTS REQUIRED.sql" />
     <Build Include="_TestClasses\sprockit_Execution.sql" />
     <Build Include="sprockit_ReleaseProcess\setup.sql" />
     <Build Include="sprockit_ReleaseProcess\test GIVEN valid ExecutionId THEN execution ended.sql" />
@@ -139,9 +140,8 @@
     <Build Include="sprockit_ProcessType\test GIVEN process type does not exist THEN insert succeeds.sql" />
     <Build Include="sprockit_ProcessType\test GIVEN process type is null THEN insert fails.sql" />
     <Build Include="_TestClasses\sprockit_DependencyStatus.sql" />
-    <Build Include="sprockit_DependencyStatus\test FAIL.sql" />
+    <Build Include="sprockit_DependencyStatus\test MORE TESTS REQUIRED.sql" />
     <Build Include="_TestClasses\sprockit_Process.sql" />
-    <Build Include="sprockit_Process\test FAIL.sql" />
     <Build Include="sprockit_ReserveProcess\test GIVEN ready process has no handler THEN process released.sql" />
     <Build Include="sprockit_Execution\test ASSERT ExecutionId is identity.sql" />
     <Build Include="sprockit_Execution\setup.sql" />
@@ -160,6 +160,34 @@
     <Build Include="sprockit_Execution\test ASSERT BranchWeight is nullable.sql" />
     <Build Include="sprockit_Execution\test ASSERT IsEnabled is nullable.sql" />
     <Build Include="sprockit_Execution\test ASSERT Priority is nullable.sql" />
+    <Build Include="sprockit_Process\setup.sql" />
+    <Build Include="sprockit_Process\test ASSERT ProcessId is identity.sql" />
+    <Build Include="sprockit_Process\test ASSERT ProcessGroup is non-nullable.sql" />
+    <Build Include="sprockit_Process\test ASSERT ProcessPath is non-nullable.sql" />
+    <Build Include="sprockit_Process\test ASSERT ProcessType is non-nullable.sql" />
+    <Build Include="sprockit_Process\test ASSERT IsValidator is non-nullable.sql" />
+    <Build Include="sprockit_Process\test ASSERT Status is non-nullable.sql" />
+    <Build Include="sprockit_Process\test ASSERT ErrorCount is non-nullable.sql" />
+    <Build Include="sprockit_Process\test ASSERT LastStatusUpdate is non-nullable.sql" />
+    <Build Include="sprockit_Process\test ASSERT AvgDuration is non-nullable.sql" />
+    <Build Include="sprockit_Process\test ASSERT BranchWeight is non-nullable.sql" />
+    <Build Include="sprockit_Process\test ASSERT IsEnabled is non-nullable.sql" />
+    <Build Include="sprockit_Process\test ASSERT Priority is non-nullable.sql" />
+    <Build Include="sprockit_Process\test ASSERT ProcessGroup has default.sql" />
+    <Build Include="sprockit_Process\test ASSERT IsValidator has default.sql" />
+    <Build Include="sprockit_Process\test ASSERT Status has default.sql" />
+    <Build Include="sprockit_Process\test ASSERT ErrorCount has default.sql" />
+    <Build Include="sprockit_Process\test ASSERT LastStatusUpdate has default.sql" />
+    <Build Include="sprockit_Process\test ASSERT AvgDuration has default.sql" />
+    <Build Include="sprockit_Process\test ASSERT BranchWeight has default.sql" />
+    <Build Include="sprockit_Process\test ASSERT IsEnabled has default.sql" />
+    <Build Include="sprockit_Process\test ASSERT Priority has default.sql" />
+    <Build Include="sprockit_Process\test ASSERT LastExecutionId is nullable.sql" />
+    <Build Include="sprockit_Process\test ASSERT DataWatermark is nullable.sql" />
+    <Build Include="_TestClasses\sprockit_SetExecutionProperty.sql" />
+    <Build Include="sprockit_SetExecutionProperty\test MORE TESTS REQUIRED.sql" />
+    <Build Include="sprockit_Process\test ASSERT ProcessType is foreign key.sql" />
+    <Build Include="sprockit_Process\test ASSERT ProcessPath is unique.sql" />
   </ItemGroup>
   <ItemGroup>
     <SqlCmdVariable Include="Sprockit">
