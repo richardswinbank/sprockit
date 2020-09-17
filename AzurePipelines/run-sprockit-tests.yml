@@ -11,19 +11,19 @@ trigger:
 variables:
   SqlServerInstance: '(localdb)\MSSQLLocalDB'
   TestingDbName: Sprockit
-  TestingProjectName: SprockitSqlAgentTests
+  TestingProjectName: SprockitSqlAgent.Tests
 
 pool:
   vmImage: 'windows-2019'
 
 steps:
 
-- task: CopyFiles@2
-  displayName: Copy SQL 2008 system DB dacpacs to correct location in build agent
-  inputs:
-    sourceFolder: 'vs'
-    contents: '*.dacpac' 
-    targetFolder: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\IDE\Extensions\Microsoft\SQLDB\Extensions\SqlServer\100\SqlSchemas\'
+#- task: CopyFiles@2
+#  displayName: Copy SQL 2008 system DB dacpacs to correct location in build agent
+#  inputs:
+#    sourceFolder: 'vs'
+#    contents: '*.dacpac' 
+#    targetFolder: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\IDE\Extensions\Microsoft\SQLDB\Extensions\SqlServer\100\SqlSchemas\'
 
 - task: SqlDacpacDeploymentOnMachineGroup@0
   displayName: Enable CLR on $(SqlServerInstance)  # required for tSQLt
@@ -54,59 +54,8 @@ steps:
     AuthScheme: 'windowsAuthentication'
     AdditionalArguments: '/p:IncludeCompositeObjects=true /p:CreateNewDatabase=true /v:Sprockit=Sprockit /v:tSQLt=tSQLt'
 
-- task: SqlDacpacDeploymentOnMachineGroup@0
-  displayName: Run tSQLt tests
-  inputs:
-    TaskType: 'sqlInline'
-    InlineSql: 'EXEC tSQLt.RunAll'
-    ServerName: $(SqlServerInstance)
-    DatabaseName: $(TestingDbName)
-    AuthScheme: 'windowsAuthentication'
-
-- task: PowerShell@2
-  displayName: Export tSQLt test results
-  condition: succeededOrFailed()
-  inputs:
-    targetType: 'inline'
-    script: |
-      $connectionString = "Server=$(SqlServerInstance);Database=$(TestingDbName);Trusted_Connection=true;"
-      $filepath = "$(System.DefaultWorkingDirectory)/testresults.xml"
-
-      $connection = new-object system.data.SqlClient.SQLConnection($connectionString)
-      $sqlCommand = 'EXEC tSQLt.XmlResultFormatter'
-      
-      try
-      {
-        $connection.Open()
-        $command = new-object system.data.sqlclient.sqlcommand($sqlCommand,$connection)
-        $command.CommandTimeout = 60
-            
-        $xmlReader = $command.ExecuteXmlReader()
-            
-        $xmlWriterSettings = New-Object System.Xml.XmlWriterSettings
-        $xmlWriterSettings.CloseOutput = $true
-        $xmlWriter = ([System.Xml.XmlWriter]::Create($filePath, $xmlWriterSettings))
-        
-        $xmlWriter.WriteNode($xmlReader,$true)    
-        $xmlWriter.Flush()
-      }
-      catch {
-        $errorMessage = $_.Exception.Message
-        $body = "Extract failed to run for the extract: $errorMessage"
-      }
-      finally
-      {
-          $xmlWriter.Dispose()
-          $xmlReader.Dispose()
-          $connection.Dispose()
-      }
-
-- task: PublishTestResults@2
-  displayName: Publish tSQLt test results
-  condition: succeededOrFailed()
-  inputs:
-    testResultsFormat: 'JUnit'
-    testResultsFiles: '**/test*.xml'
-    mergeTestResults: true
-    failTaskOnFailedTests: true
-    testRunTitle: '$(TestingDbName) tSQLt test results'
+- template: templates/run-tsqlt-tests.yml
+  parameters:
+    SqlServerInstance: $(SqlServerInstance)
+    TestingDatabaseName: $(TestingDbName)
+    
