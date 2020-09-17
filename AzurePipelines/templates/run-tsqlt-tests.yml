@@ -1,0 +1,66 @@
+
+parameters:
+  SqlServerInstance: ''
+  TestingDatabaseName: ''
+
+steps:
+  
+- task: SqlDacpacDeploymentOnMachineGroup@0
+  displayName: Enable CLR on ${{ parameters.SqlServerInstance }}  # required for tSQLt
+  inputs:
+    TaskType: 'sqlInline'
+    InlineSql: |
+      EXEC sp_configure 'clr enabled', 1; RECONFIGURE;
+    ServerName: ${{ parameters.SqlServerInstance }}
+    DatabaseName: 'master'
+    AuthScheme: 'windowsAuthentication'
+
+- task: SqlDacpacDeploymentOnMachineGroup@0
+  displayName: Run tSQLt tests
+  inputs:
+    TaskType: 'sqlInline'
+    InlineSql: 'EXEC tSQLt.RunAll'
+    targetMethod: connectionString
+    
+    ServerName: ${{ parameters.SqlServerInstance }}
+    DatabaseName: ${{ parameters.TestingDatabaseName }}
+    AuthScheme: 'windowsAuthentication'
+
+- task: PowerShell@2
+  displayName: Export tSQLt test results
+  condition: succeededOrFailed()
+  inputs:
+    targetType: 'inline'    
+    script: |
+      try
+      {
+        $connStr = "Server=${{ parameters.SqlServerInstance }};Database=${{ parameters.TestingDatabaseName }};Trusted_Connection=true;"
+        $conn = new-object system.data.SqlClient.SQLConnection($connStr)
+        $conn.Open()
+        
+        $cmd = new-object system.data.sqlclient.sqlcommand("EXEC tSQLt.XmlResultFormatter",$conn)
+        $xmlReader = $cmd.ExecuteXmlReader()
+            
+        $xmlWriterSettings = New-Object System.Xml.XmlWriterSettings
+        $xmlWriterSettings.CloseOutput = $true
+        $xmlWriter = ([System.Xml.XmlWriter]::Create("testresults.xml", $xmlWriterSettings))
+        
+        $xmlWriter.WriteNode($xmlReader,$true)    
+        $xmlWriter.Flush()
+      }
+      finally
+      {
+          if($xmlWriter) { $xmlWriter.Dispose() }
+          if($xmlReader) { $xmlReader.Dispose() }
+          if($conn) { $conn.Dispose() }
+      }
+
+- task: PublishTestResults@2
+  displayName: Publish tSQLt test results
+  condition: succeededOrFailed()
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: testresults.xml
+    mergeTestResults: true
+    failTaskOnFailedTests: true
+    testRunTitle: '${{ parameters.SqlServerInstance }}\${{ parameters.TestingDatabaseName }} tSQLt test results'
