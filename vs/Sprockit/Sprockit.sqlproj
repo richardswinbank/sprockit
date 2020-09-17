@@ -100,9 +100,6 @@
     <Build Include="sprockit\XMLSchemaCollections\Properties.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="SqlSchemaCompare1.scmp" />
-  </ItemGroup>
-  <ItemGroup>
     <PostDeploy Include="_Scripts\PostDeployment.sql" />
   </ItemGroup>
   <ItemGroup>

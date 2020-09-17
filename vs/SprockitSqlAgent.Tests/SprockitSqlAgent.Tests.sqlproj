@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <Name>SprockitSqlAgentTests</Name>
+    <Name>SprockitSqlAgent.Tests</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{d22648d5-0a67-4085-80c2-d070398fd91c}</ProjectGuid>
@@ -11,8 +11,8 @@
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
-    <RootNamespace>SprockitSqlAgentTests</RootNamespace>
-    <AssemblyName>SprockitSqlAgentTests</AssemblyName>
+    <RootNamespace>SprockitSqlAgent.Tests</RootNamespace>
+    <AssemblyName>SprockitSqlAgent.Tests</AssemblyName>
     <ModelCollation>1033, CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
@@ -67,12 +67,6 @@
     </SqlCmdVariable>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SprockitTests\SprockitTests.sqlproj">
-      <Name>SprockitTests</Name>
-      <Project>{a2b47ffd-a176-4d44-ab59-c6f6f406e617}</Project>
-      <Private>True</Private>
-      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
-    </ProjectReference>
     <ProjectReference Include="..\SprockitSqlAgent\SprockitSqlAgent.sqlproj">
       <Name>SprockitSqlAgent</Name>
       <Project>{2d9ef994-8dee-430f-9ce3-6b807774b543}</Project>
@@ -82,6 +76,12 @@
     <ProjectReference Include="..\Sprockit\Sprockit.sqlproj">
       <Name>Sprockit</Name>
       <Project>{04c478df-7c6e-40fc-bd03-02748bb7aefc}</Project>
+      <Private>True</Private>
+      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
+    </ProjectReference>
+    <ProjectReference Include="..\Sprockit.Tests\Sprockit.Tests.sqlproj">
+      <Name>Sprockit.Tests</Name>
+      <Project>{a2b47ffd-a176-4d44-ab59-c6f6f406e617}</Project>
       <Private>True</Private>
       <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
     </ProjectReference>

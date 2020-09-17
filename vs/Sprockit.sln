@@ -5,11 +5,13 @@ VisualStudioVersion = 16.0.30320.27
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Sprockit", "Sprockit\Sprockit.sqlproj", "{04C478DF-7C6E-40FC-BD03-02748BB7AEFC}"
 EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "SprockitTests", "SprockitTests\SprockitTests.sqlproj", "{A2B47FFD-A176-4D44-AB59-C6F6F406E617}"
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Sprockit.Tests", "Sprockit.Tests\Sprockit.Tests.sqlproj", "{A2B47FFD-A176-4D44-AB59-C6F6F406E617}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "SprockitSqlAgent", "SprockitSqlAgent\SprockitSqlAgent.sqlproj", "{2D9EF994-8DEE-430F-9CE3-6B807774B543}"
 EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "SprockitSqlAgentTests", "SprockitSqlAgentTests\SprockitSqlAgentTests.sqlproj", "{D22648D5-0A67-4085-80C2-D070398FD91C}"
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "SprockitSqlAgent.Tests", "SprockitSqlAgent.Tests\SprockitSqlAgent.Tests.sqlproj", "{D22648D5-0A67-4085-80C2-D070398FD91C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{95186050-C5A7-493C-8E3C-E848C5A0424F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,6 +46,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A2B47FFD-A176-4D44-AB59-C6F6F406E617} = {95186050-C5A7-493C-8E3C-E848C5A0424F}
+		{D22648D5-0A67-4085-80C2-D070398FD91C} = {95186050-C5A7-493C-8E3C-E848C5A0424F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E90319C5-23D8-4252-8467-5941C838A226}
