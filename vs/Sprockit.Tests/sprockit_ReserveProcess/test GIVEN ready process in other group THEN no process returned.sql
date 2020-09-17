@@ -33,6 +33,7 @@ CREATE TABLE #actual (
   ExecutionId INT
 , ProcessType NVARCHAR(10)
 , ProcessPath NVARCHAR(850)
+, DataWatermark NVARCHAR(255)
 )
 
 SELECT *
@@ -50,6 +51,7 @@ INSERT INTO #actual (
   ExecutionId
 , ProcessType
 , ProcessPath
+, DataWatermark
 )
 EXEC sprockit.ReserveProcess @handlerId = @handlerId
 

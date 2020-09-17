@@ -45,3 +45,12 @@ INSERT INTO sprockit.Process (
   (31, @processGroup, 2, 'SomeType', '/My/Process/Path', 'Not ready')
 , (32, @processGroup, 2, 'SomeType', '/My/Other/Process/Path', 'Ready')
 , (33, @processGroup, 2, 'OtherType', '[Some].[Different].[Process]', 'Not ready')
+
+EXEC tSQLt.FakeTable @TableName = 'sprockit.ProcessType'
+
+INSERT INTO sprockit.ProcessType (
+  ProcessType
+) 
+SELECT DISTINCT 
+  ProcessType
+FROM sprockit.Process

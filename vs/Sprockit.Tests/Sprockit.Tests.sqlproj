@@ -120,7 +120,6 @@
     <Build Include="sprockit_EnqueueProcesses\test FAIL.sql" />
     <Build Include="sprockit_Property\test FAIL.sql" />
     <Build Include="_TestClasses\sprockit_Execution.sql" />
-    <Build Include="sprockit_Execution\test FAIL.sql" />
     <Build Include="sprockit_ReleaseProcess\setup.sql" />
     <Build Include="sprockit_ReleaseProcess\test GIVEN valid ExecutionId THEN execution ended.sql" />
     <Build Include="sprockit_ReleaseProcess\test GIVEN invalid ExecutionId THEN execution not ended.sql" />
@@ -143,6 +142,24 @@
     <Build Include="sprockit_DependencyStatus\test FAIL.sql" />
     <Build Include="_TestClasses\sprockit_Process.sql" />
     <Build Include="sprockit_Process\test FAIL.sql" />
+    <Build Include="sprockit_ReserveProcess\test GIVEN ready process has no handler THEN process released.sql" />
+    <Build Include="sprockit_Execution\test ASSERT ExecutionId is identity.sql" />
+    <Build Include="sprockit_Execution\setup.sql" />
+    <Build Include="sprockit_Execution\test ASSERT ProcessId is non-nullable.sql" />
+    <Build Include="sprockit_Execution\test ASSERT ProcessId is foreign key.sql" />
+    <Build Include="sprockit_Execution\test ASSERT HandlerId is foreign key.sql" />
+    <Build Include="sprockit_Execution\test ASSERT HandlerId is non-nullable.sql" />
+    <Build Include="sprockit_Execution\test ASSERT ExecutionProperties is non-nullable.sql" />
+    <Build Include="sprockit_Execution\test ASSERT ExecutionProperties has schema.sql" />
+    <Build Include="sprockit_Execution\test ASSERT StartDateTime is non-nullable.sql" />
+    <Build Include="sprockit_Execution\test ASSERT StartDateTime has default.sql" />
+    <Build Include="sprockit_Execution\test ASSERT EndDateTime is nullable.sql" />
+    <Build Include="sprockit_Execution\test ASSERT ProcessType is non-nullable.sql" />
+    <Build Include="sprockit_Execution\test ASSERT EndStatus is nullable.sql" />
+    <Build Include="sprockit_Execution\test ASSERT AvgDuration is nullable.sql" />
+    <Build Include="sprockit_Execution\test ASSERT BranchWeight is nullable.sql" />
+    <Build Include="sprockit_Execution\test ASSERT IsEnabled is nullable.sql" />
+    <Build Include="sprockit_Execution\test ASSERT Priority is nullable.sql" />
   </ItemGroup>
   <ItemGroup>
     <SqlCmdVariable Include="Sprockit">

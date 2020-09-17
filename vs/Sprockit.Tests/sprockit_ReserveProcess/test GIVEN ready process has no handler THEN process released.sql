@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE sprockit_ReserveProcess.[test GIVEN ready process THEN process reserved]
+﻿CREATE PROCEDURE [sprockit_ReserveProcess].[test GIVEN ready process has no handler THEN process released]
 AS
 
 -- ARRANGE
@@ -11,30 +11,25 @@ EXEC tSQLt.FakeTable @TableName = 'sprockit.Process', @Defaults = 1
 INSERT INTO sprockit.Process (
   ProcessId
 , ProcessGroup
+, IsEnabled
 , ProcessType
 , ProcessPath
 , [Status]
 ) VALUES
-  (31, @processGroup, 'SomeType', '/My/Process/Path', 'Not ready')
-, (32, @processGroup, 'SomeType', '/My/Other/Process/Path', 'Ready')
-, (33, @processGroup, 'OtherType', '[Some].[Different].[Process]', 'Not ready')
+  (31, @processGroup, 1, 'SomeType', '/My/Process/Path', 'Not ready')
+, (32, @processGroup, 1, 'SomeType', '/My/Other/Process/Path', 'Ready')
+, (33, @processGroup, 1, 'OtherType', '[Some].[Different].[Process]', 'Not ready')
 
-EXEC tSQLt.FakeTable 'sprockit.Reservation'
+UPDATE sprockit.ProcessType
+SET HasHandler = 0
+WHERE ProcessType = 'SomeType'
+
+EXEC tSQLt.SpyProcedure 'sprockit.ReleaseProcess'
 
 SELECT
-  ProcessId
-, HandlerId
+  1 AS ExecutionId
+, 'Done' AS EndStatus
 INTO #expected
-FROM sprockit.Reservation
-WHERE 0 = 1
-
-INSERT INTO #expected (
-  ProcessId
-, HandlerId
-) VALUES (
-  32
-, @handlerId
-)
 
 -- ACT
 DECLARE @result TABLE (
@@ -53,10 +48,10 @@ INSERT INTO @result (
 EXEC sprockit.ReserveProcess @handlerId = @handlerId
 
 SELECT
-  ProcessId
-, HandlerId
+  ExecutionId
+, EndStatus
 INTO #actual
-FROM sprockit.Reservation
+FROM sprockit.ReleaseProcess_SpyProcedureLog
 
 -- ASSERT
 EXEC tSQLt.AssertEqualsTable 

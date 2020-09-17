@@ -32,12 +32,14 @@ DECLARE @result TABLE (
   ExecutionId INT
 , ProcessType NVARCHAR(10)
 , ProcessPath NVARCHAR(850)
+, DataWatermark NVARCHAR(255)
 )
 
 INSERT INTO @result (
   ExecutionId
 , ProcessType
 , ProcessPath
+, DataWatermark
 )
 EXEC sprockit.ReserveProcess @handlerId = @handlerId
 

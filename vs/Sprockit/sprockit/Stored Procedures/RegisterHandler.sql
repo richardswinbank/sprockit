@@ -17,11 +17,9 @@ SET NOCOUNT ON
 INSERT INTO [sprockit].[Handler] (
   [BatchId]
 , ExternalId
-, [StartDateTime]
 ) VALUES (
   @batchId
 , @externalId
-, GETUTCDATE()
 );
 
 DECLARE @handlerId INT = SCOPE_IDENTITY();
