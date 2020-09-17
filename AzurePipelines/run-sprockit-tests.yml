@@ -25,17 +25,6 @@ steps:
 #    contents: '*.dacpac' 
 #    targetFolder: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\IDE\Extensions\Microsoft\SQLDB\Extensions\SqlServer\100\SqlSchemas\'
 
-- task: SqlDacpacDeploymentOnMachineGroup@0
-  displayName: Enable CLR on $(SqlServerInstance)  # required for tSQLt
-  inputs:
-    TaskType: 'sqlInline'
-    InlineSql: |
-      EXEC sp_configure 'clr enabled', 1;
-      RECONFIGURE;
-    ServerName: $(SqlServerInstance)
-    DatabaseName: 'master'
-    AuthScheme: 'windowsAuthentication'
-
 - task: VSBuild@1
   displayName: 'Build $(TestingProjectName) SSDT project'
   inputs:
