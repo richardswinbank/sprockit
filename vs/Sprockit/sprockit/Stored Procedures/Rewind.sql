@@ -10,30 +10,20 @@ CREATE PROCEDURE [sprockit].[Rewind] (
   @processIdentifier NVARCHAR(1024)
 ) AS
 
-DECLARE @process TABLE (
-  ProcessId INT
-)
+DECLARE @processId INT
+EXEC @processId = [sprockit].[ResolveProcessId] @processIdentifier = @processIdentifier
 
-INSERT INTO @process (
-  ProcessId
-)
-EXEC [sprockit].[ResolveProcessId] @processIdentifier = @processIdentifier
-
-IF @@ROWCOUNT <> 1
+IF @processId < 0
   RETURN -1  -- error will be thrown from [ResolveProcessId]
 
 UPDATE sprockit.Process
 SET [Status] = 'Errored'
-WHERE ProcessId = (
-  SELECT ProcessId FROM @process
-)
+WHERE ProcessId = @processId
 
 DECLARE @processGroup INT = (
   SELECT ProcessGroup
   FROM sprockit.Process
-  WHERE ProcessId = (
-    SELECT ProcessId FROM @process
-  )
+  WHERE ProcessId = @processId
 )
 
 EXEC sprockit.EnqueueProcesses @processGroup

@@ -49,3 +49,11 @@ SET ExecutionProperties = '<Properties>' + (
 ) + '</Properties>'
 FROM sprockit.Execution e
 WHERE e.ExecutionId = @executionid;
+
+DECLARE @msg NVARCHAR(MAX) = 'Set property "' + @propertyName + '" = ' + @propertyValue
+DECLARE @evtSource NVARCHAR(1024) = QUOTENAME(OBJECT_SCHEMA_NAME(@@PROCID)) + '.' + QUOTENAME(OBJECT_NAME(@@PROCID))
+
+EXEC sprockit.LogEvent 
+  @message = @msg
+, @executionId = @executionId
+, @eventSource = @evtSource

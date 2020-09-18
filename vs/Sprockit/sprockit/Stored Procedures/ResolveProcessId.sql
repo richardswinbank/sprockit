@@ -26,10 +26,7 @@ BEGIN TRY
   WHERE ProcessId = @processIdentifier
 
   IF @processId > 0    -- if we get this far, it's an INT at least
-  BEGIN
-    SELECT @processId AS ProcessId
-    RETURN   -- and if > 0, it's a valid process ID
-  END
+    RETURN @processId  -- and if > 0, it's a valid process ID
 
 END TRY
 BEGIN CATCH
@@ -75,4 +72,4 @@ BEGIN
 END
 
 IF @debug = 1 PRINT @msg
-SELECT @processId AS ProcessId
+RETURN @processId
