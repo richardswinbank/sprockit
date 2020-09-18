@@ -13,6 +13,9 @@ CREATE PROCEDURE [sprockit].[SetExecutionProperty] (
 )
 AS
 
+IF @propertyName IS NULL
+  RETURN 1
+
 SET @propertyValue = COALESCE(@propertyValue, '<null>')
 
 IF @propertyName = 'SprockitProcessWatermark'
