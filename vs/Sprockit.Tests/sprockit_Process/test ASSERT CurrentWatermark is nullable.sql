@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE sprockit_Process.[test ASSERT DataWatermark is nullable]
+﻿CREATE PROCEDURE sprockit_Process.[test ASSERT CurrentWatermark is nullable]
 AS
 
 --ACT
@@ -11,7 +11,7 @@ INSERT INTO [sprockit].[Process] (
 , [ErrorCount]
 , [LastStatusUpdate]
 , [LastExecutionId]
-, [DataWatermark]
+, [CurrentWatermark]
 , [AvgDuration]
 , [BranchWeight]
 , [IsEnabled]

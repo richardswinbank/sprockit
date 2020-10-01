@@ -8,7 +8,7 @@ DECLARE @propertyValue NVARCHAR(50) = 'NewValue'
 
 SELECT 
   ProcessId
-, DataWatermark
+, [CurrentWatermark]
 INTO #expected
 FROM sprockit.Process
 
@@ -21,7 +21,7 @@ EXEC sprockit.SetExecutionProperty
 -- ASSERT
 SELECT 
   ProcessId
-, DataWatermark
+, [CurrentWatermark]
 INTO #actual
 FROM sprockit.Process
 

@@ -183,7 +183,7 @@
     <Build Include="sprockit_Process\test ASSERT IsEnabled has default.sql" />
     <Build Include="sprockit_Process\test ASSERT Priority has default.sql" />
     <Build Include="sprockit_Process\test ASSERT LastExecutionId is nullable.sql" />
-    <Build Include="sprockit_Process\test ASSERT DataWatermark is nullable.sql" />
+    <Build Include="sprockit_Process\test ASSERT CurrentWatermark is nullable.sql" />
     <Build Include="_TestClasses\sprockit_SetExecutionProperty.sql" />
     <Build Include="sprockit_Process\test ASSERT ProcessType is foreign key.sql" />
     <Build Include="sprockit_Process\test ASSERT ProcessPath is unique.sql" />

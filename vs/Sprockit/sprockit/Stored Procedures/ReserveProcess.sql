@@ -113,7 +113,7 @@ SELECT
   x.ExecutionId
 , p.ProcessType
 , p.ProcessPath
-, p.DataWatermark
+, p.[CurrentWatermark]
 FROM (
   SELECT @executionId AS ExecutionId
 ) x

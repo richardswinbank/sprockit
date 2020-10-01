@@ -5,7 +5,7 @@ EXEC tSQLt.FakeTable 'sprockit.Process'
 
 INSERT INTO sprockit.Process (
   ProcessId
-, DataWatermark
+, [CurrentWatermark]
 ) VALUES
   (31, 'OldValue')
 , (32, 'OldValue')

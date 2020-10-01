@@ -20,7 +20,7 @@ SET @propertyValue = COALESCE(@propertyValue, '<null>')
 
 IF @propertyName = 'SprockitProcessWatermark'
   UPDATE p
-  SET DataWatermark = @propertyValue
+  SET [CurrentWatermark] = @propertyValue
   FROM sprockit.Execution e
     INNER JOIN sprockit.Process p ON p.ProcessId = e.ProcessId
   WHERE e.ExecutionId = @executionId;

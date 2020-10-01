@@ -13,7 +13,7 @@ INSERT INTO [sprockit].[Process] (
 , [ErrorCount]
 , [LastStatusUpdate]
 , [LastExecutionId]
-, [DataWatermark]
+, [CurrentWatermark]
 , [AvgDuration]
 , [BranchWeight]
 , [IsEnabled]
