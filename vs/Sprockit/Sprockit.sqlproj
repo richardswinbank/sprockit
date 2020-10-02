@@ -98,6 +98,8 @@
     <None Include="_StaticData\sprockit.Property.sql" />
     <Build Include="sprockit\Functions\GetExecutionProperty.sql" />
     <Build Include="sprockit\XMLSchemaCollections\Properties.sql" />
+    <Build Include="sprockit\Stored Procedures\SerialiseProcesses.sql" />
+    <Build Include="sprockit\Stored Procedures\DeserialiseProcesses.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="_Scripts\PostDeployment.sql" />
