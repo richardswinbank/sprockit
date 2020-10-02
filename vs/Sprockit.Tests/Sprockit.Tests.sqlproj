@@ -197,6 +197,7 @@
     <Build Include="sprockit_SetExecutionProperty\test WHEN property is SprockitProcessWatermark then process is updated.sql" />
     <Build Include="sprockit_SetExecutionProperty\test WHEN property is not SprockitProcessWatermark then process is not updated.sql" />
     <Build Include="sprockit_SetExecutionProperty\test WHEN property is not null then event is logged.sql" />
+    <Build Include="sprockit_Process\test ASSERT DefaultWatermark is nullable.sql" />
   </ItemGroup>
   <ItemGroup>
     <SqlCmdVariable Include="Sprockit">
