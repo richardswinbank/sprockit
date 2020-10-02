@@ -30,7 +30,7 @@ BEGIN TRY
       SET ProcessType  = src.ProcessType
         , ProcessGroup = src.ProcessGroup
         , DefaultWatermark  = src.DefaultWatermark
-        , CurrentWatermark  = CASE WHEN CurrentWatermark IS NULL THEN src.DefaultWatermark END
+        , CurrentWatermark  = CASE WHEN tgt.CurrentWatermark IS NULL THEN src.DefaultWatermark ELSE tgt.CurrentWatermark END
         , IsEnabled = src.IsEnabled
         , [Priority] = src.[Priority]
     WHEN NOT MATCHED BY TARGET THEN
