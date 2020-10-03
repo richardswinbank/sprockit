@@ -17,7 +17,7 @@ INSERT INTO @properties (
 , DataType
 , [Description]
 ) VALUES
-  ('ProcessSchedulerSpName', 'sprockit.EnqueueProcesses', 'NVARCHAR(255)', 'Name of SP that sets processes Ready')
+  ('ProcessSchedulerSpName', 'sprockit.EnqueueProcesses', 'NVARCHAR(255)', 'Name of SP to set processes Ready')
 
 DECLARE @propertyName NVARCHAR(128)
 

@@ -1,8 +1,15 @@
-﻿CREATE PROCEDURE sprockit.DeserialiseProcesses(
+﻿CREATE PROCEDURE [sprockit].[DeserialiseProcesses](
   @processes XML
 ) AS
 
-DROP TABLE IF EXISTS #processes
+IF @processes IS NULL
+BEGIN
+  RAISERROR ('@processes cannot be NULL', 11, 1)
+  RETURN 1
+END
+
+IF OBJECT_ID('tempdb..#processes') IS NOT NULL
+  DROP TABLE #processes
 
 SELECT
   t.c.value('(@Path)[1]', 'NVARCHAR(850)') AS ProcessPath
@@ -20,6 +27,16 @@ FROM (
 BEGIN TRY
 
   BEGIN TRANSACTION
+
+    IF (
+      SELECT COUNT(*) FROM sprockit.ProcessType
+    ) = 0
+    INSERT INTO sprockit.ProcessType (
+      ProcessType
+    ) 
+    SELECT DISTINCT 
+      ProcessType
+    FROM #processes p
 
     -- insert new processes & update existing
     MERGE INTO sprockit.Process tgt
@@ -95,6 +112,6 @@ END TRY
 BEGIN CATCH
 
   ROLLBACK;
-  THROW;
+  EXEC sprockit.RethrowError;
 
 END CATCH

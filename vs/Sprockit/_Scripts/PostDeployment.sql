@@ -10,4 +10,4 @@ Post-Deployment Script Template
 --------------------------------------------------------------------------------------
 */
 
-:r ..\_StaticData\sprockit.Property.sql
+:r ..\sprockit\StaticData\Property.sql

@@ -62,8 +62,8 @@
     <Folder Include="sprockit\Functions\" />
     <Folder Include="sprockit\Stored Procedures\" />
     <Folder Include="_Scripts" />
-    <Folder Include="_StaticData" />
     <Folder Include="sprockit\XMLSchemaCollections\" />
+    <Folder Include="sprockit\StaticData" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="sprockit\Tables\Execution.sql" />
@@ -95,11 +95,12 @@
     <Build Include="sprockit\Stored Procedures\string_split.sql" />
     <Build Include="sprockit\Functions\GetProperty.sql" />
     <Build Include="sprockit\Tables\Property.sql" />
-    <None Include="_StaticData\sprockit.Property.sql" />
     <Build Include="sprockit\Functions\GetExecutionProperty.sql" />
     <Build Include="sprockit\XMLSchemaCollections\Properties.sql" />
     <Build Include="sprockit\Stored Procedures\SerialiseProcesses.sql" />
     <Build Include="sprockit\Stored Procedures\DeserialiseProcesses.sql" />
+    <Build Include="sprockit\Functions\ProcessPathEquivalence.sql" />
+    <None Include="sprockit\StaticData\Property.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="_Scripts\PostDeployment.sql" />

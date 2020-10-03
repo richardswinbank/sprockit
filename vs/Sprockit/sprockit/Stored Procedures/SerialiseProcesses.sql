@@ -1,5 +1,5 @@
 ﻿
-CREATE PROCEDURE sprockit.SerialiseProcesses
+CREATE PROCEDURE [sprockit].[SerialiseProcesses]
 AS
 
 DECLARE @xml NVARCHAR(MAX) = N'';
@@ -12,7 +12,7 @@ WITH processes AS (
       , [ProcessGroup] AS [Group]
       , [ProcessType] AS [Type]
       , [DefaultWatermark]
-      , IIF([IsEnabled] = 1, 'true', 'false') AS [IsEnabled]
+      , CASE [IsEnabled] WHEN 1 THEN 'true' ELSE 'false' END AS [IsEnabled]
       , [Priority]
       FROM [sprockit].[Process] AS [Process]
       WHERE ProcessId = p.ProcessId
@@ -34,4 +34,4 @@ SELECT
     + '</Process>'
 FROM processes;
 
-SELECT '<Processes>' + @xml + '</Processes>' AS Processes
+SELECT CAST('<Processes>' + @xml + '</Processes>' AS XML) AS Processes
