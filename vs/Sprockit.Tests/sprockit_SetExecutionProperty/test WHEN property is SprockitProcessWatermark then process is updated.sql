@@ -8,7 +8,7 @@ DECLARE @propertyValue NVARCHAR(50) = 'NewValue'
 
 SELECT 
   ProcessId
-, CASE ProcessId WHEN 33 THEN @propertyValue ELSE [CurrentWatermark] END AS DataWatermark
+, CASE ProcessId WHEN 33 THEN @propertyValue ELSE [CurrentWatermark] END AS [CurrentWatermark]
 INTO #expected
 FROM sprockit.Process
 
