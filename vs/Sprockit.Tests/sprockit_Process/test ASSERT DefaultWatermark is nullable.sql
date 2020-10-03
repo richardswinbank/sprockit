@@ -28,7 +28,7 @@ SELECT
 , GETUTCDATE()
 , 75
 , NULL
-, 'watermark'
+, '20200917204254'
 , 467
 , 794
 , 1

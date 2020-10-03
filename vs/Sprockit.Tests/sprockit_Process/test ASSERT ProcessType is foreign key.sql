@@ -18,6 +18,7 @@ INSERT INTO [sprockit].[Process] (
 , [ErrorCount]
 , [LastStatusUpdate]
 , [LastExecutionId]
+, [DefaultWatermark]
 , [CurrentWatermark]
 , [AvgDuration]
 , [BranchWeight]
@@ -33,6 +34,7 @@ SELECT
 , 0
 , GETUTCDATE()
 , 75
+, '20200101000000'
 , '20200917204254'
 , 467
 , 794
