@@ -99,7 +99,6 @@
     <Build Include="sprockit\XMLSchemaCollections\Properties.sql" />
     <Build Include="sprockit\Stored Procedures\SerialiseProcesses.sql" />
     <Build Include="sprockit\Stored Procedures\DeserialiseProcesses.sql" />
-    <Build Include="sprockit\Functions\ProcessPathEquivalence.sql" />
     <None Include="sprockit\StaticData\Property.sql" />
   </ItemGroup>
   <ItemGroup>

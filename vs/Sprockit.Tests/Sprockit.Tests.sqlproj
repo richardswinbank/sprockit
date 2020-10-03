@@ -72,7 +72,6 @@
     <Folder Include="sprockit_SetExecutionProperty" />
     <Folder Include="sprockit_DeserialiseProcess" />
     <Folder Include="sprockit_SerialiseProcess" />
-    <Folder Include="sprockit_ProcessPathEquivalence" />
   </ItemGroup>
   <ItemGroup>
     <ArtifactReference Include="..\tSQLt.dacpac">
@@ -205,9 +204,6 @@
     <Build Include="sprockit_DeserialiseProcess\test MORE TESTS REQUIRED.sql" />
     <Build Include="_TestClasses\sprockit_SerialiseProcess.sql" />
     <Build Include="sprockit_SerialiseProcess\test MORE TESTS REQUIRED.sql" />
-    <Build Include="_TestClasses\sprockit_ProcessPathEquivalence.sql" />
-    <Build Include="sprockit_ProcessPathEquivalence\test MORE TESTS REQUIRED.sql" />
-    <Build Include="sprockit_Property\test ASSERT equivalence function property name exists.sql" />
   </ItemGroup>
   <ItemGroup>
     <SqlCmdVariable Include="Sprockit">
