@@ -18,7 +18,8 @@ SELECT
 , t.c.value('(@DefaultWatermark)[1]', 'NVARCHAR(255)') AS DefaultWatermark
 , t.c.value('(@IsEnabled)[1]', 'BIT') AS IsEnabled
 , t.c.value('(@Priority)[1]', 'TINYINT') AS [Priority]
-, t.c.query('./Requires') AS DependsOn
+, t.c.query('./Requires') AS Requires
+, t.c.query('./Produces') AS Produces
 INTO #processes
 FROM (
   SELECT @processes.query('/Processes/Process') AS Processes
@@ -71,13 +72,23 @@ BEGIN TRY
 
     -- merge dependencies
     WITH src AS (
-      SELECT DISTINCT
+      SELECT
         p.ProcessId
-      , d.ProcessId AS DependsOn
+      , input.ProcessId AS DependsOn
       FROM #processes np
-        CROSS APPLY np.DependsOn.nodes('/Requires/PriorProcess') t(c)
+        CROSS APPLY np.Requires.nodes('/Requires/Input') inputs(c)
         LEFT JOIN sprockit.Process p ON p.ProcessPath = np.ProcessPath
-        LEFT JOIN sprockit.Process d ON d.ProcessPath = t.c.value('(@Path)[1]', 'NVARCHAR(850)')
+        LEFT JOIN sprockit.Process input ON input.ProcessPath = inputs.c.[value]('(@Path)[1]', 'NVARCHAR(850)')
+
+      UNION
+
+      SELECT
+        [output].ProcessId
+      , p.ProcessId AS DependsOn
+      FROM #processes np
+        CROSS APPLY np.Produces.nodes('/Produces/Output') outputs(c)
+        LEFT JOIN sprockit.Process p ON p.ProcessPath = np.ProcessPath
+        LEFT JOIN sprockit.Process [output] ON [output].ProcessPath = outputs.c.[value]('(@Path)[1]', 'NVARCHAR(850)')
     )
     MERGE INTO sprockit.ProcessDependency tgt
     USING src
