@@ -48,7 +48,11 @@ BEGIN TRY
       SET ProcessType  = src.ProcessType
         , ProcessGroup = src.ProcessGroup
         , DefaultWatermark  = src.DefaultWatermark
-        , CurrentWatermark  = CASE WHEN tgt.CurrentWatermark IS NULL THEN src.DefaultWatermark ELSE tgt.CurrentWatermark END
+        , CurrentWatermark =
+            CASE 
+              WHEN src.DefaultWatermark IS NULL THEN NULL
+              ELSE COALESCE(tgt.CurrentWatermark, src.DefaultWatermark)
+            END
         , IsEnabled = src.IsEnabled
         , [Priority] = src.[Priority]
     WHEN NOT MATCHED BY TARGET THEN
