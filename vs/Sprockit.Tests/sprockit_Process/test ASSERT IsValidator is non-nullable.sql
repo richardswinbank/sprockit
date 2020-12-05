@@ -1,15 +1,15 @@
-﻿CREATE PROCEDURE sprockit_Process.[test ASSERT IsValidator is non-nullable]
+﻿CREATE PROCEDURE sprockit_Process.[test ASSERT LogPropertyUpdates is non-nullable]
 AS
 
 --EXPECT
-EXEC tSQLt.ExpectException @ExpectedMessagePattern = 'Cannot insert the value NULL into column ''IsValidator''_%'
+EXEC tSQLt.ExpectException @ExpectedMessagePattern = 'Cannot insert the value NULL into column ''LogPropertyUpdates''_%'
 
 --ACT
 INSERT INTO [sprockit].[Process] (
   [ProcessGroup]
 , [ProcessPath]
 , [ProcessType]
-, [IsValidator]
+, [LogPropertyUpdates]
 , [Status]
 , [ErrorCount]
 , [LastStatusUpdate]

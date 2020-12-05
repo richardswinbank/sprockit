@@ -6,7 +6,7 @@ INSERT INTO [sprockit].[Process] (
   [ProcessGroup]
 , [ProcessPath]
 , [ProcessType]
-, [IsValidator]
+, [LogPropertyUpdates]
 , [Status]
 , [ErrorCount]
 , [LastStatusUpdate]

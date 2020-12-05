@@ -18,6 +18,7 @@ SELECT
 , t.c.value('(@DefaultWatermark)[1]', 'NVARCHAR(255)') AS DefaultWatermark
 , t.c.value('(@IsEnabled)[1]', 'BIT') AS IsEnabled
 , t.c.value('(@Priority)[1]', 'TINYINT') AS [Priority]
+, t.c.value('(@LogPropertyUpdates)[1]', 'BIT') AS LogPropertyUpdates
 , t.c.query('./Requires') AS Requires
 , t.c.query('./Produces') AS Produces
 INTO #processes
@@ -55,6 +56,7 @@ BEGIN TRY
             END
         , IsEnabled = src.IsEnabled
         , [Priority] = src.[Priority]
+        , LogPropertyUpdates = src.LogPropertyUpdates
     WHEN NOT MATCHED BY TARGET THEN
       INSERT (
         ProcessPath
@@ -64,6 +66,7 @@ BEGIN TRY
       , CurrentWatermark
       , IsEnabled
       , [Priority]
+      , LogPropertyUpdates
       ) VALUES (
         src.ProcessPath
       , src.ProcessType
@@ -72,6 +75,7 @@ BEGIN TRY
       , src.DefaultWatermark
       , src.IsEnabled
       , src.[Priority]
+      , src.LogPropertyUpdates
       );
 
     -- merge dependencies

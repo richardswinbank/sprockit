@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE sprockit_Process.[test ASSERT IsValidator has default]
+﻿CREATE PROCEDURE sprockit_Process.[test ASSERT LogPropertyUpdates has default]
 AS
 
 --ARRANGE
@@ -9,7 +9,7 @@ INSERT INTO [sprockit].[Process] (
   [ProcessGroup]
 , [ProcessPath]
 , [ProcessType]
---, [IsValidator]
+--, [LogPropertyUpdates]
 , [Status]
 , [ErrorCount]
 , [LastStatusUpdate]
@@ -42,7 +42,7 @@ DECLARE @processId INT = SCOPE_IDENTITY()
 
 --ASSERT
 DECLARE @actual BIT = (
-  SELECT IsValidator FROM sprockit.Process
+  SELECT [LogPropertyUpdates] FROM sprockit.Process
   WHERE ProcessId = @processId
 )
 

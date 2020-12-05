@@ -97,7 +97,6 @@
     <Build Include="sprockit\Tables\Property.sql" />
     <Build Include="sprockit\Functions\GetExecutionProperty.sql" />
     <Build Include="sprockit\XMLSchemaCollections\Properties.sql" />
-    <Build Include="sprockit\Stored Procedures\SerialiseProcesses.sql" />
     <Build Include="sprockit\Stored Procedures\DeserialiseProcesses.sql" />
     <None Include="sprockit\StaticData\Property.sql" />
   </ItemGroup>

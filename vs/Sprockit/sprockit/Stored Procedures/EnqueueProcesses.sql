@@ -36,6 +36,7 @@ FROM sprockit.Process p
   INNER JOIN sprockit.[Event] e ON e.ExecutionId = p.LastExecutionId
   INNER JOIN sprockit.RetryableError re 
     ON re.ProcessType = p.ProcessType
+    AND p.ProcessPath LIKE re.ProcessPathPattern
     AND e.[Message] LIKE re.MessagePattern
 WHERE p.[Status] = 'Errored' 
 AND e.Severity >= 200

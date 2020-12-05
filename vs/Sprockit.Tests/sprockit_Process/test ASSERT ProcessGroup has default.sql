@@ -8,7 +8,7 @@ DECLARE @expected INT = 1
 INSERT INTO [sprockit].[Process] (
   [ProcessPath]
 , [ProcessType]
-, [IsValidator]
+, [LogPropertyUpdates]
 , [Status]
 , [ErrorCount]
 , [LastStatusUpdate]

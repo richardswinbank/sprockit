@@ -13,7 +13,7 @@ AS
 
 DECLARE @processId INT 
 DECLARE @isEnabled BIT 
-DECLARE @executionId INT = -1
+DECLARE @executionId INT
 
 -- loop until we've reserved a process or there's nothing available to reserve
 WHILE 1 = 1 
@@ -21,6 +21,7 @@ BEGIN
 
   SET @processId = -1
   SET @isEnabled = 1
+  SET @executionId = -1
 
   -- Choose a process
   SELECT TOP 1 

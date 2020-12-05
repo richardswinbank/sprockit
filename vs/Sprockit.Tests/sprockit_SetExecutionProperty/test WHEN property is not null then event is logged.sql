@@ -1,6 +1,10 @@
 ﻿CREATE PROCEDURE sprockit_SetExecutionProperty.[test WHEN property is not null then event is logged]
 AS
 
+-- this test failing due to addition of LogPropertyUpdates
+-- need to review wholetest class for reserved "SprockitProcess..." properties
+
+
 -- ARRANGE
 DECLARE @executionId INT = 433
 DECLARE @propertyName NVARCHAR(50) = 'MySecondProperty'
