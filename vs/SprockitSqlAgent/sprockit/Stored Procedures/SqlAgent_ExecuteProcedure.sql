@@ -29,7 +29,7 @@ EXEC sp_executesql
 IF @hasParameter = 1
 BEGIN
 
-  EXEC sprockit.SetExecutionProperty
+  EXEC sprockit.[LogExecutionProperty]
     @executionId = @executionId
   , @propertyName = 'PassedSprockitExecutionId'
   , @propertyValue = 'true'

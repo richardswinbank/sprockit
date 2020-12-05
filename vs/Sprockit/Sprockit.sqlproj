@@ -88,8 +88,6 @@
     <Build Include="sprockit\Stored Procedures\ResolveProcessId.sql" />
     <Build Include="sprockit\Stored Procedures\ReleaseProcess.sql" />
     <Build Include="sprockit\Stored Procedures\LogEvent.sql" />
-    <Build Include="sprockit\Stored Procedures\LogError.sql" />
-    <Build Include="sprockit\Stored Procedures\ConfigureProcesses.sql" />
     <Build Include="sprockit\Tables\ProcessType.sql" />
     <Build Include="sprockit\Tables\RetryableError.sql" />
     <Build Include="sprockit\Stored Procedures\string_split.sql" />

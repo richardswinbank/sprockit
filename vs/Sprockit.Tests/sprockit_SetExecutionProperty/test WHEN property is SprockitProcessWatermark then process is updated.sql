@@ -13,7 +13,7 @@ INTO #expected
 FROM sprockit.Process
 
 -- ACT
-EXEC sprockit.SetExecutionProperty 
+EXEC sprockit.[LogExecutionProperty] 
   @executionId = @executionId
 , @propertyName = @propertyName
 , @propertyValue = @propertyValue

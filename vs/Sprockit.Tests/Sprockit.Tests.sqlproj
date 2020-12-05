@@ -102,8 +102,6 @@
     <Folder Include="sprockit_Event\Stored Procedures\" />
     <Folder Include="sprockit_DeserialiseProcesses\" />
     <Folder Include="sprockit_DeserialiseProcesses\Stored Procedures\" />
-    <Folder Include="sprockit_ConfigureProcesses\" />
-    <Folder Include="sprockit_ConfigureProcesses\Stored Procedures\" />
     <Folder Include="sprockit_Batch\" />
     <Folder Include="sprockit_Batch\Stored Procedures\" />
   </ItemGroup>
@@ -252,7 +250,6 @@
     <Build Include="sprockit_GetExecutionProperty\Stored Procedures\test MORE TESTS REQUIRED.sql" />
     <Build Include="sprockit_Event\Stored Procedures\test MORE TESTS REQUIRED.sql" />
     <Build Include="sprockit_DeserialiseProcesses\Stored Procedures\test MORE TESTS REQUIRED.sql" />
-    <Build Include="sprockit_ConfigureProcesses\Stored Procedures\test MORE TESTS REQUIRED.sql" />
     <Build Include="sprockit_Batch\Stored Procedures\test MORE TESTS REQUIRED.sql" />
     <Build Include="_TestClasses\sprockit_Batch.sql" />
     <Build Include="_TestClasses\sprockit_ConfigureProcesses.sql" />

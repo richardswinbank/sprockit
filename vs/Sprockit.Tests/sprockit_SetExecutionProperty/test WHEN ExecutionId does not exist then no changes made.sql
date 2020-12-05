@@ -15,7 +15,7 @@ FROM [sprockit].[Execution] e
   CROSS APPLY e.ExecutionProperties.nodes('//Properties/Property') t(c)
 
 -- ACT
-EXEC sprockit.SetExecutionProperty 
+EXEC sprockit.[LogExecutionProperty] 
   @executionId = @executionId
 , @propertyName = @propertyName
 , @propertyValue = @propertyValue

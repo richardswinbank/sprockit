@@ -19,7 +19,7 @@ SELECT
 INTO #expected
 
 -- ACT
-EXEC sprockit.SetExecutionProperty 
+EXEC sprockit.[LogExecutionProperty] 
   @executionId = @executionId
 , @propertyName = @propertyName
 , @propertyValue = @propertyValue

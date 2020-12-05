@@ -44,7 +44,7 @@ EXEC [SSISDB].[catalog].[create_execution]
 , @execution_id = @ssisExecutionId OUTPUT
 
 -- write SSIS execution ID to log
-EXEC sprockit.SetExecutionProperty
+EXEC sprockit.[LogExecutionProperty]
   @executionId = @executionId
 , @propertyName = 'SsisExecutionId'
 , @propertyValue = @ssisExecutionId
@@ -73,7 +73,7 @@ IF EXISTS (
 )
 BEGIN
 
-  EXEC sprockit.SetExecutionProperty
+  EXEC sprockit.[LogExecutionProperty]
     @executionId = @executionId
   , @propertyName = 'PassedSprockitExecutionId'
   , @propertyValue = 'true'

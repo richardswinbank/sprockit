@@ -1,12 +1,12 @@
 ﻿/*
- * sprockit.[SetExecutionProperty]
+ * sprockit.[LogExecutionProperty]
  * Copyright (c) 2015-2020 Richard Swinbank (richard@richardswinbank.net) 
  * http://richardswinbank.net/sprockit
  *
  * Record a feature of a process's execution
  */
 
-CREATE PROCEDURE [sprockit].[SetExecutionProperty] (
+CREATE PROCEDURE [sprockit].[LogExecutionProperty] (
    @executionId INT 
 ,  @propertyName NVARCHAR(4000)
 ,  @propertyValue NVARCHAR(MAX)
@@ -25,12 +25,12 @@ IF @propertyName = 'SprockitProcessInformation'
     , @executionId = @executionId
     , @severity = 0
     , @eventSource = @evtSource
---ELSE IF @propertyName = 'SprockitProcessError'
---    EXEC sprockit.LogEvent  
---      @message = @propertyValue
---    , @executionId = @executionId
---    , @severity = 200
---    , @eventSource = @evtSource
+ELSE IF @propertyName = 'SprockitProcessError'
+    EXEC sprockit.LogEvent  
+      @message = @propertyValue
+    , @executionId = @executionId
+    , @severity = 200
+    , @eventSource = @evtSource
 ELSE IF @propertyName = 'SprockitProcessWarning'
     EXEC sprockit.LogEvent  
       @message = @propertyValue
