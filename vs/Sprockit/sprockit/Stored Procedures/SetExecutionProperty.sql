@@ -19,23 +19,23 @@ IF @propertyName IS NULL
 DECLARE @evtSource NVARCHAR(1024) = QUOTENAME(OBJECT_SCHEMA_NAME(@@PROCID)) + '.' + QUOTENAME(OBJECT_NAME(@@PROCID))
 SET @propertyValue = COALESCE(@propertyValue, '<null>')
 
-IF @propertyName = 'SprockitProcessError'
+IF @propertyName = 'SprockitProcessInformation'
     EXEC sprockit.LogEvent  
       @message = @propertyValue
     , @executionId = @executionId
-    , @severity = 200
+    , @severity = 0
     , @eventSource = @evtSource
+--ELSE IF @propertyName = 'SprockitProcessError'
+--    EXEC sprockit.LogEvent  
+--      @message = @propertyValue
+--    , @executionId = @executionId
+--    , @severity = 200
+--    , @eventSource = @evtSource
 ELSE IF @propertyName = 'SprockitProcessWarning'
     EXEC sprockit.LogEvent  
       @message = @propertyValue
     , @executionId = @executionId
     , @severity = 100
-    , @eventSource = @evtSource
-ELSE IF @propertyName = 'SprockitProcessInformation'
-    EXEC sprockit.LogEvent  
-      @message = @propertyValue
-    , @executionId = @executionId
-    , @severity = 0
     , @eventSource = @evtSource
 ELSE IF @propertyName = 'SprockitProcessWatermark'
     UPDATE p
