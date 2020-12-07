@@ -1,4 +1,12 @@
-﻿CREATE PROCEDURE [sprockit].[DeserialiseProcesses](
+﻿/*
+ * sprockit.[DeserialiseProcesses]
+ * Copyright (c) 2020 Richard Swinbank (richard@richardswinbank.net) 
+ * http://richardswinbank.net/sprockit
+ *
+ * Deserialise process list from XML & sync to database
+ */
+ 
+CREATE PROCEDURE [sprockit].[DeserialiseProcesses] (
   @processes XML
 ) AS
 

@@ -35,4 +35,11 @@
     <Property Name="ParentElementType" Value="SqlSchema" />
     <Property Name="NewName" Value="[LogExecutionProperty]" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="0e321677-2db5-4396-877c-b785316937ef" ChangeDateTime="12/07/2020 09:14:01">
+    <Property Name="ElementName" Value="[sprockit].[LogExecutionProperty]" />
+    <Property Name="ElementType" Value="SqlProcedure" />
+    <Property Name="ParentElementName" Value="[sprockit]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="[SetExecutionProperty]" />
+  </Operation>
 </Operations>

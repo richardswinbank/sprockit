@@ -97,6 +97,7 @@
     <Build Include="sprockit\XMLSchemaCollections\Properties.sql" />
     <Build Include="sprockit\Stored Procedures\DeserialiseProcesses.sql" />
     <None Include="sprockit\StaticData\Property.sql" />
+    <Build Include="sprockit\Functions\BatchExecution.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="_Scripts\PostDeployment.sql" />

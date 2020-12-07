@@ -1,12 +1,12 @@
 ﻿/*
- * sprockit.[LogExecutionProperty]
+ * sprockit.[SetExecutionProperty]
  * Copyright (c) 2015-2020 Richard Swinbank (richard@richardswinbank.net) 
  * http://richardswinbank.net/sprockit
  *
  * Record a feature of a process's execution
  */
 
-CREATE PROCEDURE [sprockit].[LogExecutionProperty] (
+CREATE PROCEDURE [sprockit].[SetExecutionProperty] (
    @executionId INT 
 ,  @propertyName NVARCHAR(4000)
 ,  @propertyValue NVARCHAR(MAX)

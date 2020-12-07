@@ -1,4 +1,11 @@
-﻿
+﻿/*
+ * sprockit.[GetExecutionProperty]
+ * Copyright (c) 2015-2020 Richard Swinbank (richard@richardswinbank.net) 
+ * http://richardswinbank.net/sprockit
+ *
+ * Shred execution property value from XML
+ */
+ 
 CREATE FUNCTION [sprockit].[GetExecutionProperty] (
   @propertyName NVARCHAR(128)
 , @properties XML(sprockit.Properties)
