@@ -11,8 +11,8 @@
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
-    <RootNamespace>Sprockit.Tests</RootNamespace>
-    <AssemblyName>Sprockit.Tests</AssemblyName>
+    <RootNamespace>SprockitTests</RootNamespace>
+    <AssemblyName>SprockitTests</AssemblyName>
     <ModelCollation>1033, CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
@@ -58,7 +58,6 @@
     <Folder Include="Properties" />
     <Folder Include="_Scripts" />
     <Folder Include="_TestClasses" />
-    <Folder Include="sprockit_LogError" />
     <Folder Include="sprockit_GetProperty" />
     <Folder Include="sprockit_ReserveProcess" />
     <Folder Include="sprockit_Reservation\" />
@@ -104,6 +103,8 @@
     <Folder Include="sprockit_DeserialiseProcesses\Stored Procedures\" />
     <Folder Include="sprockit_Batch\" />
     <Folder Include="sprockit_Batch\Stored Procedures\" />
+    <Folder Include="dbo" />
+    <Folder Include="dbo\StoredProcedures" />
   </ItemGroup>
   <ItemGroup>
     <ArtifactReference Include="..\tSQLt.dacpac">
@@ -126,7 +127,6 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="_TestClasses\sprockit_LogError.sql" />
-    <Build Include="sprockit_LogError\test WHEN called THEN calls sprockit.LogEvent.sql" />
     <Build Include="_TestClasses\sprockit_GetProperty.sql" />
     <Build Include="sprockit_GetProperty\test GIVEN property name exists THEN property value returned.sql" />
     <Build Include="sprockit_GetProperty\setup.sql" />
@@ -270,6 +270,8 @@
     <Build Include="_TestClasses\sprockit_string_split.sql" />
     <Build Include="_TestClasses\sprockit_UnregisterHandler.sql" />
     <Build Include="_TestClasses\sprockit_UpdateMetrics.sql" />
+    <Build Include="sprockit_ReserveProcess\test GIVEN last process disabled THEN no process returned.sql" />
+    <Build Include="dbo\StoredProcedures\InsertExec.sql" />
   </ItemGroup>
   <ItemGroup>
     <SqlCmdVariable Include="Sprockit">
@@ -288,5 +290,13 @@
       <Private>True</Private>
       <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="dbo\StoredProcedures\ClrStoredProcedures.cs" />
   </ItemGroup>
 </Project>

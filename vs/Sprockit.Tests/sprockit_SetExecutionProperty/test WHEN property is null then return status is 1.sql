@@ -10,7 +10,7 @@ DECLARE @expected INT = 1
 DECLARE @actual INT = 0
 
 -- ACT
-EXEC @actual = sprockit.[LogExecutionProperty] 
+EXEC @actual = sprockit.[SetExecutionProperty] 
   @executionId = @executionId
 , @propertyName = @propertyName
 , @propertyValue = @propertyValue

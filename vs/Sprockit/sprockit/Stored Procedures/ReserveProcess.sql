@@ -13,7 +13,7 @@ AS
 
 DECLARE @processId INT 
 DECLARE @isEnabled BIT 
-DECLARE @executionId INT
+DECLARE @executionId INT = -1
 
 -- loop until we've reserved a process or there's nothing available to reserve
 WHILE 1 = 1 

@@ -21,7 +21,7 @@ WHERE ExecutionId = @executionId
 AND [name] = @propertyName
 
 -- ACT
-EXEC sprockit.[LogExecutionProperty] 
+EXEC sprockit.[SetExecutionProperty] 
   @executionId = @executionId
 , @propertyName = @propertyName
 , @propertyValue = @propertyValue
