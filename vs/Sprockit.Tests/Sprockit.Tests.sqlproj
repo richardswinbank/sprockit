@@ -222,7 +222,7 @@
     <Build Include="sprockit_Process\test ASSERT ProcessType is foreign key.sql" />
     <Build Include="sprockit_Process\test ASSERT ProcessPath is unique.sql" />
     <Build Include="sprockit_SetExecutionProperty\setup.sql" />
-    <Build Include="sprockit_SetExecutionProperty\test WHEN ExecutionId does not exist then no changes made.sql" />
+    <Build Include="sprockit_SetExecutionProperty\test WHEN ExecutionId does not exist then Execution not updated.sql" />
     <Build Include="sprockit_SetExecutionProperty\test WHEN property does not exist then new property added.sql" />
     <Build Include="sprockit_SetExecutionProperty\test WHEN property exists then value is updated.sql" />
     <Build Include="sprockit_SetExecutionProperty\test WHEN property is null then no changes made.sql" />
