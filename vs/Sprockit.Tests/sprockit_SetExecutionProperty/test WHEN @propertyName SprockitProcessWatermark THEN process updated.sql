@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE sprockit_SetExecutionProperty.[test WHEN property is SprockitProcessWatermark then process is updated]
+﻿CREATE PROCEDURE sprockit_SetExecutionProperty.[test WHEN @propertyName SprockitProcessWatermark THEN process updated]
 AS
 
 -- ARRANGE

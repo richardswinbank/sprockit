@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE sprockit_SetExecutionProperty.[test WHEN property is not SprockitProcessWatermark then process is not updated]
+﻿CREATE PROCEDURE sprockit_SetExecutionProperty.[test WHEN @propertyName not SprockitProcessWatermark THEN process not updated]
 AS
 
 -- ARRANGE

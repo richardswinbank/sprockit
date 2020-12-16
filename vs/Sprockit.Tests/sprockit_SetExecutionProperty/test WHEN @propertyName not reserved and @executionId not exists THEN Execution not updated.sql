@@ -1,9 +1,9 @@
-﻿CREATE PROCEDURE sprockit_SetExecutionProperty.[test WHEN property exists then value is updated]
+﻿CREATE PROCEDURE sprockit_SetExecutionProperty.[test WHEN @propertyName not reserved and @executionId not exists THEN Execution not updated]
 AS
 
 -- ARRANGE
-DECLARE @executionId INT = 433
-DECLARE @propertyName NVARCHAR(50) = 'MySecondProperty'
+DECLARE @executionId INT = 435
+DECLARE @propertyName NVARCHAR(50) = 'MyNewProperty'
 DECLARE @propertyValue NVARCHAR(50) = 'NewValue'
 
 SELECT 
@@ -13,12 +13,6 @@ SELECT
 INTO #expected
 FROM [sprockit].[Execution] e
   CROSS APPLY e.ExecutionProperties.nodes('//Properties/Property') t(c)
-
-UPDATE e
-SET [value] = @propertyValue
-FROM #expected e
-WHERE ExecutionId = @executionId
-AND [name] = @propertyName
 
 -- ACT
 EXEC sprockit.[SetExecutionProperty] 
@@ -38,4 +32,3 @@ FROM [sprockit].[Execution] e
 EXEC tSQLt.AssertEqualsTable
   @Expected = '#expected'
 , @Actual = '#actual'
-

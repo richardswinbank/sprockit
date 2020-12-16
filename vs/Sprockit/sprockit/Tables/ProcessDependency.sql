@@ -3,7 +3,7 @@ CREATE TABLE [sprockit].[ProcessDependency] (
     [ProcessId]    INT NOT NULL,
     [DependsOn]    INT NOT NULL,
     CONSTRAINT [PK__sprockit_Dependency] PRIMARY KEY NONCLUSTERED ([DependencyId] ASC),
-    CONSTRAINT [CK__sprockit_ProcessDependency__NoSelfDependency] CHECK ([processId]<>[dependson]),
+    CONSTRAINT [CK__sprockit_ProcessDependency__NoSelfDependency] CHECK ([ProcessId]<>[DependsOn]),
     CONSTRAINT [FK__DependsOn] FOREIGN KEY ([DependsOn]) REFERENCES [sprockit].[Process] ([ProcessId]),
     CONSTRAINT [FK__ProcessId] FOREIGN KEY ([ProcessId]) REFERENCES [sprockit].[Process] ([ProcessId]),
     CONSTRAINT [UQ__sprockit_ProcessDependency] UNIQUE NONCLUSTERED ([ProcessId] ASC, [DependsOn] ASC)

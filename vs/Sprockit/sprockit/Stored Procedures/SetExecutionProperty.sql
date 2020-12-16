@@ -10,13 +10,12 @@ CREATE PROCEDURE [sprockit].[SetExecutionProperty] (
   @executionId INT 
 , @propertyValue NVARCHAR(MAX)
 , @propertyName NVARCHAR(4000) = NULL
-, @evtSource NVARCHAR(1024) = NULL
 )
 AS
 
 SET @propertyName = COALESCE(@propertyName, 'SprockitProcessInformation')
 SET @propertyValue = COALESCE(@propertyValue, '<null>')
-SET @evtSource = COALESCE(@evtSource, QUOTENAME(OBJECT_SCHEMA_NAME(@@PROCID)) + '.' + QUOTENAME(OBJECT_NAME(@@PROCID)))
+DECLARE @evtSource NVARCHAR(300) = QUOTENAME(OBJECT_SCHEMA_NAME(@@PROCID)) + '.' + QUOTENAME(OBJECT_NAME(@@PROCID))
 
 IF @propertyName = 'SprockitProcessInformation'
     EXEC sprockit.LogEvent  

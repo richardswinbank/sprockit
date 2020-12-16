@@ -222,14 +222,13 @@
     <Build Include="sprockit_Process\test ASSERT ProcessType is foreign key.sql" />
     <Build Include="sprockit_Process\test ASSERT ProcessPath is unique.sql" />
     <Build Include="sprockit_SetExecutionProperty\setup.sql" />
-    <Build Include="sprockit_SetExecutionProperty\test WHEN ExecutionId does not exist then Execution not updated.sql" />
-    <Build Include="sprockit_SetExecutionProperty\test WHEN property does not exist then new property added.sql" />
-    <Build Include="sprockit_SetExecutionProperty\test WHEN property exists then value is updated.sql" />
+    <Build Include="sprockit_SetExecutionProperty\test WHEN @propertyName not reserved and @executionId not exists THEN Execution not updated.sql" />
+    <Build Include="sprockit_SetExecutionProperty\test WHEN @propertyName not reserved and property not exists THEN property added.sql" />
+    <Build Include="sprockit_SetExecutionProperty\test WHEN @propertyName not reserved and property exists THEN property updated.sql" />
     <Build Include="sprockit_SetExecutionProperty\test WHEN property is null then no changes made.sql" />
     <Build Include="sprockit_SetExecutionProperty\test WHEN value is null then value is updated.sql" />
-    <Build Include="sprockit_SetExecutionProperty\test WHEN property is null then return status is 1.sql" />
-    <Build Include="sprockit_SetExecutionProperty\test WHEN property is SprockitProcessWatermark then process is updated.sql" />
-    <Build Include="sprockit_SetExecutionProperty\test WHEN property is not SprockitProcessWatermark then process is not updated.sql" />
+    <Build Include="sprockit_SetExecutionProperty\test WHEN @propertyName SprockitProcessWatermark THEN process updated.sql" />
+    <Build Include="sprockit_SetExecutionProperty\test WHEN @propertyName not SprockitProcessWatermark THEN process not updated.sql" />
     <Build Include="sprockit_SetExecutionProperty\test WHEN property is not null then event is logged.sql" />
     <Build Include="sprockit_Process\test ASSERT DefaultWatermark is nullable.sql" />
     <Build Include="_TestClasses\sprockit_DeserialiseProcess.sql" />
@@ -272,6 +271,12 @@
     <Build Include="_TestClasses\sprockit_UpdateMetrics.sql" />
     <Build Include="sprockit_ReserveProcess\test GIVEN last process disabled THEN no process returned.sql" />
     <Build Include="dbo\StoredProcedures\InsertExec.sql" />
+    <Build Include="sprockit_SetExecutionProperty\test WHEN @propertyName SprockitProcessInformation THEN LogEvent called.sql" />
+    <Build Include="sprockit_SetExecutionProperty\test WHEN @propertyName SprockitProcessWarning THEN LogEvent called.sql" />
+    <Build Include="sprockit_SetExecutionProperty\test WHEN @propertyName SprockitProcessError THEN LogEvent called.sql" />
+    <Build Include="sprockit_SetExecutionProperty\test WHEN @propertyName not message type THEN LogEvent not called.sql" />
+    <Build Include="sprockit_SetExecutionProperty\test WHEN LogPropertyUpdates set THEN LogEvent called.sql" />
+    <Build Include="sprockit_SetExecutionProperty\test WHEN LogPropertyUpdates not set THEN LogEvent not called.sql" />
   </ItemGroup>
   <ItemGroup>
     <SqlCmdVariable Include="Sprockit">
