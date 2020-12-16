@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE sprockit_SetExecutionProperty.[test WHEN ExecutionId does not exist then no changes made]
+﻿CREATE PROCEDURE sprockit_SetExecutionProperty.[test WHEN ExecutionId does not exist then Execution not updated]
 AS
 
 -- ARRANGE
