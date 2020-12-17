@@ -13,6 +13,9 @@ CREATE PROCEDURE [sprockit].[SetExecutionProperty] (
 )
 AS
 
+IF @executionId IS NULL
+  RETURN 1
+
 SET @propertyName = COALESCE(@propertyName, 'SprockitProcessInformation')
 SET @propertyValue = COALESCE(@propertyValue, '<null>')
 DECLARE @evtSource NVARCHAR(300) = QUOTENAME(OBJECT_SCHEMA_NAME(@@PROCID)) + '.' + QUOTENAME(OBJECT_NAME(@@PROCID))

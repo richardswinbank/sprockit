@@ -225,11 +225,8 @@
     <Build Include="sprockit_SetExecutionProperty\test WHEN @propertyName not reserved and @executionId not exists THEN Execution not updated.sql" />
     <Build Include="sprockit_SetExecutionProperty\test WHEN @propertyName not reserved and property not exists THEN property added.sql" />
     <Build Include="sprockit_SetExecutionProperty\test WHEN @propertyName not reserved and property exists THEN property updated.sql" />
-    <Build Include="sprockit_SetExecutionProperty\test WHEN property is null then no changes made.sql" />
-    <Build Include="sprockit_SetExecutionProperty\test WHEN value is null then value is updated.sql" />
     <Build Include="sprockit_SetExecutionProperty\test WHEN @propertyName SprockitProcessWatermark THEN process updated.sql" />
     <Build Include="sprockit_SetExecutionProperty\test WHEN @propertyName not SprockitProcessWatermark THEN process not updated.sql" />
-    <Build Include="sprockit_SetExecutionProperty\test WHEN property is not null then event is logged.sql" />
     <Build Include="sprockit_Process\test ASSERT DefaultWatermark is nullable.sql" />
     <Build Include="_TestClasses\sprockit_DeserialiseProcess.sql" />
     <Build Include="_TestClasses\sprockit_SerialiseProcess.sql" />
@@ -246,7 +243,6 @@
     <Build Include="sprockit_PrepareBatchRestart\Stored Procedures\test MORE TESTS REQUIRED.sql" />
     <Build Include="sprockit_LogEvent\Stored Procedures\test MORE TESTS REQUIRED.sql" />
     <Build Include="sprockit_Handler\Stored Procedures\test MORE TESTS REQUIRED.sql" />
-    <Build Include="sprockit_GetExecutionProperty\Stored Procedures\test MORE TESTS REQUIRED.sql" />
     <Build Include="sprockit_Event\Stored Procedures\test MORE TESTS REQUIRED.sql" />
     <Build Include="sprockit_DeserialiseProcesses\Stored Procedures\test MORE TESTS REQUIRED.sql" />
     <Build Include="sprockit_Batch\Stored Procedures\test MORE TESTS REQUIRED.sql" />
@@ -277,6 +273,13 @@
     <Build Include="sprockit_SetExecutionProperty\test WHEN @propertyName not message type THEN LogEvent not called.sql" />
     <Build Include="sprockit_SetExecutionProperty\test WHEN LogPropertyUpdates set THEN LogEvent called.sql" />
     <Build Include="sprockit_SetExecutionProperty\test WHEN LogPropertyUpdates not set THEN LogEvent not called.sql" />
+    <Build Include="sprockit_GetExecutionProperty\Stored Procedures\test WHEN @propertyName exists THEN property value returned.sql" />
+    <Build Include="sprockit_GetExecutionProperty\Stored Procedures\test WHEN @propertyName not exists THEN no rows returned.sql" />
+    <Build Include="sprockit_GetExecutionProperty\Stored Procedures\test WHEN @properties is NULL THEN no rows returned.sql" />
+    <Build Include="sprockit_SetExecutionProperty\test WHEN @propertyName SprockitProcessError THEN Execution not updated.sql" />
+    <Build Include="sprockit_SetExecutionProperty\test WHEN @propertyName SprockitProcessInformation THEN Execution not updated.sql" />
+    <Build Include="sprockit_SetExecutionProperty\test WHEN @propertyName SprockitProcessWarning THEN Execution not updated.sql" />
+    <Build Include="sprockit_SetExecutionProperty\test WHEN @propertyName SprockitProcessWatermark THEN Execution not updated.sql" />
   </ItemGroup>
   <ItemGroup>
     <SqlCmdVariable Include="Sprockit">

@@ -7,18 +7,17 @@ DECLARE @propertyName NVARCHAR(50) = 'MySecondProperty'
 DECLARE @propertyValue NVARCHAR(50) = 'NewValue'
 
 SELECT 
-  e.ExecutionId
-, t.c.value('@name', 'NVARCHAR(4000)') AS [name]
-, t.c.value('@value', 'NVARCHAR(4000)') AS [value]
+  @propertyValue AS PropertyValue
 INTO #expected
-FROM [sprockit].[Execution] e
-  CROSS APPLY e.ExecutionProperties.nodes('//Properties/Property') t(c)
 
-UPDATE e
-SET [value] = @propertyValue
-FROM #expected e
-WHERE ExecutionId = @executionId
-AND [name] = @propertyName
+-- validate that property exists
+DECLARE @oldValue NVARCHAR(50)
+SELECT 
+  @oldValue = xp.PropertyValue
+FROM sprockit.Execution e
+  CROSS APPLY [sprockit].GetExecutionProperty(@propertyName, e.ExecutionProperties) xp
+WHERE e.ExecutionId = @executionId
+EXEC tSQLt.AssertEquals @Expected = 'value2', @actual = @oldValue, @message = 'Error in test setup'
 
 -- ACT
 EXEC sprockit.[SetExecutionProperty] 
@@ -27,15 +26,12 @@ EXEC sprockit.[SetExecutionProperty]
 , @propertyValue = @propertyValue
 
 -- ASSERT
-SELECT 
-  e.ExecutionId
-, t.c.value('@name', 'NVARCHAR(4000)') AS [name]
-, t.c.value('@value', 'NVARCHAR(4000)') AS [value]
+SELECT xp.*
 INTO #actual
-FROM [sprockit].[Execution] e
-  CROSS APPLY e.ExecutionProperties.nodes('//Properties/Property') t(c)
+FROM sprockit.Execution e
+  CROSS APPLY [sprockit].GetExecutionProperty(@propertyName, e.ExecutionProperties) xp
+WHERE e.ExecutionId = @executionId
 
 EXEC tSQLt.AssertEqualsTable
   @Expected = '#expected'
 , @Actual = '#actual'
-

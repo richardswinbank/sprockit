@@ -1,10 +1,10 @@
-﻿CREATE PROCEDURE sprockit_SetExecutionProperty.[test WHEN @propertyName not reserved and @executionId not exists THEN Execution not updated]
+﻿CREATE PROCEDURE sprockit_SetExecutionProperty.[test WHEN @propertyName SprockitProcessWarning THEN Execution not updated]
 AS
 
 -- ARRANGE
-DECLARE @executionId INT = 435 -- not exists
-DECLARE @propertyName NVARCHAR(50) = 'MyNewProperty'
-DECLARE @propertyValue NVARCHAR(50) = 'NewValue'
+DECLARE @executionId INT = 433
+DECLARE @propertyName NVARCHAR(50) = 'SprockitProcessWarning'
+DECLARE @propertyValue NVARCHAR(50) = 'Message'
 
 SELECT 
   @propertyValue AS PropertyValue
