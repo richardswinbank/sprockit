@@ -241,7 +241,6 @@
     <Build Include="sprockit_ProcessDependency\Stored Procedures\test MORE TESTS REQUIRED.sql" />
     <Build Include="sprockit_PrepareNewBatch\Stored Procedures\test MORE TESTS REQUIRED.sql" />
     <Build Include="sprockit_PrepareBatchRestart\Stored Procedures\test MORE TESTS REQUIRED.sql" />
-    <Build Include="sprockit_LogEvent\Stored Procedures\test MORE TESTS REQUIRED.sql" />
     <Build Include="sprockit_Handler\Stored Procedures\test MORE TESTS REQUIRED.sql" />
     <Build Include="sprockit_Event\Stored Procedures\test MORE TESTS REQUIRED.sql" />
     <Build Include="sprockit_DeserialiseProcesses\Stored Procedures\test MORE TESTS REQUIRED.sql" />
@@ -280,6 +279,12 @@
     <Build Include="sprockit_SetExecutionProperty\test WHEN @propertyName SprockitProcessInformation THEN Execution not updated.sql" />
     <Build Include="sprockit_SetExecutionProperty\test WHEN @propertyName SprockitProcessWarning THEN Execution not updated.sql" />
     <Build Include="sprockit_SetExecutionProperty\test WHEN @propertyName SprockitProcessWatermark THEN Execution not updated.sql" />
+    <Build Include="sprockit_SetExecutionProperty\test WHEN @executionId NULL THEN 1 returned.sql" />
+    <Build Include="sprockit_SetExecutionProperty\test WHEN @propertyValue not NULL THEN @propertyValue retained.sql" />
+    <Build Include="sprockit_SetExecutionProperty\test WHEN @propertyName NULL THEN @propertyName replaced.sql" />
+    <Build Include="sprockit_LogEvent\Stored Procedures\test WHEN values supplied THEN values logged.sql" />
+    <Build Include="sprockit_LogEvent\Stored Procedures\test WHEN @eventDateTime NULL THEN @eventDateTime replaced.sql" />
+    <Build Include="sprockit_LogEvent\Stored Procedures\test WHEN @eventSource NULL THEN @eventSource replaced.sql" />
   </ItemGroup>
   <ItemGroup>
     <SqlCmdVariable Include="Sprockit">
