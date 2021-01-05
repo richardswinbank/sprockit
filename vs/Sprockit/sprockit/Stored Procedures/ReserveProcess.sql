@@ -1,6 +1,6 @@
 ﻿/*
  * sprockit.[ReserveProcess] 
- * Copyright (c) 2015-2020 Richard Swinbank (richard@richardswinbank.net) 
+ * Copyright (c) 2015-2021 Richard Swinbank (richard@richardswinbank.net) 
  * http://richardswinbank.net/sprockit
  *
  * Reserve a process for execution by a handler
@@ -13,7 +13,7 @@ AS
 
 DECLARE @processId INT 
 DECLARE @isEnabled BIT 
-DECLARE @executionId INT = -1
+DECLARE @executionId INT
 
 -- loop until we've reserved a process or there's nothing available to reserve
 WHILE 1 = 1 
