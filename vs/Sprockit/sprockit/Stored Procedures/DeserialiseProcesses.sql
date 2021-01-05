@@ -24,9 +24,9 @@ SELECT
 , t.c.value('(@Type)[1]', 'NVARCHAR(10)') AS ProcessType
 , t.c.value('(@Group)[1]', 'INT') AS ProcessGroup
 , t.c.value('(@DefaultWatermark)[1]', 'NVARCHAR(255)') AS DefaultWatermark
-, t.c.value('(@IsEnabled)[1]', 'BIT') AS IsEnabled
-, t.c.value('(@Priority)[1]', 'TINYINT') AS [Priority]
-, t.c.value('(@LogPropertyUpdates)[1]', 'BIT') AS LogPropertyUpdates
+, COALESCE(t.c.value('(@IsEnabled)[1]', 'BIT'), 1) AS IsEnabled
+, COALESCE(t.c.value('(@Priority)[1]', 'TINYINT'), 100) AS [Priority]
+, COALESCE(t.c.value('(@LogPropertyUpdates)[1]', 'BIT'), 0) AS LogPropertyUpdates
 , t.c.query('./Requires') AS Requires
 , t.c.query('./Produces') AS Produces
 INTO #processes
