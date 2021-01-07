@@ -23,6 +23,8 @@ AFTER INSERT, UPDATE
 AS
 BEGIN
 
+  SET NOCOUNT ON
+
   IF OBJECT_ID('tempdb..#successors') IS NOT NULL
     DROP TABLE #successors
 

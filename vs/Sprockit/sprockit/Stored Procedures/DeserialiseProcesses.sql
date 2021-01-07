@@ -10,6 +10,8 @@ CREATE PROCEDURE [sprockit].[DeserialiseProcesses] (
   @processes XML
 ) AS
 
+SET NOCOUNT ON
+
 IF @processes IS NULL
 BEGIN
   RAISERROR ('@processes cannot be NULL', 11, 1)
@@ -86,28 +88,47 @@ BEGIN TRY
       , src.LogPropertyUpdates
       );
 
+    -- collect dependencies
+    SELECT
+      p.ProcessId
+    , np.ProcessPath
+    , input.ProcessId AS DependsOn
+    , inputs.c.[value]('(@Path)[1]', 'NVARCHAR(850)') AS DependsOnPath
+    INTO #dependencies
+    FROM #processes np
+      CROSS APPLY np.Requires.nodes('/Requires/Input') inputs(c)
+      LEFT JOIN sprockit.Process p ON p.ProcessPath = np.ProcessPath
+      LEFT JOIN sprockit.Process input ON input.ProcessPath = inputs.c.[value]('(@Path)[1]', 'NVARCHAR(850)')
+
+    UNION
+
+    SELECT
+      [output].ProcessId
+    , outputs.c.[value]('(@Path)[1]', 'NVARCHAR(850)')
+    , p.ProcessId AS DependsOn
+    , np.ProcessPath
+    FROM #processes np
+      CROSS APPLY np.Produces.nodes('/Produces/Output') outputs(c)
+      LEFT JOIN sprockit.Process p ON p.ProcessPath = np.ProcessPath
+      LEFT JOIN sprockit.Process [output] ON [output].ProcessPath = outputs.c.[value]('(@Path)[1]', 'NVARCHAR(850)')
+    ;
+
+    DECLARE @msg NVARCHAR(MAX) = N''
+
+    SELECT 
+      @msg += CHAR(13) + CHAR(10) + ' - ' + ProcessPath
+    FROM #dependencies
+    WHERE ProcessId IS NULL
+
+    IF LEN(@msg) > 0
+    BEGIN
+      SET @msg = 'Unable to resolve process(es):' + @msg
+      RAISERROR(@msg, 11, 1)
+    END
+
     -- merge dependencies
-    WITH src AS (
-      SELECT
-        p.ProcessId
-      , input.ProcessId AS DependsOn
-      FROM #processes np
-        CROSS APPLY np.Requires.nodes('/Requires/Input') inputs(c)
-        LEFT JOIN sprockit.Process p ON p.ProcessPath = np.ProcessPath
-        LEFT JOIN sprockit.Process input ON input.ProcessPath = inputs.c.[value]('(@Path)[1]', 'NVARCHAR(850)')
-
-      UNION
-
-      SELECT
-        [output].ProcessId
-      , p.ProcessId AS DependsOn
-      FROM #processes np
-        CROSS APPLY np.Produces.nodes('/Produces/Output') outputs(c)
-        LEFT JOIN sprockit.Process p ON p.ProcessPath = np.ProcessPath
-        LEFT JOIN sprockit.Process [output] ON [output].ProcessPath = outputs.c.[value]('(@Path)[1]', 'NVARCHAR(850)')
-    )
     MERGE INTO sprockit.ProcessDependency tgt
-    USING src
+    USING #dependencies src
       ON src.ProcessId = tgt.ProcessId
       AND src.DependsOn = tgt.DependsOn
     WHEN NOT MATCHED BY TARGET THEN
