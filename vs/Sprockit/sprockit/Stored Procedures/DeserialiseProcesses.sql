@@ -1,6 +1,6 @@
 ﻿/*
  * sprockit.[DeserialiseProcesses]
- * Copyright (c) 2020 Richard Swinbank (richard@richardswinbank.net) 
+ * Copyright (c) 2020-2021 Richard Swinbank (richard@richardswinbank.net) 
  * http://richardswinbank.net/sprockit
  *
  * Deserialise process list from XML & sync to database
@@ -26,7 +26,6 @@ SELECT
 , t.c.value('(@Type)[1]', 'NVARCHAR(10)') AS ProcessType
 , t.c.value('(@Group)[1]', 'INT') AS ProcessGroup
 , t.c.value('(@DefaultWatermark)[1]', 'NVARCHAR(255)') AS DefaultWatermark
-, COALESCE(t.c.value('(@IsEnabled)[1]', 'BIT'), 1) AS IsEnabled
 , COALESCE(t.c.value('(@Priority)[1]', 'TINYINT'), 100) AS [Priority]
 , COALESCE(t.c.value('(@LogPropertyUpdates)[1]', 'BIT'), 0) AS LogPropertyUpdates
 , t.c.query('./Requires') AS Requires
@@ -64,7 +63,6 @@ BEGIN TRY
               WHEN src.DefaultWatermark IS NULL THEN NULL
               ELSE COALESCE(tgt.CurrentWatermark, src.DefaultWatermark)
             END
-        , IsEnabled = src.IsEnabled
         , [Priority] = src.[Priority]
         , LogPropertyUpdates = src.LogPropertyUpdates
     WHEN NOT MATCHED BY TARGET THEN
@@ -74,7 +72,6 @@ BEGIN TRY
       , ProcessGroup
       , DefaultWatermark
       , CurrentWatermark
-      , IsEnabled
       , [Priority]
       , LogPropertyUpdates
       ) VALUES (
@@ -83,7 +80,6 @@ BEGIN TRY
       , src.ProcessGroup
       , src.DefaultWatermark
       , src.DefaultWatermark
-      , src.IsEnabled
       , src.[Priority]
       , src.LogPropertyUpdates
       );
