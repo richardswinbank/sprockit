@@ -64,6 +64,7 @@
     <Folder Include="_Scripts" />
     <Folder Include="sprockit\XMLSchemaCollections\" />
     <Folder Include="sprockit\StaticData" />
+    <Folder Include="sprockit\Views\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="sprockit\Tables\Execution.sql" />
@@ -98,6 +99,12 @@
     <Build Include="sprockit\Stored Procedures\DeserialiseProcesses.sql" />
     <None Include="sprockit\StaticData\Property.sql" />
     <Build Include="sprockit\Functions\BatchExecution.sql" />
+    <Build Include="sprockit\Views\ReportParallelism.sql" />
+    <Build Include="sprockit\Views\ReportFinalStatus.sql" />
+    <Build Include="sprockit\Views\ReportExecutionProperty.sql" />
+    <Build Include="sprockit\Views\ReportExecution.sql" />
+    <Build Include="sprockit\Views\ReportEvent.sql" />
+    <Build Include="sprockit\Views\ReportBatch.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="_Scripts\PostDeployment.sql" />
