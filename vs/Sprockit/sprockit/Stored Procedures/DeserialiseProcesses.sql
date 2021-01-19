@@ -109,12 +109,22 @@ BEGIN TRY
       LEFT JOIN sprockit.Process [output] ON [output].ProcessPath = outputs.c.[value]('(@Path)[1]', 'NVARCHAR(850)')
     ;
 
-    DECLARE @msg NVARCHAR(MAX) = N''
+    DECLARE @msg NVARCHAR(MAX) = N'';
 
+    WITH err AS (
+      SELECT ProcessPath 
+      FROM #dependencies
+      WHERE ProcessId IS NULL
+	  
+	  UNION 
+	  
+	  SELECT DependsOnPath
+      FROM #dependencies
+      WHERE DependsOn IS NULL
+	)
     SELECT 
       @msg += CHAR(13) + CHAR(10) + ' - ' + ProcessPath
-    FROM #dependencies
-    WHERE ProcessId IS NULL
+    FROM err;
 
     IF LEN(@msg) > 0
     BEGIN
