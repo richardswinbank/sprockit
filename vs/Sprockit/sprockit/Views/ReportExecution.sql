@@ -31,7 +31,11 @@ SELECT
 , x.EndDateTime
 , x.EndStatus
 , COALESCE(evt.Warnings, 0) AS Warnings
-, COALESCE(evt.Errors, 0) AS Errors
+, CASE 
+    WHEN evt.Errors > 0 THEN evt.Errors
+	WHEN x.EndStatus = 'Errored' THEN 1
+	ELSE 0
+  END AS Errors
 , h.HandlerId
 , h.ExternalId
 FROM sprockit.Execution x
