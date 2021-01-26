@@ -17,15 +17,20 @@ IF @processId < 0
   RETURN -1;  -- error will be thrown from [ResolveProcessId]
 
 WITH cte AS (
-  SELECT ProcessId 
-  FROM sprockit.DependencyStatus(1)
+  SELECT 
+    ProcessId 
+  , ProcessGroup
+  FROM sprockit.Process
   WHERE ProcessId = @processId
 
   UNION ALL
 
-  SELECT ds.ProcessId
-  FROM sprockit.DependencyStatus(1) ds
-    INNER JOIN cte ON cte.ProcessId = ds.PredecessorId
+  SELECT 
+    ds.ProcessId
+  , cte.ProcessGroup
+  FROM cte
+    CROSS APPLY sprockit.DependencyStatus(cte.ProcessGroup) ds
+  WHERE cte.ProcessId = ds.PredecessorId
 )
 UPDATE p
 SET p.[Status] = 
