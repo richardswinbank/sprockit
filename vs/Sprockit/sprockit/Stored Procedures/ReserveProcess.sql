@@ -37,6 +37,7 @@ BEGIN
   AND p.ProcessGroup = b.ProcessGroup
   ORDER BY
     p.[IsEnabled]        -- disabled processes first (zero execution time; may reveal higher-priority processes downstream)
+  , pt.HasHandler        -- processes without handlers first (zero execution time)
   , p.[Priority]         -- highest priority first (low numbers = high priority; priority overrides branch weight)
   , p.BranchWeight DESC  -- then in order of branch weight (heaviest first)
   , p.AvgDuration DESC   -- then in order of average duration (longest first)
