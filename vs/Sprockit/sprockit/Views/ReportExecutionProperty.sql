@@ -11,7 +11,7 @@ AS
 
 SELECT 
   x.ExecutionId
-, p.property.[value]('(//Property/@name)[1]','NVARCHAR(255)') AS PropertyName
-, p.property.[value]('(//Property/@value)[1]','NVARCHAR(255)') AS PropertyValue
+, p.property.[value]('(@name)[1]','NVARCHAR(255)') AS PropertyName
+, p.property.[value]('(@value)[1]','NVARCHAR(255)') AS PropertyValue
 FROM sprockit.Execution x
   CROSS APPLY x.ExecutionProperties.nodes('/Properties/Property') AS p(property)
