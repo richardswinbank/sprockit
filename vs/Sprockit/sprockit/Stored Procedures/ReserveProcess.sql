@@ -15,6 +15,11 @@ DECLARE @processId INT
 DECLARE @isEnabled BIT 
 DECLARE @executionId INT
 
+DECLARE @running INT = (
+  SELECT COUNT(*) FROM sprockit.Handler h
+  WHERE h.EndDateTime IS NULL
+)
+
 -- loop until we've reserved a process or there's nothing available to reserve
 WHILE 1 = 1 
 BEGIN
@@ -33,8 +38,9 @@ BEGIN
     INNER JOIN sprockit.Batch b ON b.BatchId = h.BatchId  
     LEFT JOIN sprockit.Reservation r ON r.ProcessId = p.ProcessId
   WHERE p.[Status] = 'Ready'
-  AND r.ProcessId IS NULL  -- not already reserved
   AND p.ProcessGroup = b.ProcessGroup
+  AND r.ProcessId IS NULL  -- not already reserved
+  AND @running < sprockit.GetProperty('MaximumParallelProcesses')  -- below max capacity
   ORDER BY
     p.[IsEnabled]        -- disabled processes first (zero execution time; may reveal higher-priority processes downstream)
   , pt.HasHandler        -- processes without handlers first (zero execution time)
