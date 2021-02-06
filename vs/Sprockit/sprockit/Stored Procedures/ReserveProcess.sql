@@ -16,8 +16,8 @@ DECLARE @isEnabled BIT
 DECLARE @executionId INT
 
 DECLARE @running INT = (
-  SELECT COUNT(*) FROM sprockit.Handler h
-  WHERE h.EndDateTime IS NULL
+  SELECT COUNT(*) FROM sprockit.Process
+  WHERE [Status] = 'Running'
 )
 
 -- loop until we've reserved a process or there's nothing available to reserve
@@ -71,6 +71,7 @@ BEGIN
       CONTINUE; -- ...so try again for another process.
 
     EXEC sprockit.RethrowError;
+    RETURN -1;
 
   END CATCH
   

@@ -26,6 +26,16 @@ FROM sprockit.Handler h
 WHERE h.EndDateTime IS NULL
 AND b.ProcessGroup = @processGroup
 
+-- clear up after crashed handlers' executions
+UPDATE e
+SET EndDateTime = GETUTCDATE()
+  , [EndStatus] = 'Unknown'
+FROM sprockit.Execution e
+  INNER JOIN sprockit.Handler h ON h.HandlerId = e.HandlerId
+  INNER JOIN sprockit.Batch b ON b.BatchId = h.BatchId
+WHERE e.EndDateTime IS NULL
+AND b.ProcessGroup = @processGroup
+
 -- reset process statuses
 UPDATE sprockit.Process
 SET [Status] = 
