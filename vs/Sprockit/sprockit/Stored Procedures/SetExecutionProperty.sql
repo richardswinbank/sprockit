@@ -1,6 +1,6 @@
 ﻿/*
  * sprockit.[SetExecutionProperty]
- * Copyright (c) 2015-2020 Richard Swinbank (richard@richardswinbank.net) 
+ * Copyright (c) 2015-2021 Richard Swinbank (richard@richardswinbank.net) 
  * http://richardswinbank.net/sprockit
  *
  * Record a feature of a process's execution
@@ -20,12 +20,17 @@ SET @propertyName = COALESCE(@propertyName, 'SprockitProcessInformation')
 SET @propertyValue = COALESCE(@propertyValue, '<null>')
 DECLARE @evtSource NVARCHAR(300) = QUOTENAME(OBJECT_SCHEMA_NAME(@@PROCID)) + '.' + QUOTENAME(OBJECT_NAME(@@PROCID))
 
-IF @propertyName = 'SprockitProcessInformation'
-    EXEC sprockit.LogEvent  
-      @message = @propertyValue
-    , @executionId = @executionId
-    , @severity = 0
-    , @eventSource = @evtSource
+IF @propertyName = 'SprockitHandlerId'
+    UPDATE e
+    SET ExternalHandlerId = @propertyValue
+    FROM sprockit.Execution e
+    WHERE e.ExecutionId = @executionId;
+ELSE IF @propertyName = 'SprockitProcessWatermark'
+    UPDATE p
+    SET [CurrentWatermark] = @propertyValue
+    FROM sprockit.Execution e
+    INNER JOIN sprockit.Process p ON p.ProcessId = e.ProcessId
+    WHERE e.ExecutionId = @executionId;
 ELSE IF @propertyName = 'SprockitProcessError'
     EXEC sprockit.LogEvent  
       @message = @propertyValue
@@ -38,12 +43,12 @@ ELSE IF @propertyName = 'SprockitProcessWarning'
     , @executionId = @executionId
     , @severity = 100
     , @eventSource = @evtSource
-ELSE IF @propertyName = 'SprockitProcessWatermark'
-    UPDATE p
-    SET [CurrentWatermark] = @propertyValue
-    FROM sprockit.Execution e
-    INNER JOIN sprockit.Process p ON p.ProcessId = e.ProcessId
-    WHERE e.ExecutionId = @executionId;
+ELSE IF @propertyName = 'SprockitProcessInformation'
+    EXEC sprockit.LogEvent  
+      @message = @propertyValue
+    , @executionId = @executionId
+    , @severity = 0
+    , @eventSource = @evtSource
 ELSE 
     WITH old AS (
       SELECT 

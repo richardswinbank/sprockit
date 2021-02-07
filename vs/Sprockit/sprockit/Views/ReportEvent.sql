@@ -10,7 +10,7 @@ CREATE VIEW [sprockit].[ReportEvent]
 AS
 
 SELECT 
-  h.BatchId
+  x.BatchId
 , e.EventId
 , e.EventDateTime
 , e.Severity
@@ -25,5 +25,4 @@ SELECT
 , e.[Message]
 FROM sprockit.[Event] e
   INNER JOIN sprockit.Execution x ON x.ExecutionId = e.ExecutionId
-  INNER JOIN sprockit.Handler h ON h.HandlerId = x.HandlerId
   INNER JOIN sprockit.Process p ON p.ProcessId = x.ProcessId

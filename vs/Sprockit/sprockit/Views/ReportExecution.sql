@@ -18,9 +18,10 @@ WITH evt AS (
   GROUP BY ExecutionId
 )
 SELECT
-  h.BatchId
+  x.BatchId
 , p.ProcessGroup
 , x.ExecutionId
+, x.ExternalHandlerId
 , x.ProcessId
 , p.ProcessPath
 , p.ProcessType
@@ -36,10 +37,7 @@ SELECT
 	WHEN x.EndStatus = 'Errored' THEN 1
 	ELSE 0
   END AS Errors
-, h.HandlerId
-, h.ExternalId
 FROM sprockit.Execution x
-  INNER JOIN sprockit.Handler h ON h.HandlerId = x.HandlerId
   INNER JOIN sprockit.Process p ON p.ProcessId = x.ProcessId
   INNER JOIN sprockit.ProcessType pt ON pt.ProcessType = p.ProcessType
   LEFT JOIN evt ON evt.ExecutionId = x.ExecutionId
