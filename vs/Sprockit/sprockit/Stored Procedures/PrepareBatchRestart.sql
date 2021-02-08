@@ -1,4 +1,4 @@
-﻿/*
+/*
  * sprockit.[PrepareBatchRestart]
  * Copyright (c) 2015-2021 Richard Swinbank (richard@richardswinbank.net) 
  * http://richardswinbank.net/sprockit
@@ -18,7 +18,8 @@ DECLARE @msg NVARCHAR(255)
 
 SELECT TOP 1
   @batchId = BatchId
-, @msg = 'Starting batch ' + CAST(@batchId AS VARCHAR) + COALESCE(' with external manager ID ' + @externalManagerId, '')
+, @msg = 'Process manager started for batch ID ' + CAST(@batchId AS VARCHAR) 
+    + COALESCE(' (external ID ' + @externalManagerId + ')', '')
 FROM sprockit.Batch
 WHERE ProcessGroup = @processGroup
 ORDER BY StartDateTime DESC;
