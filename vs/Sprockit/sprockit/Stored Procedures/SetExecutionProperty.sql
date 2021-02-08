@@ -1,4 +1,4 @@
-﻿/*
+/*
  * sprockit.[SetExecutionProperty]
  * Copyright (c) 2015-2021 Richard Swinbank (richard@richardswinbank.net) 
  * http://richardswinbank.net/sprockit
@@ -20,7 +20,7 @@ SET @propertyName = COALESCE(@propertyName, 'SprockitProcessInformation')
 SET @propertyValue = COALESCE(@propertyValue, '<null>')
 DECLARE @evtSource NVARCHAR(300) = QUOTENAME(OBJECT_SCHEMA_NAME(@@PROCID)) + '.' + QUOTENAME(OBJECT_NAME(@@PROCID))
 
-IF @propertyName = 'SprockitHandlerId'
+IF @propertyName = 'SprockitProcessHandler'
     UPDATE e
     SET ExternalHandlerId = @propertyValue
     FROM sprockit.Execution e
