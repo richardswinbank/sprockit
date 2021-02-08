@@ -1,6 +1,6 @@
-﻿/*
+/*
  * sprockit.[PrepareBatchRestart]
- * Copyright (c) 2015-2020 Richard Swinbank (richard@richardswinbank.net) 
+ * Copyright (c) 2015-2021 Richard Swinbank (richard@richardswinbank.net) 
  * http://richardswinbank.net/sprockit
  *
  * Prepare Sprockit processes to restart the current batch for a specified process group
@@ -8,33 +8,48 @@
  
 CREATE PROCEDURE [sprockit].[PrepareBatchRestart] (
   @processGroup INT
+, @externalManagerId NVARCHAR(1024) = NULL
 )
 AS
+
+--- determine batch ID 
+DECLARE @batchId INT
+DECLARE @msg NVARCHAR(255)
+
+SELECT TOP 1
+  @batchId = BatchId
+, @msg = 'Process manager started for batch ID ' + CAST(@batchId AS VARCHAR) 
+    + COALESCE(' (external ID ' + @externalManagerId + ')', '')
+FROM sprockit.Batch
+WHERE ProcessGroup = @processGroup
+ORDER BY StartDateTime DESC;
+
+-- Log restart
+EXEC sprockit.LogEvent 
+  @message = @msg
+, @severity = 100
+, @eventSource = '[sprockit].[PrepareBatchRestart]';
+
+UPDATE b
+SET ExternalManagerId = @externalManagerId
+FROM sprockit.Batch b
+WHERE BatchId = @batchId;
 
 -- delete reservations from last attempt
 DELETE r
 FROM sprockit.Reservation r
   INNER JOIN sprockit.Process p ON p.ProcessId = r.ProcessId
-WHERE p.ProcessGroup = @processGroup
+WHERE p.ProcessGroup = @processGroup;
 
--- clear up after crashed handlers
-UPDATE h
-SET EndDateTime = GETUTCDATE()
-  , [Status] = 'Unknown'
-FROM sprockit.Handler h
-  INNER JOIN sprockit.Batch b ON b.BatchId = h.BatchId
-WHERE h.EndDateTime IS NULL
-AND b.ProcessGroup = @processGroup
-
--- clear up after crashed handlers' executions
+-- clear up after lost executions
+-- (this shouldn't happen, but in case a handler crashes without properly releasing a process)
 UPDATE e
 SET EndDateTime = GETUTCDATE()
   , [EndStatus] = 'Unknown'
 FROM sprockit.Execution e
-  INNER JOIN sprockit.Handler h ON h.HandlerId = e.HandlerId
-  INNER JOIN sprockit.Batch b ON b.BatchId = h.BatchId
+  INNER JOIN sprockit.Batch b ON b.BatchId = e.BatchId
 WHERE e.EndDateTime IS NULL
-AND b.ProcessGroup = @processGroup
+AND b.ProcessGroup = @processGroup;
 
 -- reset process statuses
 UPDATE sprockit.Process
@@ -51,10 +66,7 @@ WHERE [Status] IN (
 , 'Stopped'
 , 'Blocked'
 )
-AND ProcessGroup = @processGroup
+AND ProcessGroup = @processGroup;
 
-SELECT TOP 1 
-  BatchId
-FROM sprockit.Batch
-WHERE ProcessGroup = @processGroup
-ORDER BY StartDateTime DESC
+-- return batch ID
+SELECT @batchId AS BatchId;
