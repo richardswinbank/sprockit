@@ -42,4 +42,11 @@
     <Property Name="ParentElementType" Value="SqlSchema" />
     <Property Name="NewName" Value="[SetExecutionProperty]" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="1a2c695d-6b48-4f26-a464-12905a51f390" ChangeDateTime="02/07/2021 20:29:03">
+    <Property Name="ElementName" Value="[sprockit].[Execution].[HandlerId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[sprockit].[Execution]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="BatchId" />
+  </Operation>
 </Operations>

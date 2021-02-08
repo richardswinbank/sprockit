@@ -11,17 +11,16 @@ AS
 
 WITH [status] AS (
   SELECT TOP 1 WITH TIES
-    h.BatchId
-  , e.ProcessId
-  , COALESCE(e.EndStatus, 'Running') AS FinalStatus
-  , e.ExecutionId
+    BatchId
+  , ProcessId
+  , COALESCE(EndStatus, 'Running') AS FinalStatus
+  , ExecutionId
   FROM sprockit.Execution e
-    INNER JOIN sprockit.Handler h ON h.HandlerId = e.HandlerId
   ORDER BY ROW_NUMBER() OVER (
     PARTITION BY 
-      h.BatchId
-    , e.ProcessId
-    ORDER BY e.ExecutionId DESC
+      BatchId
+    , ProcessId
+    ORDER BY ExecutionId DESC
   )
 )
 SELECT 

@@ -70,13 +70,10 @@
     <Build Include="sprockit\Tables\Execution.sql" />
     <Build Include="sprockit\Tables\Reservation.sql" />
     <Build Include="sprockit\Tables\ProcessDependency.sql" />
-    <Build Include="sprockit\Tables\Handler.sql" />
     <Build Include="sprockit\Tables\Batch.sql" />
     <Build Include="sprockit\Tables\Process.sql" />
     <Build Include="sprockit\Functions\DependencyStatus.sql" />
     <Build Include="sprockit\Stored Procedures\ReserveProcess.sql" />
-    <Build Include="sprockit\Stored Procedures\UnregisterHandler.sql" />
-    <Build Include="sprockit\Stored Procedures\RegisterHandler.sql" />
     <Build Include="sprockit\Stored Procedures\EnqueueProcesses.sql" />
     <Build Include="sprockit\Stored Procedures\UpdateMetrics.sql" />
     <Build Include="sprockit\Stored Procedures\PrepareNewBatch.sql" />
@@ -91,20 +88,18 @@
     <Build Include="sprockit\Stored Procedures\LogEvent.sql" />
     <Build Include="sprockit\Tables\ProcessType.sql" />
     <Build Include="sprockit\Tables\RetryableError.sql" />
-    <Build Include="sprockit\Stored Procedures\string_split.sql" />
     <Build Include="sprockit\Functions\GetProperty.sql" />
     <Build Include="sprockit\Tables\Property.sql" />
     <Build Include="sprockit\Functions\GetExecutionProperty.sql" />
     <Build Include="sprockit\XMLSchemaCollections\Properties.sql" />
     <Build Include="sprockit\Stored Procedures\DeserialiseProcesses.sql" />
     <None Include="sprockit\StaticData\Property.sql" />
-    <Build Include="sprockit\Functions\BatchExecution.sql" />
-    <Build Include="sprockit\Views\ReportParallelism.sql" />
-    <Build Include="sprockit\Views\ReportFinalStatus.sql" />
-    <Build Include="sprockit\Views\ReportExecutionProperty.sql" />
-    <Build Include="sprockit\Views\ReportExecution.sql" />
-    <Build Include="sprockit\Views\ReportEvent.sql" />
     <Build Include="sprockit\Views\ReportBatch.sql" />
+    <Build Include="sprockit\Views\ReportEvent.sql" />
+    <Build Include="sprockit\Views\ReportExecution.sql" />
+    <Build Include="sprockit\Views\ReportExecutionProperty.sql" />
+    <Build Include="sprockit\Views\ReportFinalStatus.sql" />
+    <Build Include="sprockit\Views\ReportParallelism.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="_Scripts\PostDeployment.sql" />

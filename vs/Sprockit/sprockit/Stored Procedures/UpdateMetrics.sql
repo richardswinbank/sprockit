@@ -37,7 +37,8 @@ WHERE p.ProcessGroup = @processGroup
 CREATE TABLE #executionPaths (
   PathId INT IDENTITY PRIMARY KEY
 , ProcessId INT
-, ExecutionPath NVARCHAR(1024)
+, ExecutionPath NVARCHAR(MAX)
+, PathWeight INT
 )
 
 DECLARE @i INT = -1
@@ -46,10 +47,12 @@ DECLARE @i INT = -1
 INSERT INTO #executionPaths (
   ProcessId
 , ExecutionPath
+, PathWeight
 )
 SELECT
   p.ProcessId
-, CAST(p.ProcessId AS NVARCHAR(1024)) AS ExecutionPath
+, CAST(p.ProcessId AS NVARCHAR) AS ExecutionPath
+, p.AvgDuration
 FROM sprockit.Process p
   LEFT JOIN sprockit.DependencyStatus(@processGroup) pd ON pd.PredecessorId = p.ProcessId
 WHERE p.ProcessGroup = @processGroup
@@ -64,32 +67,24 @@ BEGIN
   INSERT INTO #executionPaths (
     ProcessId
   , ExecutionPath
+  , PathWeight
   )
   SELECT
     pd.PredecessorId
   , CAST(pd.PredecessorId AS NVARCHAR) + ',' + xp.ExecutionPath
+  , xp.PathWeight + p.AvgDuration
   FROM #executionPaths xp
     INNER JOIN sprockit.DependencyStatus(@processGroup) pd ON pd.ProcessId = xp.ProcessId
+    INNER JOIN sprockit.Process p ON p.ProcessId = pd.PredecessorId
   WHERE LEN(xp.ExecutionPath) - LEN(REPLACE(xp.ExecutionPath, ',', '')) = @i 
 
 END
 
-;WITH pathLengths AS (
-  SELECT 
-    xp.PathId
-  , xp.ProcessId
-  , SUM(CASE p.IsEnabled WHEN 0 THEN 0 ELSE p.AvgDuration END) AS PathLength
-  FROM #executionPaths xp
-    CROSS APPLY sprockit.string_split(xp.ExecutionPath, ',') spl
-    INNER JOIN sprockit.Process p ON p.ProcessId = spl.[value]
-  GROUP BY 
-    xp.PathId
-  , xp.ProcessId
-), branchWeights AS (
+;WITH branchWeights AS (
   SELECT
     ProcessId 
-  , MAX(PathLength) AS BranchWeight
-  FROM pathLengths
+  , MAX(PathWeight) AS BranchWeight
+  FROM #executionPaths
   GROUP BY ProcessId
 )
 UPDATE p

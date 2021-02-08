@@ -1,6 +1,6 @@
 /*
  * sprockit.[EnqueueProcesses]
- * Copyright (c) 2015-2020 Richard Swinbank (richard@richardswinbank.net) 
+ * Copyright (c) 2015-2021 Richard Swinbank (richard@richardswinbank.net) 
  * http://richardswinbank.net/sprockit
  *
  * Update process readiness based on dependency information
@@ -35,7 +35,7 @@ SET [Status] = 'Ready'
 FROM sprockit.Process p
   INNER JOIN sprockit.[Event] e ON e.ExecutionId = p.LastExecutionId
   INNER JOIN sprockit.RetryableError re 
-    ON re.ProcessType = p.ProcessType
+    ON re.ProcessType LIKE p.ProcessType
     AND p.ProcessPath LIKE re.ProcessPathPattern
     AND e.[Message] LIKE re.MessagePattern
 WHERE p.[Status] = 'Errored' 
@@ -60,18 +60,3 @@ WHILE @@ROWCOUNT > 0
     INNER JOIN sprockit.Process succ ON succ.ProcessPath = dep.ProcessPath
   WHERE dep.PredecessorStatus = 'Blocked'
   AND succ.[Status] <> 'Blocked'
-
--- return ready process & running handler counts
-SELECT (
-  SELECT COUNT(*)
-  FROM sprockit.Process
-  WHERE ProcessGroup = @processGroup
-  AND [Status] = 'Ready'
-) AS ReadyProcesses
-, (
-  SELECT COUNT(*)
-  FROM sprockit.Handler h
-    INNER JOIN sprockit.Batch b ON b.BatchId = h.BatchId
-  WHERE b.ProcessGroup = @processGroup
-  AND h.EndDateTime IS NULL
-) AS RunningHandlers
