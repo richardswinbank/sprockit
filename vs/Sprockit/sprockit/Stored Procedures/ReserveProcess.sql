@@ -1,4 +1,4 @@
-﻿/*
+/*
  * sprockit.[ReserveProcess] 
  * Copyright (c) 2015-2021 Richard Swinbank (richard@richardswinbank.net) 
  * http://richardswinbank.net/sprockit
@@ -21,9 +21,9 @@ DECLARE @running INT = (
   WHERE [Status] = 'Running'
 );
 
-DECLARE @enqueueSp NVARCHAR(1024) = sprockit.GetProperty('ProcessSchedulerSpName');
+DECLARE @enqueueSp NVARCHAR(1024) = sprockit.GetProperty('ProcessSchedulerSpName') + ' @processGroup = @processGroup';
 EXEC sp_executesql 
-  @stmt = @enqueueSp
+  @statement = @enqueueSp
 , @params = N'@processGroup INT'
 , @processGroup = @processGroup
 
@@ -127,10 +127,10 @@ END;
 
 -- return execution details to the process manager
 SELECT
-  x.ExecutionId
+  x.ExecutionId AS SprockitExecutionId
 , p.ProcessType
 , p.ProcessPath
-, p.[CurrentWatermark]
+, p.[CurrentWatermark] AS SprockitProcessWatermark
 , x.RunningProcesses
 FROM (
   SELECT 
