@@ -1,4 +1,4 @@
-﻿/*
+/*
  * sprockit.[PrepareNewBatch]
  * Copyright (c) 2015-2021 Richard Swinbank (richard@richardswinbank.net) 
  * http://richardswinbank.net/sprockit
@@ -44,6 +44,7 @@ WITH lastBatch AS (
     WHERE ProcessGroup = @processGroup
     ORDER BY StartDateTime DESC
   )
+  GROUP BY BatchId
 )
 UPDATE b
 SET EndDateTime = lastBatch.EndDateTime
