@@ -17,6 +17,15 @@
     CONSTRAINT [FK__sprockit_Execution__ProcessId] FOREIGN KEY ([ProcessId]) REFERENCES [sprockit].[Process] ([ProcessId])
 );
 
+GO
+
+CREATE NONCLUSTERED INDEX IX__sprockit_Execution__StartDateTime
+ON sprockit.Execution (
+  StartDateTime
+) INCLUDE (
+  BatchId
+, EndDateTime
+)
 
 
 
