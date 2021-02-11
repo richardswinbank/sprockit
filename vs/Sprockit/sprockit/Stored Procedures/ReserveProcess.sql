@@ -8,6 +8,7 @@
 
 CREATE PROCEDURE [sprockit].[ReserveProcess] (
   @batchId INT
+, @returnSingleRow BIT = 0
 )
 AS
 
@@ -39,7 +40,7 @@ BEGIN
   SET @isEnabled = 1
   SET @executionId = -1
 
-  -- Choose a process
+  -- choose a process
   SELECT TOP 1 
     @processId = p.ProcessId
   , @isEnabled = p.IsEnabled & pt.HasHandler
@@ -92,8 +93,10 @@ BEGIN
   , [ProcessType]  
   , [IsEnabled]
   , [Priority]
+  , WatermarkValue
   , [AvgDuration]
   , [BranchWeight]
+  , ExecutionParameters
   )
   SELECT
     ProcessId
@@ -101,9 +104,18 @@ BEGIN
   , [ProcessType]  
   , [IsEnabled]
   , [Priority]
+  , CurrentWatermark
   , [AvgDuration]
   , [BranchWeight]
-  FROM sprockit.Process
+  , '<Parameters>' + COALESCE((
+      SELECT
+        ParameterName AS [Name]
+      , ParameterValue AS [Value]
+      FROM sprockit.ProcessParameter
+      WHERE ProcessId = p.ProcessId
+      FOR XML AUTO
+    ), '') + '</Parameters>'
+  FROM sprockit.Process p
   WHERE ProcessId = @processId;
 
   SET @executionId = SCOPE_IDENTITY();
@@ -125,17 +137,59 @@ BEGIN
 
 END;
 
--- return execution details to the process manager
-SELECT
-  x.ExecutionId AS SprockitExecutionId
-, p.ProcessType
-, p.ProcessPath
-, p.[CurrentWatermark] AS SprockitProcessWatermark
-, x.RunningProcesses
-FROM (
-  SELECT 
-    @executionId AS ExecutionId
-  , @running AS RunningProcesses
-) x
-  LEFT JOIN sprockit.Execution e ON e.ExecutionId = x.ExecutionId
-  LEFT JOIN sprockit.Process p ON p.ProcessId = e.ProcessId
+/*
+ * return execution details to the process manager
+ */
+-- prepare values to return
+WITH cte AS (
+  SELECT
+    e.ProcessType
+  , p.ProcessPath
+  , e.WatermarkValue
+  , e.ProcessId
+  , x.*
+  FROM (
+    SELECT 
+      @executionId AS ExecutionId
+    , @running AS RunningProcesses
+  ) x
+    LEFT JOIN sprockit.Execution e ON e.ExecutionId = x.ExecutionId
+    LEFT JOIN sprockit.Process p ON p.ProcessId = e.ProcessId
+)
+SELECT 
+  pp.ParameterName
+, pp.ParameterValue
+INTO #parameters
+FROM sprockit.ProcessParameter pp
+  INNER JOIN cte ON cte.ProcessId = pp.ProcessId
+  
+UNION SELECT 'SprockitProcessType', ProcessType FROM cte
+UNION SELECT 'SprockitProcessPath', ProcessPath FROM cte
+UNION SELECT 'SprockitProcessWatermark', WatermarkValue FROM cte
+UNION SELECT 'SprockitExecutionId', CAST(ExecutionId AS VARCHAR) FROM cte
+UNION SELECT 'SprockitRunningProcesses', CAST(RunningProcesses AS VARCHAR) FROM cte
+;
+
+IF @returnSingleRow = 0  -- return multi-row result
+BEGIN
+
+  SELECT
+    ParameterName
+  , ParameterValue
+  FROM #parameters;
+
+END
+ELSE  -- return result as single row
+BEGIN
+
+  DECLARE @sql NVARCHAR(MAX) = N'';
+
+  SELECT @sql += '
+, ' + COALESCE('''' + REPLACE(ParameterValue, '''', '''''') + '''', 'NULL') + ' AS ' + QUOTENAME(ParameterName)
+  FROM #parameters;
+
+  SET @sql = STUFF(@sql, 1,3, 'SELECT');
+
+  EXEC(@sql);
+
+END;
