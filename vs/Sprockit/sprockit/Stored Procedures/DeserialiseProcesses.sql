@@ -28,6 +28,7 @@ SELECT
 , t.c.value('(@DefaultWatermark)[1]', 'NVARCHAR(255)') AS DefaultWatermark
 , COALESCE(t.c.value('(@Priority)[1]', 'TINYINT'), 100) AS [Priority]
 , COALESCE(t.c.value('(@LogPropertyUpdates)[1]', 'BIT'), 0) AS LogPropertyUpdates
+, t.c.query('./Parameters') AS [Parameters]
 , t.c.query('./Requires') AS Requires
 , t.c.query('./Produces') AS Produces
 INTO #processes
@@ -147,6 +148,37 @@ BEGIN TRY
       )
     WHEN NOT MATCHED BY SOURCE THEN
       DELETE;
+
+    -- merge process parameters
+    WITH src AS (
+      SELECT 
+        p.ProcessId 
+      , inputs.c.[value]('(@Name)[1]', 'NVARCHAR(850)')  AS ParameterName
+      , inputs.c.[value]('(@Value)[1]', 'NVARCHAR(850)') AS ParameterValue
+      FROM #processes np
+        CROSS APPLY np.[Parameters].nodes('/Parameters/Parameter') inputs(c)
+        LEFT JOIN sprockit.Process p ON p.ProcessPath = np.ProcessPath
+        LEFT JOIN sprockit.ProcessParameter pp 
+          ON pp.ProcessId = p.ProcessId
+          AND pp.ParameterName = inputs.c.[value]('(@Name)[1]', 'NVARCHAR(850)')
+    )
+    MERGE INTO sprockit.ProcessParameter tgt
+    USING src
+      ON src.ProcessId = tgt.ProcessId
+      AND src.ParameterName = tgt.ParameterName
+    WHEN NOT MATCHED BY TARGET THEN
+      INSERT (
+        ProcessId
+      , ParameterName
+      , ParameterValue
+      ) VALUES (
+        src.ProcessId
+      , src.ParameterName
+      , src.ParameterValue
+      )
+    WHEN NOT MATCHED BY SOURCE THEN 
+      DELETE
+    ;
 
     -- delete removed processes
     DELETE e
