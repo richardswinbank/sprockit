@@ -1,6 +1,6 @@
 ﻿/*
  * sprockit.[ResolveProcessId]
- * Copyright (c) 2018-2019 Richard Swinbank (richard@richardswinbank.net) 
+ * Copyright (c) 2018-2021 Richard Swinbank (richard@richardswinbank.net) 
  * http://richardswinbank.net/sprockit
  *
  * Identify a process using (maybe only some of) its process path.

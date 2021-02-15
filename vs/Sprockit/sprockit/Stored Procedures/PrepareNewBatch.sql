@@ -11,8 +11,9 @@ CREATE PROCEDURE [sprockit].[PrepareNewBatch] (
 )
 AS
 
--- update scheduling metrics
+-- update scheduling & control metrics
 EXEC sprockit.UpdateMetrics @processGroup
+EXEC sprockit.SetControlLimits @processGroup
 
 -- set everything not ready
 UPDATE p
