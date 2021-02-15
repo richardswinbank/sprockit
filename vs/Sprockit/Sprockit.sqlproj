@@ -103,6 +103,8 @@
     <Build Include="sprockit\Tables\ProcessParameter.sql" />
     <Build Include="sprockit\Stored Procedures\LogProcessMetric.sql" />
     <Build Include="sprockit\Tables\ProcessMetric.sql" />
+    <Build Include="sprockit\Views\ReportProcessControlChart.sql" />
+    <Build Include="sprockit\Tables\ProcessControlLimits.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="_Scripts\PostDeployment.sql" />
