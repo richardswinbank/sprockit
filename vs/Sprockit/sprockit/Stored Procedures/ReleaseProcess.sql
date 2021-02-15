@@ -14,6 +14,14 @@ CREATE PROCEDURE [sprockit].[ReleaseProcess] (
 )
 AS
 
+-- get process group
+DECLARE @processGroup INT = (
+  SELECT p.ProcessGroup
+  FROM sprockit.Execution e
+    INNER JOIN sprockit.Process p ON p.ProcessId = e.ProcessId
+  WHERE e.ExecutionId = @executionId
+)
+
 BEGIN TRY  -- ensure that process status doesn't change if earlier updates fail
 
   -- complete execution record
@@ -23,12 +31,6 @@ BEGIN TRY  -- ensure that process status doesn't change if earlier updates fail
   FROM sprockit.Execution e
   WHERE e.ExecutionId = @executionId;
 
-  -- release reservation
-  DELETE r
-  FROM sprockit.Execution e
-    INNER JOIN sprockit.Reservation r ON r.ProcessId = e.ProcessId
-  WHERE e.ExecutionId = @executionId;
-
   -- update process status
   UPDATE p
   SET [Status] = @endStatus
@@ -36,6 +38,19 @@ BEGIN TRY  -- ensure that process status doesn't change if earlier updates fail
     , ErrorCount = CASE @endStatus WHEN 'Errored' THEN ErrorCount + 1 ELSE 0 END
   FROM sprockit.Execution e
     INNER JOIN sprockit.Process p ON p.ProcessId = e.ProcessId
+  WHERE e.ExecutionId = @executionId;
+
+  -- call scheduler
+  DECLARE @enqueueSp NVARCHAR(1024) = sprockit.GetProperty('ProcessSchedulerSpName') + ' @processGroup = @processGroup';
+  EXEC sp_executesql 
+    @statement = @enqueueSp
+  , @params = N'@processGroup INT'
+  , @processGroup = @processGroup
+
+  -- release reservation
+  DELETE r
+  FROM sprockit.Execution e
+    INNER JOIN sprockit.Reservation r ON r.ProcessId = e.ProcessId
   WHERE e.ExecutionId = @executionId;
 
 END TRY

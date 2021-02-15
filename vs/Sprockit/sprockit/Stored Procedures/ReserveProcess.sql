@@ -12,21 +12,9 @@ CREATE PROCEDURE [sprockit].[ReserveProcess] (
 )
 AS
 
-DECLARE @processGroup INT = (
-  SELECT ProcessGroup FROM sprockit.Batch
-  WHERE BatchId = @batchId
-);
-
 DECLARE @running INT = (
-  SELECT COUNT(*) FROM sprockit.Process
-  WHERE [Status] = 'Running'
+  SELECT COUNT(*) FROM sprockit.Reservation
 );
-
-DECLARE @enqueueSp NVARCHAR(1024) = sprockit.GetProperty('ProcessSchedulerSpName') + ' @processGroup = @processGroup';
-EXEC sp_executesql 
-  @statement = @enqueueSp
-, @params = N'@processGroup INT'
-, @processGroup = @processGroup
 
 DECLARE @processId INT 
 DECLARE @isEnabled BIT 
@@ -45,10 +33,11 @@ BEGIN
     @processId = p.ProcessId
   , @isEnabled = p.IsEnabled & pt.HasHandler
   FROM sprockit.Process p WITH (READPAST)
+    INNER JOIN sprockit.Batch b ON b.ProcessGroup = p.ProcessGroup
     INNER JOIN sprockit.ProcessType pt ON pt.ProcessType = p.ProcessType
     LEFT JOIN sprockit.Reservation r ON r.ProcessId = p.ProcessId
   WHERE p.[Status] = 'Ready'
-  AND p.ProcessGroup = @processGroup
+  AND b.BatchId = @batchId
   AND r.ProcessId IS NULL  -- not already reserved
   AND @running < sprockit.GetProperty('MaximumParallelProcesses')  -- below maximum capacity
   ORDER BY
