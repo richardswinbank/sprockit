@@ -101,6 +101,8 @@
     <Build Include="sprockit\Views\ReportFinalStatus.sql" />
     <Build Include="sprockit\Views\ReportParallelism.sql" />
     <Build Include="sprockit\Tables\ProcessParameter.sql" />
+    <Build Include="sprockit\Stored Procedures\LogProcessMetric.sql" />
+    <Build Include="sprockit\Tables\ProcessMetric.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="_Scripts\PostDeployment.sql" />

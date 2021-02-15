@@ -46,26 +46,18 @@ BEGIN CATCH
 
 END CATCH
 
-/*
- * call process scheduler (change to process status may mean other processes are now ready
- */
--- get process group
-DECLARE @processGroup INT = (
-  SELECT p.ProcessGroup
-  FROM sprockit.Execution e
-    INNER JOIN sprockit.Process p ON p.ProcessId = e.ProcessId
-  WHERE e.ExecutionId = @executionId
-)
+IF @endStatus = 'Done' AND @metricName IS NOT NULL
+BEGIN
 
--- table to suppress output
-DECLARE @output TABLE (
-  ReadyProcesses INT
-, RunningHandlers INT
-)
+  IF @metricName = 'ProcessDuration'
+    SELECT 
+      @metricValue = DATEDIFF(SECOND, StartDateTime, EndDateTime)
+    FROM sprockit.Execution
+    WHERE ExecutionId = @executionId;
 
--- call scheduler
-INSERT INTO @output (
-  ReadyProcesses
-, RunningHandlers
-)
-EXEC sprockit.EnqueueProcesses @processGroup = @processGroup
+  EXEC sprockit.LogProcessMetric
+    @executionId = @executionId
+  , @metricName = @metricName
+  , @metricValue = @metricValue;
+
+END
