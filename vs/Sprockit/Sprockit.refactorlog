@@ -49,4 +49,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="BatchId" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="c7841608-f5b4-4564-b90e-d8de9dd51e54" ChangeDateTime="02/15/2021 07:29:47">
+    <Property Name="ElementName" Value="[sprockit].[Execution].[WatermarkValue]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[sprockit].[Execution]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="InitialWatermark" />
+  </Operation>
 </Operations>

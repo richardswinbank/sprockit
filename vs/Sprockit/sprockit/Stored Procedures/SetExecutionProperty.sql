@@ -26,11 +26,20 @@ IF @propertyName = 'SprockitProcessHandler'
     FROM sprockit.Execution e
     WHERE e.ExecutionId = @executionId;
 ELSE IF @propertyName = 'SprockitProcessWatermark'
+BEGIN
+
     UPDATE p
     SET [CurrentWatermark] = @propertyValue
     FROM sprockit.Execution e
-    INNER JOIN sprockit.Process p ON p.ProcessId = e.ProcessId
+      INNER JOIN sprockit.Process p ON p.ProcessId = e.ProcessId
     WHERE e.ExecutionId = @executionId;
+
+    UPDATE e
+    SET UpdatedWatermark = @propertyValue
+    FROM sprockit.Execution e
+    WHERE e.ExecutionId = @executionId;
+
+END
 ELSE IF @propertyName = 'SprockitProcessError'
     EXEC sprockit.LogEvent  
       @message = @propertyValue

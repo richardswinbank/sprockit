@@ -93,7 +93,7 @@ BEGIN
   , [ProcessType]  
   , [IsEnabled]
   , [Priority]
-  , WatermarkValue
+  , InitialWatermark
   , [AvgDuration]
   , [BranchWeight]
   , ExecutionParameters
@@ -145,7 +145,7 @@ WITH cte AS (
   SELECT
     e.ProcessType
   , p.ProcessPath
-  , e.WatermarkValue
+  , e.InitialWatermark
   , e.ProcessId
   , x.*
   FROM (
@@ -165,7 +165,7 @@ FROM sprockit.ProcessParameter pp
   
 UNION SELECT 'SprockitProcessType', ProcessType FROM cte
 UNION SELECT 'SprockitProcessPath', ProcessPath FROM cte
-UNION SELECT 'SprockitProcessWatermark', WatermarkValue FROM cte
+UNION SELECT 'SprockitProcessWatermark', InitialWatermark FROM cte
 UNION SELECT 'SprockitExecutionId', CAST(ExecutionId AS VARCHAR) FROM cte
 UNION SELECT 'SprockitRunningProcesses', CAST(RunningProcesses AS VARCHAR) FROM cte
 ;
