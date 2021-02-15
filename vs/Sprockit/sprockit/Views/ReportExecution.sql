@@ -12,6 +12,7 @@ AS
 WITH evt AS (
   SELECT
     ExecutionId
+  , SUM(CASE WHEN Severity < 100 THEN 1 ELSE 0 END) AS Information
   , SUM(CASE WHEN Severity BETWEEN 100 AND 199 THEN 1 ELSE 0 END) AS Warnings
   , SUM(CASE WHEN Severity >= 200 THEN 1 ELSE 0 END) AS Errors
   FROM sprockit.[Event]
@@ -31,6 +32,7 @@ SELECT
 , x.StartDateTime
 , x.EndDateTime
 , x.EndStatus
+, COALESCE(evt.Information, 0) AS Information
 , COALESCE(evt.Warnings, 0) AS Warnings
 , CASE 
     WHEN evt.Errors > 0 THEN evt.Errors

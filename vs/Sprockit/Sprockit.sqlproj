@@ -105,6 +105,7 @@
     <Build Include="sprockit\Tables\ProcessMetric.sql" />
     <Build Include="sprockit\Views\ReportProcessControlChart.sql" />
     <Build Include="sprockit\Tables\ProcessControlLimits.sql" />
+    <Build Include="sprockit\Stored Procedures\SetControlLimits.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="_Scripts\PostDeployment.sql" />
