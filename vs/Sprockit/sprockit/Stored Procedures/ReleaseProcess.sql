@@ -22,45 +22,37 @@ DECLARE @processGroup INT = (
   WHERE e.ExecutionId = @executionId
 )
 
-BEGIN TRY  -- ensure that process status doesn't change if earlier updates fail
+-- complete execution record
+UPDATE e
+SET EndStatus = @endStatus
+  , EndDateTime = GETUTCDATE()
+FROM sprockit.Execution e
+WHERE e.ExecutionId = @executionId;
 
-  -- complete execution record
-  UPDATE e
-  SET EndStatus = @endStatus
-    , EndDateTime = GETUTCDATE()
-  FROM sprockit.Execution e
-  WHERE e.ExecutionId = @executionId;
+-- update process status
+UPDATE p
+SET [Status] = @endStatus
+  , LastStatusUpdate = GETUTCDATE()
+  , ErrorCount = CASE @endStatus WHEN 'Errored' THEN ErrorCount + 1 ELSE 0 END
+FROM sprockit.Execution e
+  INNER JOIN sprockit.Process p ON p.ProcessId = e.ProcessId
+WHERE e.ExecutionId = @executionId;
 
-  -- update process status
-  UPDATE p
-  SET [Status] = @endStatus
-    , LastStatusUpdate = GETUTCDATE()
-    , ErrorCount = CASE @endStatus WHEN 'Errored' THEN ErrorCount + 1 ELSE 0 END
-  FROM sprockit.Execution e
-    INNER JOIN sprockit.Process p ON p.ProcessId = e.ProcessId
-  WHERE e.ExecutionId = @executionId;
+-- call scheduler
+DECLARE @enqueueSp NVARCHAR(1024) = sprockit.GetProperty('ProcessSchedulerSpName') + ' @processGroup = @processGroup';
+EXEC sp_executesql 
+  @statement = @enqueueSp
+, @params = N'@processGroup INT'
+, @processGroup = @processGroup
 
-  -- call scheduler
-  DECLARE @enqueueSp NVARCHAR(1024) = sprockit.GetProperty('ProcessSchedulerSpName') + ' @processGroup = @processGroup';
-  EXEC sp_executesql 
-    @statement = @enqueueSp
-  , @params = N'@processGroup INT'
-  , @processGroup = @processGroup
+-- release reservation - do this after the scheduler is called to make sure there's 
+-- zero gap between a lone execution being released and successors being set ready
+DELETE r
+FROM sprockit.Execution e
+  INNER JOIN sprockit.Reservation r ON r.ProcessId = e.ProcessId
+WHERE e.ExecutionId = @executionId;
 
-  -- release reservation
-  DELETE r
-  FROM sprockit.Execution e
-    INNER JOIN sprockit.Reservation r ON r.ProcessId = e.ProcessId
-  WHERE e.ExecutionId = @executionId;
-
-END TRY
-BEGIN CATCH
-  
-  EXEC sprockit.RethrowError;
-  RETURN -1;
-
-END CATCH
-
+-- log metric
 IF @endStatus = 'Done' AND @metricName IS NOT NULL
 BEGIN
 
