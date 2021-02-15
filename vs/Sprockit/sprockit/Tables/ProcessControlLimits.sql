@@ -4,5 +4,6 @@
 	[LowerControlLimit] [decimal](19,5) NOT NULL,
 	[Mean] [decimal](19,5) NOT NULL,
 	[UpperControlLimit] [decimal](19,5) NOT NULL
-, CONSTRAINT PK__sprockit_ProcessControlLimits PRIMARY KEY (ProcessId, MetricName)
+, [LastUpdated] DATETIME NOT NULL DEFAULT GETUTCDATE(), 
+    CONSTRAINT PK__sprockit_ProcessControlLimits PRIMARY KEY (ProcessId, MetricName)
 )

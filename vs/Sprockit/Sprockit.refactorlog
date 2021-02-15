@@ -56,4 +56,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="InitialWatermark" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="ff79acd3-ede4-4dd1-a0b5-0611c97492c3" ChangeDateTime="02/15/2021 19:58:04">
+    <Property Name="ElementName" Value="[sprockit].[ProcessControlLimits].[Updated]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[sprockit].[ProcessControlLimits]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="LastUpdate" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="e9345271-a1e6-461d-bc59-ccd1906f2782" ChangeDateTime="02/15/2021 19:58:29">
+    <Property Name="ElementName" Value="[sprockit].[ProcessControlLimits].[LastUpdate]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[sprockit].[ProcessControlLimits]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="LastUpdated" />
+  </Operation>
 </Operations>

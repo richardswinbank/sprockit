@@ -65,6 +65,7 @@ WHEN MATCHED THEN
   SET LowerControlLimit = src.LowerControlLimit
     , Mean = src.Mean
     , UpperControlLimit = src.UpperControlLimit
+    , LastUpdated = GETUTCDATE()
 WHEN NOT MATCHED BY TARGET THEN 
   INSERT (
     ProcessId
