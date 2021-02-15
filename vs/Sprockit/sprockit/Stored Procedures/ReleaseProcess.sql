@@ -1,6 +1,6 @@
 ﻿/*
  * sprockit.[ReleaseProcess] 
- * Copyright (c) 2015-2020 Richard Swinbank (richard@richardswinbank.net) 
+ * Copyright (c) 2015-2021 Richard Swinbank (richard@richardswinbank.net) 
  * http://richardswinbank.net/sprockit
  *
  * Release a process after execution by a handler
@@ -9,6 +9,8 @@
 CREATE PROCEDURE [sprockit].[ReleaseProcess] (
   @executionId INT
 , @endStatus NVARCHAR(20) = 'Done'
+, @metricName NVARCHAR(128) = NULL
+, @metricValue DECIMAL(19,5) = NULL
 )
 AS
 
