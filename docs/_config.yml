@@ -208,13 +208,13 @@ sass:
 
 # Outputting
 permalink: /:categories/:title/
-paginate: 5 # amount of posts to show
-paginate_path: /page:num/
+#paginate: 5 # amount of posts to show
+#paginate_path: /page:num/
 timezone: "Europe/London"
 
 # Plugins (previously gems:)
 plugins:
-  - jekyll-paginate
+#  - jekyll-paginate
   - jekyll-sitemap
   - jekyll-gist
   - jekyll-feed
@@ -291,5 +291,5 @@ defaults:
       share: false
       related: true
       
-#sidebar:
-#  nav: "sidebar-items"
+sidebar:
+  nav: "sidebar-items"
