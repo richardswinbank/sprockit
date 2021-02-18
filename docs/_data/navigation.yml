@@ -1,4 +1,4 @@
-sidebar-items:
+docs:
   - title: Getting Started
     children:
       - title: "About Sprockit"
