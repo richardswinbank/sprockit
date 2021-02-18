@@ -1,5 +1,6 @@
 ---
-title: About Sprockit
+layout: page
+title: "About Sprockit"
 permalink: /
 ---
 
