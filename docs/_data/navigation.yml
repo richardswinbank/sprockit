@@ -1,0 +1,4 @@
+sidebar-items:
+  - title: Getting Started
+    children:
+      - title: "About Sprockit"
