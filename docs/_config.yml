@@ -280,5 +280,5 @@ defaults:
       share: true
       related: true
       
-sidebar:
-  nav: "sidebar-items"
+#sidebar:
+#  nav: "sidebar-items"
