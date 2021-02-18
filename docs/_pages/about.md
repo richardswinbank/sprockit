@@ -1,3 +1,8 @@
+---
+title: About Sprockit
+permalink: /
+---
+
 Sprockit 2.0 is a reimplementation of [classic Sprockit](http://sprockit.info), very much still in development. My intention here is to:
 
 * decouple Sprockit's metadata model from its execution engine (i.e. the SQL Server Agent in v1.6 and earlier), allowing other engines to use the same model
