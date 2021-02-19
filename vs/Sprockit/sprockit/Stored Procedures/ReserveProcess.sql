@@ -13,7 +13,7 @@ CREATE PROCEDURE [sprockit].[ReserveProcess] (
 AS
 
 DECLARE @running INT = (
-  SELECT COUNT(*) FROM sprockit.Reservation
+  SELECT COUNT(*) FROM sprockit.Reservation  -- across all batches
 );
 
 DECLARE @processId INT 
@@ -100,7 +100,7 @@ BEGIN
       SELECT
         ParameterName AS [Name]
       , ParameterValue AS [Value]
-      FROM sprockit.ProcessParameter
+      FROM sprockit.ProcessParameter AS [Parameter]
       WHERE ProcessId = p.ProcessId
       FOR XML AUTO
     ), '') + '</Parameters>'

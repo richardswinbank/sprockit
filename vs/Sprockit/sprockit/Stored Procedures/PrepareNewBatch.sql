@@ -12,26 +12,22 @@ CREATE PROCEDURE [sprockit].[PrepareNewBatch] (
 AS
 
 -- update scheduling & control metrics
+EXEC sprockit.ManageLogs
 EXEC sprockit.UpdateMetrics @processGroup
 EXEC sprockit.SetControlLimits @processGroup
 
--- set everything not ready
+-- set initial process status
 UPDATE p
-SET [Status] = 'Not ready'
-  , LastStatusUpdate = GETUTCDATE()
-  , ErrorCount = 0
-FROM sprockit.Process p
-WHERE p.ProcessGroup = @processGroup
-
--- set processes with no predecessors to ready
-UPDATE p
-SET [Status] = 'Ready'
+SET [Status] = 
+    CASE 
+      WHEN pd.DependsOn IS NULL THEN 'Ready'
+      ELSE 'Not ready'
+    END
   , LastStatusUpdate = GETUTCDATE()
   , ErrorCount = 0
 FROM sprockit.Process p
   LEFT JOIN sprockit.ProcessDependency pd ON pd.ProcessId = p.ProcessId
-WHERE p.ProcessGroup = @processGroup
-AND pd.DependsOn IS NULL;
+WHERE p.ProcessGroup = @processGroup;
 
 -- set last batch end time
 WITH lastBatch AS (
