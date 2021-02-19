@@ -1,3 +1,10 @@
+---
+title: "sprockit.Process"
+permalink: /db/sprockit.Process/
+---
+
+Each row in this table represents a {% link _collection/document-name.md %} managed by Sprockit.
+
 |  |Column name  |Column type  |Description  |Notes  |
 |---|---|---|---|---|
 |PK  |ProcessId|INT|   |   |
