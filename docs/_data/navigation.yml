@@ -3,3 +3,7 @@ docs:
     children:
       - title: "About Sprockit"
         url: /
+  - title: Database tables
+    children:
+      - title: "sprockit.Process"
+        url: /db/sprockit.Process/
