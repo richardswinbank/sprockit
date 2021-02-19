@@ -6,4 +6,4 @@ docs:
   - title: Database tables
     children:
       - title: "sprockit.Process"
-        url: /db/sprockit.Process/
+        url: /sprockit-process/
