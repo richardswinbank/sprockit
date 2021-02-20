@@ -119,6 +119,12 @@ author:
       icon: "fab fa-fw fa-instagram"
       # url: "https://instagram.com/"
 
+sidebar:
+  - title: "Title"
+    image: http://placehold.it/350x250
+    image_alt: "image"
+    text: "Some text here."
+    
 # Site Footer
 footer:
   links:
