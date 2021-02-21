@@ -1,4 +1,0 @@
----
-title: "Watermarks"
-permalink: /watermarks/
----

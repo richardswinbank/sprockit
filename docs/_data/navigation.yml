@@ -1,9 +1,5 @@
 docs:
-  - title: Getting Started
+  - title: Sprockit
     children:
-      - title: "About Sprockit"
+      - title: "Sprockit 2.0"
         url: /
-  - title: Database tables
-    children:
-      - title: "sprockit.Process"
-        url: /sprockit-process/
