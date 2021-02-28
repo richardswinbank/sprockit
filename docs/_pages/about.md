@@ -1,4 +1,7 @@
-# Sprockit 2.0
+---
+title: "About Sprockit"
+permalink: /
+---
 
 Sprockit 2.0 is a reimplementation of [classic Sprockit](https://richardswinbank.net/sprockit), albeit very much still in development. My intention here is to:
 

@@ -70,4 +70,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="LastUpdated" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="64129dbd-520e-42f5-a64b-99735e1f2ea4" ChangeDateTime="02/19/2021 20:07:47">
+    <Property Name="ElementName" Value="[sprockit].[Reservation].[BatchId ]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[sprockit].[Reservation]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="BatchId" />
+  </Operation>
 </Operations>

@@ -27,7 +27,7 @@ ORDER BY StartDateTime DESC;
 -- Log restart
 EXEC sprockit.LogEvent 
   @message = @msg
-, @severity = 100
+, @severity = 0
 , @eventSource = '[sprockit].[PrepareBatchRestart]';
 
 UPDATE b
