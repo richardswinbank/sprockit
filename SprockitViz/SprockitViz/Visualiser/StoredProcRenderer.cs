@@ -11,7 +11,7 @@ namespace FireFive.SprockitViz.Visualiser
 
         public override string GetLabel(Node n, string outputFolder)
         {
-            return $"<<TABLE border=\"0\"><TR><TD><img src=\"{outputFolder}\\sqldb.svg\"/></TD><TD>{n.Name}</TD></TR></TABLE>>";
+            return $"<<TABLE border=\"0\"><TR><TD><img src=\"{outputFolder}\\sqldb.svg\"/></TD><TD>{n.Name.Replace("[Reporting].[","").Replace("].[",".").Replace("]","")}</TD></TR></TABLE>>";
         }
     }
 }
