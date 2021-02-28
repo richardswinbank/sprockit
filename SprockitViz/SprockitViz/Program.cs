@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Threading;
 using System.Xml.Serialization;
 
 namespace FireFive.SprockitViz
@@ -21,20 +22,51 @@ namespace FireFive.SprockitViz
 
         static void Main(string[] args)
         {
+            Console.WriteLine(@"
+  ****************************************************************************
+  *  Sprockit Pipeline Visualiser                                            *
+  *  Copyright (c) 2018-2021 Richard Swinbank (richard@richardswinbank.net)  *
+  *  http://richardswinbank.net/sprockitviz                                  *
+  ****************************************************************************
+");
+            Thread.Sleep(1500);
+
             /*
              * TODO: sort out command line option handling
              */
+            var filename = @"C:\Users\boomin\source\repos\Boomin\Shared\Data-Platform\sprockit-processes\SprockitProcesses.xml";
 
+            /*
+             * TODO: sort out settings config
+             */
             var settings = new Dictionary<string, string>
             {
-                ["OutputFolder"] = @"C:\sprockitviz\tmp",
+                ["OutputFolder"] = @"C:\tmp\sprockitviz",
                 ["Verbose"] = "true",
                 ["GraphvizAppFolder"] = @"C:\Program Files (x86)\Graphviz2.38\bin",
                 ["DeleteWorkingFiles"] = "false"
             };
 
-            var p = new Program(@"C:\Users\boomin\source\repos\Boomin\Shared\Data-Platform\sprockit-processes\SprockitProcesses.xml", settings);
-            p.Run();
+            GraphvizVisualiser.AddRenderer("ADF", new AdfPipelineRenderer());
+            GraphvizVisualiser.AddRenderer("ADLS", new AdlsLocationRenderer());
+            GraphvizVisualiser.AddRenderer("ASQL", new StoredProcRenderer());
+            GraphvizVisualiser.AddRenderer("TABLE", new SqlTableRenderer());
+            GraphvizVisualiser.AddRenderer("VIEW", new SqlViewRenderer());
+            GraphvizVisualiser.AddRenderer("TVF", new SqlFunctionRenderer());
+
+            var p = new Program(filename, settings);
+            /*
+             * TODO: cleanup exception management
+             */
+            try
+            {
+                p.Run();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Console.WriteLine(e.StackTrace);
+            }
 
         }
 
@@ -45,7 +77,7 @@ namespace FireFive.SprockitViz
             var vs = new VisualiserSettings(settings);
             var v = new GraphvizVisualiser(vs);
 
-            v.Visualise(graph);
+            //v.Visualise(graph);
 
             CopyAppFile("_sprockitviz.css", vs.OutputFolder);
             CopyAppFile("_sprockitviz.js", vs.OutputFolder);

@@ -35,15 +35,23 @@ namespace FireFive.SprockitViz.PipelineGraph
             properties[propertyName] = propertyValue;
         }
 
+        public IEnumerable<string> PropertyNames
+        {
+            get
+            {
+                return properties.Keys;
+            }
+        }
+
         //public bool HasProperty(string propertyName)
         //{
         //   return properties.ContainsKey(propertyName);
         //}
 
-        //public string GetProperty(string propertyName)
-        //{
-        //   return properties[propertyName];
-        //}
+        public string GetProperty(string propertyName)
+        {
+           return properties[propertyName];
+        }
 
         public override string ToString()
         {

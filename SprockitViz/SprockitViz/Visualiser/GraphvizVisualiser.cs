@@ -80,7 +80,7 @@ namespace FireFive.SprockitViz.Visualiser
             foreach (Node n in g.Nodes)
             {
                 var r = (renderers.ContainsKey(n.Type) ? renderers[n.Type] : basicRenderer);
-                sb.AppendLine($"  {r.Render(n, g.IsCentre(n))};");
+                sb.AppendLine($"  {r.Render(n, g.IsCentre(n), settings.OutputFolder)};");
             }
 
             // add edges
