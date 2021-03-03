@@ -8,7 +8,7 @@ namespace FireFive.SprockitViz.Visualiser
         public string Render(Node n, bool isCentre, string outputFolder)
         {
             return Enquote(n.Name) + "["
-                + $"label={GetLabel(n, outputFolder)}"
+                + $"label={GetLabel(n)}"
                 + $",href={Enquote("_sprockitviz.html?node=" + n.Name)},target=_parent"
                 + (isCentre ? $",fillcolor=gold" : "")
                 + $",style={Enquote(GetFullStyle(n, isCentre))}"
@@ -34,7 +34,7 @@ namespace FireFive.SprockitViz.Visualiser
             return "&#13;&#10;-------------&#13;&#10;Parameters:" + sb.ToString();
         }
 
-        public virtual string GetLabel(Node n, string outputFolder)
+        public virtual string GetLabel(Node n)
         {
             return Enquote(n.Name);
         }

@@ -9,7 +9,7 @@ namespace FireFive.SprockitViz.Visualiser
             return $"{n.Name} -- Azure SQL Database table";
         }
 
-        public override string GetLabel(Node n, string outputFolder)
+        public override string GetLabel(Node n)
         {
             return $"<<TABLE border=\"0\"><TR><TD><img src=\"sqldb.svg\"/></TD><TD>{n.Name.Replace("[Reporting].[", "").Replace("].[", ".").Replace("]", "")}</TD></TR></TABLE>>";
         }

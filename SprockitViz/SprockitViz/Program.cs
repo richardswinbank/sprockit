@@ -44,7 +44,7 @@ namespace FireFive.SprockitViz
                 ["OutputFolder"] = @"C:\tmp\sprockitviz",
                 ["Verbose"] = "true",
                 ["GraphvizAppFolder"] = @"C:\Program Files\Graphviz\bin",
-                ["DeleteWorkingFiles"] = "true"
+                ["DeleteWorkingFiles"] = "false"
             };
 
             GraphvizVisualiser.AddRenderer("ADF", new AdfPipelineRenderer());
@@ -53,6 +53,7 @@ namespace FireFive.SprockitViz
             GraphvizVisualiser.AddRenderer("TABLE", new SqlTableRenderer());
             GraphvizVisualiser.AddRenderer("VIEW", new SqlViewRenderer());
             GraphvizVisualiser.AddRenderer("TVF", new SqlFunctionRenderer());
+            GraphvizVisualiser.AddRenderer("PBI", new PbiDatasetRenderer());
 
             var p = new Program(filename, settings);
             /*

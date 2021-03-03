@@ -9,9 +9,9 @@ namespace FireFive.SprockitViz.Visualiser
             return $"{n.Name} -- Azure SQL Database function";
         }
 
-        public override string GetLabel(Node n, string outputFolder)
+        public override string GetLabel(Node n)
         {
-            return base.GetLabel(n, outputFolder).Replace("</TD></TR></TABLE>", "()</TD></TR></TABLE>");
+            return base.GetLabel(n).Replace("</TD></TR></TABLE>", "()</TD></TR></TABLE>");
         }
     }
 }
