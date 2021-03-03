@@ -1,6 +1,6 @@
 /*
  * _sprockitviz.js
- * Copyright (c) 2019 Richard Swinbank (richard@richardswinbank.net)
+ * Copyright (c) 2019-2021 Richard Swinbank (richard@richardswinbank.net)
  * http://richardswinbank.net/
  *
  * JavaScript functions to drive sprocktviz client-side app.
@@ -23,7 +23,7 @@ function setContent() {
   // set title & diagram 
   document.getElementById("title").innerHTML = node + "&nbsp;&nbsp;&nbsp;";
   var obj = document.getElementById("diagram");
-  obj.outerHTML = obj.outerHTML.replace(/data="(.+?)"/, 'data="' + node + '.svg' + '"');
+  obj.outerHTML = obj.outerHTML.replace(/data="(.+?)"/, 'data="' + node.replaceAll('/','_') + '.svg' + '"');
 
   // set up autocomplete
   setupAutoComplete(document.getElementById("myInput"), nodes);

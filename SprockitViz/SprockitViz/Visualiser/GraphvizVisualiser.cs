@@ -55,7 +55,7 @@ namespace FireFive.SprockitViz.Visualiser
                 // for unflatten.exe *and* dot.exe when settings.DeleteWorkingFiles is false)
                 File.WriteAllText(ufFile, GetDotScript(g));
                 // call unflatten.exe, writing output script into dotFile
-                ExecuteGraphviz(GraphvizExecutable.Unflatten, ufFile, dotFile, "-fl" + maxLeafStagger);
+                ExecuteGraphviz(GraphvizExecutable.Unflatten, outputFolder, ufFile, dotFile, "-fl" + maxLeafStagger);
             }
             else
             {
@@ -63,7 +63,7 @@ namespace FireFive.SprockitViz.Visualiser
                 File.WriteAllText(dotFile, GetDotScript(g));
             }
 
-            ExecuteGraphviz(GraphvizExecutable.Dot, dotFile, imgFile, $"-T{outputFormat} -Kdot");
+            ExecuteGraphviz(GraphvizExecutable.Dot, outputFolder, dotFile, imgFile, $"-T{outputFormat} -Kdot");
         }
 
         // return a DOT script for a specified graph
@@ -154,12 +154,13 @@ namespace FireFive.SprockitViz.Visualiser
         private enum GraphvizExecutable { Dot, Unflatten }
 
         // execute a Graphviz application
-        private void ExecuteGraphviz(GraphvizExecutable executable, string inputFile, string outputFile, string commandLineArgs)
+        private void ExecuteGraphviz(GraphvizExecutable executable, string outputFolder, string inputFile, string outputFile, string commandLineArgs)
         {
             // prepare to execute Graphviz application
             Process gv = new Process();
             gv.StartInfo.CreateNoWindow = true;
             gv.StartInfo.UseShellExecute = false;
+            gv.StartInfo.WorkingDirectory = outputFolder;
             gv.StartInfo.FileName = settings.GraphvizAppFolder + "\\" + (executable == GraphvizExecutable.Dot ? "dot" : "unflatten") + ".exe";
             if (!File.Exists(gv.StartInfo.FileName))
                 throw new Exception("Graphviz executable " + gv.StartInfo.FileName + " not found.");

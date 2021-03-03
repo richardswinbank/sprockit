@@ -34,7 +34,7 @@ namespace FireFive.SprockitViz
             /*
              * TODO: sort out command line option handling
              */
-            var filename = @"C:\Users\boomin\source\repos\Boomin\Shared\Data-Platform\sprockit-processes\SprockitProcesses.xml";
+            var filename = @"C:\Users\RichardSwinbank\source\repos\Boomin\Shared\Data-Platform\sprockit-processes\SprockitProcesses.xml";
 
             /*
              * TODO: sort out settings config
@@ -43,8 +43,8 @@ namespace FireFive.SprockitViz
             {
                 ["OutputFolder"] = @"C:\tmp\sprockitviz",
                 ["Verbose"] = "true",
-                ["GraphvizAppFolder"] = @"C:\Program Files (x86)\Graphviz2.38\bin",
-                ["DeleteWorkingFiles"] = "false"
+                ["GraphvizAppFolder"] = @"C:\Program Files\Graphviz\bin",
+                ["DeleteWorkingFiles"] = "true"
             };
 
             GraphvizVisualiser.AddRenderer("ADF", new AdfPipelineRenderer());
@@ -77,7 +77,7 @@ namespace FireFive.SprockitViz
             var vs = new VisualiserSettings(settings);
             var v = new GraphvizVisualiser(vs);
 
-            //v.Visualise(graph);
+            v.Visualise(graph);
 
             CopyAppFile("_sprockitviz.css", vs.OutputFolder);
             CopyAppFile("_sprockitviz.js", vs.OutputFolder);
@@ -88,7 +88,7 @@ namespace FireFive.SprockitViz
             foreach (var n in graph.Nodes)
             {
                 i++;
-                nodeNames.AppendLine(", \"" + n.FileNameWithoutExtension + "\"");
+                nodeNames.AppendLine(", \"" + n.Name + "\"");
 
                 Console.WriteLine("Drawing subgraph " + i + " of " + graph.NodeCount + " (" + n.Name + ")");
                 // find the subgraph

@@ -9,7 +9,7 @@ namespace FireFive.SprockitViz.Visualiser
         {
             return Enquote(n.Name) + "["
                 + $"label={GetLabel(n, outputFolder)}"
-                + $",href={Enquote("_sprockitviz.html?node=" + n.FileNameWithoutExtension)},target=_parent"
+                + $",href={Enquote("_sprockitviz.html?node=" + n.Name)},target=_parent"
                 + (isCentre ? $",fillcolor=gold" : "")
                 + $",style={Enquote(GetFullStyle(n, isCentre))}"
                 + $",tooltip={Enquote(GetTooltip(n) + GetParameterSummary(n))}"
