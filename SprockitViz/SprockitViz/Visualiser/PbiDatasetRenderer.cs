@@ -12,7 +12,7 @@ namespace FireFive.SprockitViz
 
         public override string GetLabel(Node n)
         {
-            return $"<<TABLE border=\"0\"><TR><TD></TD><TD>{n.Name}</TD></TR></TABLE>>";
+            return $"<<TABLE border=\"0\"><TR><TD WIDTH=\"30\" HEIGHT=\"30\" FIXEDSIZE=\"TRUE\"><img SCALE=\"TRUE\" src=\"aas.svg\"/></TD><TD>{n.Name}</TD></TR></TABLE>>";
         }
     }
 }

@@ -41,10 +41,10 @@ namespace FireFive.SprockitViz
              */
             var settings = new Dictionary<string, string>
             {
-                ["OutputFolder"] = @"C:\tmp\sprockitviz",
+                ["OutputFolder"] = @"C:\Users\RichardSwinbank\PD Innovations Ltd\Engineering - Data Platform\sprockitviz",
                 ["Verbose"] = "true",
                 ["GraphvizAppFolder"] = @"C:\Program Files\Graphviz\bin",
-                ["DeleteWorkingFiles"] = "false"
+                ["DeleteWorkingFiles"] = "true"
             };
 
             GraphvizVisualiser.AddRenderer("ADF", new AdfPipelineRenderer());

@@ -11,7 +11,7 @@ namespace FireFive.SprockitViz.Visualiser
 
         public override string GetLabel(Node n)
         {
-            return $"<<TABLE border=\"0\"><TR><TD><img src=\"datalake.svg\"/></TD><TD>{n.Name}</TD></TR></TABLE>>";
+            return $"<<TABLE border=\"0\"><TR><TD WIDTH=\"30\" HEIGHT=\"30\" FIXEDSIZE=\"TRUE\"><img SCALE=\"TRUE\" src=\"datalake.svg\"/></TD><TD>{n.Name}</TD></TR></TABLE>>";
         }
     }
 }
