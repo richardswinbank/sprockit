@@ -9,8 +9,6 @@
 CREATE PROCEDURE [sprockit].[ReleaseProcess] (
   @executionId INT
 , @endStatus NVARCHAR(20) = 'Done'
-, @metricName NVARCHAR(128) = NULL
-, @metricValue DECIMAL(19,5) = NULL
 )
 AS
 
@@ -51,20 +49,3 @@ DELETE r
 FROM sprockit.Execution e
   INNER JOIN sprockit.Reservation r ON r.ProcessId = e.ProcessId
 WHERE e.ExecutionId = @executionId;
-
--- log metric
-IF @endStatus = 'Done' AND @metricName IS NOT NULL
-BEGIN
-
-  IF @metricName = 'ProcessDuration'
-    SELECT 
-      @metricValue = DATEDIFF(SECOND, StartDateTime, EndDateTime)
-    FROM sprockit.Execution
-    WHERE ExecutionId = @executionId;
-
-  EXEC sprockit.LogProcessMetric
-    @executionId = @executionId
-  , @metricName = @metricName
-  , @metricValue = @metricValue;
-
-END

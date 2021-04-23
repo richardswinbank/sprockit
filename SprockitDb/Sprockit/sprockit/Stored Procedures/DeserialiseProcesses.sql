@@ -24,7 +24,7 @@ IF OBJECT_ID('tempdb..#processes') IS NOT NULL
 SELECT
   t.c.value('(@Path)[1]', 'NVARCHAR(850)') AS ProcessPath
 , t.c.value('(@Type)[1]', 'NVARCHAR(10)') AS ProcessType
-, t.c.value('(@Group)[1]', 'INT') AS ProcessGroup
+, COALESCE(t.c.value('(@Group)[1]', 'INT'), 1) AS ProcessGroup
 , t.c.value('(@DefaultWatermark)[1]', 'NVARCHAR(255)') AS DefaultWatermark
 , COALESCE(t.c.value('(@Priority)[1]', 'TINYINT'), 100) AS [Priority]
 , COALESCE(t.c.value('(@LogPropertyUpdates)[1]', 'BIT'), 0) AS LogPropertyUpdates

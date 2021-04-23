@@ -14,7 +14,6 @@ AS
 -- update scheduling & control metrics
 EXEC sprockit.ManageLogs
 EXEC sprockit.UpdateMetrics @processGroup
-EXEC sprockit.SetControlLimits @processGroup
 
 -- set initial process status
 UPDATE p

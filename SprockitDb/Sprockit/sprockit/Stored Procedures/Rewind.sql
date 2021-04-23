@@ -34,10 +34,11 @@ WITH cte AS (
 )
 UPDATE p
 SET p.[Status] = 
-  CASE p.ProcessId
-    WHEN @processId THEN 'Ready'
-    ELSE 'Not ready'
-  END
+    CASE p.ProcessId
+      WHEN @processId THEN 'Ready'
+      ELSE 'Not ready'
+    END
+  , p.ErrorCount = 0
 FROM sprockit.Process p 
   INNER JOIN cte ON p.ProcessId = cte.ProcessId
 ;

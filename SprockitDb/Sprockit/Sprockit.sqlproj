@@ -101,13 +101,9 @@
     <Build Include="sprockit\Views\ReportFinalStatus.sql" />
     <Build Include="sprockit\Views\ReportParallelism.sql" />
     <Build Include="sprockit\Tables\ProcessParameter.sql" />
-    <Build Include="sprockit\Stored Procedures\LogProcessMetric.sql" />
-    <Build Include="sprockit\Tables\ProcessMetric.sql" />
-    <Build Include="sprockit\Views\ReportProcessControlChart.sql" />
-    <Build Include="sprockit\Tables\ProcessControlLimits.sql" />
-    <Build Include="sprockit\Stored Procedures\SetControlLimits.sql" />
     <Build Include="sprockit\Stored Procedures\UninstallSprockit.sql" />
     <Build Include="sprockit\Stored Procedures\ManageLogs.sql" />
+    <Build Include="sprockit\Views\ReportExecutionParameter.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="_Scripts\PostDeployment.sql" />

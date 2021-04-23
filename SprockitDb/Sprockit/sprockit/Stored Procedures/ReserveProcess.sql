@@ -13,7 +13,10 @@ CREATE PROCEDURE [sprockit].[ReserveProcess] (
 AS
 
 DECLARE @running INT = (
-  SELECT COUNT(*) FROM sprockit.Reservation  -- across all batches
+  SELECT COUNT(*) 
+  FROM sprockit.Reservation r
+    INNER JOIN sprockit.Execution e ON e.ProcessId = r.ProcessId
+  WHERE e.BatchId = @batchId
 );
 
 DECLARE @processId INT 
