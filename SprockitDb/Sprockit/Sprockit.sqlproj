@@ -104,6 +104,7 @@
     <Build Include="sprockit\Stored Procedures\UninstallSprockit.sql" />
     <Build Include="sprockit\Stored Procedures\ManageLogs.sql" />
     <Build Include="sprockit\Views\ReportExecutionParameter.sql" />
+    <Build Include="sprockit\Views\ReportProcessMetric.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="_Scripts\PostDeployment.sql" />
