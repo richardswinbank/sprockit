@@ -11,7 +11,7 @@ AS
 
 SELECT 
   x.ExecutionId
-, p.parameter.[value]('(@name)[1]','NVARCHAR(255)') AS PropertyName
-, p.parameter.[value]('(@value)[1]','NVARCHAR(255)') AS PropertyValue
+, p.parameter.[value]('(@name)[1]','NVARCHAR(255)') AS ParameterName
+, p.parameter.[value]('(@value)[1]','NVARCHAR(255)') AS ParameterValue
 FROM sprockit.Execution x
   CROSS APPLY x.ExecutionParameters.nodes('/Parameters/Parameter') AS p(parameter)
