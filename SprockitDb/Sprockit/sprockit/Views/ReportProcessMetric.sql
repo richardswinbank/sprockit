@@ -20,14 +20,17 @@ WITH executions AS (
   , ProcessId
 )
 SELECT 
-  x.ProcessId
-, x.ExecutionDateTime
+  x.ExecutionDateTime
+, r.ExecutionId AS ReportedForExecutionId
 , e.[Message] AS MetricName
 , SUM(e.MetricValue) AS MetricValue
 FROM sprockit.[Event] e
   INNER JOIN executions x ON x.ExecutionId = e.ExecutionId
+  INNER JOIN executions r 
+    ON r.ProcessId = x.ProcessId
+    AND r.ExecutionDateTime >= x.ExecutionDateTime
 WHERE e.MetricValue IS NOT NULL
 GROUP BY 
-  x.ProcessId
+  r.ExecutionId
 , e.[Message]
 , x.ExecutionDateTime

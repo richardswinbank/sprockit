@@ -101,8 +101,8 @@ BEGIN
   , [BranchWeight]
   , '<Parameters>' + COALESCE((
       SELECT
-        ParameterName AS [Name]
-      , ParameterValue AS [Value]
+        ParameterName AS [name]
+      , ParameterValue AS [value]
       FROM sprockit.ProcessParameter AS [Parameter]
       WHERE ProcessId = p.ProcessId
       FOR XML AUTO
