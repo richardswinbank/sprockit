@@ -5,5 +5,7 @@ docs:
         url: /
   - title: Tables
     children:
+      - title: "sprockit.Process"
+        url: /tables/Process/
       - title: "sprockit.ProcessType"
         url: /tables/ProcessType/
