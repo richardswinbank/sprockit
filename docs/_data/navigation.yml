@@ -7,6 +7,8 @@ docs:
     children:
       - title: "sprockit.Batch"
         url: /tables/Batch/
+      - title: "sprockit.Execution"
+        url: /tables/Execution/
       - title: "sprockit.Process"
         url: /tables/Process/
       - title: "sprockit.ProcessType"
