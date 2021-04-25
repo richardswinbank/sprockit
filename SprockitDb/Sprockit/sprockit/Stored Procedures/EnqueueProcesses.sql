@@ -37,6 +37,7 @@ FROM sprockit.Process p
   INNER JOIN sprockit.RetryableError re 
     ON re.ProcessType LIKE p.ProcessType
     AND p.ProcessPath LIKE re.ProcessPathPattern
+    AND COALESCE(e.EventSource, '%') LIKE re.EventSourcePattern
     AND e.[Message] LIKE re.MessagePattern
 WHERE p.[Status] = 'Errored' 
 AND e.Severity >= 200

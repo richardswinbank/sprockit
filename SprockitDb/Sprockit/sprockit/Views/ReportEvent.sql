@@ -23,6 +23,7 @@ SELECT
 , p.ProcessPath
 , e.[EventSource]
 , e.[Message]
+, e.MetricValue
 FROM sprockit.[Event] e
   INNER JOIN sprockit.Execution x ON x.ExecutionId = e.ExecutionId
   INNER JOIN sprockit.Process p ON p.ProcessId = x.ProcessId
