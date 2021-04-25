@@ -3,3 +3,7 @@ docs:
     children:
       - title: "Sprockit 2.0"
         url: /
+  - title: Tables
+    children:
+      - title: "sprockit.ProcessType"
+        url: /tables/ProcessType/
