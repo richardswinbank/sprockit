@@ -3,7 +3,7 @@ title: "sprockit.ProcessType"
 permalink: /tables/ProcessType/
 ---
 
-This table enumerates supported process types.
+This table enumerates supported [process]({{"/tables/Process/"|relative_url}}) types.
 
 |  |Column  |Type   |Description  |Comments  |
 |--|--|--|--|--|
