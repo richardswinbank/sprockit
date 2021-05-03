@@ -11,7 +11,7 @@ This table records [process]({{"/tables/Process/"|relative_url}}) executions. A 
 |[FK]({{"/tables/Process/"|relative_url}})  |**ProcessId**  |**INT**  |Identifies the process executed.  |  |
 |[FK]({{"/tables/Batch/"|relative_url}})  |**BatchId**  |**INT**  |Identifies the batch during which this execution took place.  |  |
 |  |ExternalHandlerId  |NVARCHAR(255)  |External identifier for the execution engine’s process handler, responsible for this execution.   |This could be a SQL Server Agent job name, or an Azure Data Factory pipeline run ID.  |
-|  |**ExecutionParameters**  |**XML**  |XML summary of [parameter values]({{"/tables/Parameter/"|relative_url}}) returned to the exeution engine when the process was reserved.  |DEFAULT `'<Parameters/>'`  |
+|  |**ExecutionParameters**  |**XML**  |XML summary of [parameter values]({{"/tables/ProcessParameter/"|relative_url}}) returned to the exeution engine when the process was reserved.  |DEFAULT `'<Parameters/>'`  |
 |  |**ExecutionProperties**  |**XML**  |XML summary of properties logged during or for this execution.  |DEFAULT `'<Properties/>'`. An execution property is a name/value pair logged using [sprockit].[SetExecutionProperty]. A property's name is unique within an execution; calling [sprockit].[SetExecutionProperty] twice for the same execution ID and property name overwrites the first property value with the second.   |
 |  |**StartDateTime**  |**DATETIME**  |The UTC date and time at which the process was reserved.  |DEFAULT `getutcdate()`  |
 |  |EndDateTime  |DATETIME  |The UTC date and time at which the process was released.  |  |
