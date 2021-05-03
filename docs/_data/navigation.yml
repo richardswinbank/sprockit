@@ -15,5 +15,7 @@ docs:
         url: /tables/Process/
       - title: "sprockit.ProcessDependency"
         url: /tables/ProcessDependency/
+      - title: "sprockit.ProcessParameter"
+        url: /tables/ProcessParameter/
       - title: "sprockit.ProcessType"
         url: /tables/ProcessType/
