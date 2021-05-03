@@ -19,3 +19,5 @@ docs:
         url: /tables/ProcessParameter/
       - title: "sprockit.ProcessType"
         url: /tables/ProcessType/
+      - title: "sprockit.RetryableError"
+        url: /tables/RetryableError/
