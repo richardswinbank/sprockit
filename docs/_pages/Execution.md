@@ -1,4 +1,3 @@
-
 ---
 title: "sprockit.Execution"
 permalink: /tables/Execution/
