@@ -3,3 +3,21 @@ docs:
     children:
       - title: "Sprockit 2.0"
         url: /
+  - title: Tables
+    children:
+      - title: "sprockit.Batch"
+        url: /tables/Batch/
+      - title: "sprockit.Event"
+        url: /tables/Event/
+      - title: "sprockit.Execution"
+        url: /tables/Execution/
+      - title: "sprockit.Process"
+        url: /tables/Process/
+      - title: "sprockit.ProcessDependency"
+        url: /tables/ProcessDependency/
+      - title: "sprockit.ProcessParameter"
+        url: /tables/ProcessParameter/
+      - title: "sprockit.ProcessType"
+        url: /tables/ProcessType/
+      - title: "sprockit.RetryableError"
+        url: /tables/RetryableError/
