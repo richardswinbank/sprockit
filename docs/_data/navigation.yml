@@ -3,6 +3,10 @@ docs:
     children:
       - title: "Sprockit 2.0"
         url: /
+  - title: Concepts
+    children:
+      - title: "Execution engine"
+        url: /concepts/ExecutionEngine/
   - title: Tables
     children:
       - title: "sprockit.Batch"
