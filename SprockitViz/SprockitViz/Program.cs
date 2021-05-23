@@ -63,15 +63,13 @@ namespace FireFive.SprockitViz
         {
             var p = ParseFile(vs.SourceFile);
             var graph = p.GetGraph("Sprockit 2.0");
-            var v = new GraphvizVisualiser(vs);
-
-            v.Visualise(graph);
-
-            CopyAppFile("_sprockitviz.css", vs.OutputFolder);
-            CopyAppFile("_sprockitviz.js", vs.OutputFolder);
-            CopyAppFile("_sprockitviz.html", vs.OutputFolder);
+            foreach (var file in new string[] { "_sprockitviz.html", "_sprockitviz.js", "_sprockitviz.css" })
+                CopyToOutput(file);
             foreach (var file in Directory.GetFiles("Icons"))
-                CopyAppFile(file, vs.OutputFolder);
+                CopyToOutput(file);
+
+            var v = new GraphvizVisualiser(vs);
+            v.Visualise(graph);
 
             int i = 0;
             var nodeNames = new StringBuilder();
@@ -89,17 +87,14 @@ namespace FireFive.SprockitViz
             }
             File.WriteAllText(vs.OutputFolder + @"\_sprockitNodes.js", @"function getNodes() { 
    return [
-     " + nodeNames.ToString().Substring(2) + @"
+     " + nodeNames.ToString()[2..] + @"
      ];
    }");
         }
 
-        private void CopyAppFile(string fileName, string destinationFolder)
+        private void CopyToOutput(string fileName)
         {
-            File.Copy(fileName, $@"{destinationFolder}\{Path.GetFileName(fileName)}", true);
-            //string fileName = settings.OutputFolder + "\\" + settings.HtmlStyleSheet;
-            //string fileContents = File.ReadAllText(settings.HtmlStyleSheet);
-            //File.WriteAllText(fileName, fileContents);
+            File.Copy(fileName, $@"{vs.OutputFolder}\{Path.GetFileName(fileName)}", true);
         }
 
         private ProcessList ParseFile(string sprockitFilePath)
