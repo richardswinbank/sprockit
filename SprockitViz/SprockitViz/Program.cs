@@ -1,5 +1,6 @@
 ﻿using FireFive.SprockitViz.Visualiser;
 using FireFive.SprockitViz.Xml;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,13 +12,11 @@ namespace FireFive.SprockitViz
 {
     class Program
     {
-        private string sprockitFilePath;
-        private Dictionary<string, string> settings;
+        private VisualiserSettings vs;
 
-        public Program(string sprockitFilePath, Dictionary<string, string> settings)
+        public Program(VisualiserSettings settings)
         {
-            this.sprockitFilePath = sprockitFilePath;
-            this.settings = settings;
+            vs = settings;
         }
 
         static void Main(string[] args)
@@ -31,21 +30,10 @@ namespace FireFive.SprockitViz
 ");
             Thread.Sleep(1500);
 
-            /*
-             * TODO: sort out command line option handling
-             */
-            var filename = @"C:\Users\RichardSwinbank\source\repos\Boomin\Shared\Data-Platform\sprockit-processes\SprockitProcesses.xml";
-
-            /*
-             * TODO: sort out settings config
-             */
-            var settings = new Dictionary<string, string>
-            {
-                ["OutputFolder"] = @"C:\Users\RichardSwinbank\PD Innovations Ltd\Engineering - Data Platform\sprockitviz",
-                ["Verbose"] = "true",
-                ["GraphvizAppFolder"] = @"C:\Program Files\Graphviz\bin",
-                ["DeleteWorkingFiles"] = "true"
-            };
+            var builder = new ConfigurationBuilder()
+                .AddJsonFile($"SprockitvizSettings.json", true, true)
+                .AddJsonFile($"SprockitvizSettings.Dev.json", true, true);
+            var config = builder.Build();
 
             GraphvizVisualiser.AddRenderer("ADF", new AdfPipelineRenderer());
             GraphvizVisualiser.AddRenderer("ADLS", new AdlsLocationRenderer());
@@ -55,7 +43,7 @@ namespace FireFive.SprockitViz
             GraphvizVisualiser.AddRenderer("TVF", new SqlFunctionRenderer());
             GraphvizVisualiser.AddRenderer("PBI", new PbiDatasetRenderer());
 
-            var p = new Program(filename, settings);
+            var p = new Program(config.Get<VisualiserSettings>());
             /*
              * TODO: cleanup exception management
              */
@@ -73,16 +61,15 @@ namespace FireFive.SprockitViz
 
         public void Run()
         {
-            var p = ParseFile(sprockitFilePath);
+            var p = ParseFile(vs.SourceFile);
             var graph = p.GetGraph("Sprockit 2.0");
-            var vs = new VisualiserSettings(settings);
+            foreach (var file in new string[] { "_sprockitviz.html", "_sprockitviz.js", "_sprockitviz.css" })
+                CopyToOutput(file);
+            foreach (var file in Directory.GetFiles("Icons"))
+                CopyToOutput(file);
+
             var v = new GraphvizVisualiser(vs);
-
             v.Visualise(graph);
-
-            CopyAppFile("_sprockitviz.css", vs.OutputFolder);
-            CopyAppFile("_sprockitviz.js", vs.OutputFolder);
-            CopyAppFile("_sprockitviz.html", vs.OutputFolder);
 
             int i = 0;
             var nodeNames = new StringBuilder();
@@ -100,17 +87,14 @@ namespace FireFive.SprockitViz
             }
             File.WriteAllText(vs.OutputFolder + @"\_sprockitNodes.js", @"function getNodes() { 
    return [
-     " + nodeNames.ToString().Substring(2) + @"
+     " + nodeNames.ToString()[2..] + @"
      ];
    }");
         }
 
-        private void CopyAppFile(string fileName, string destinationFolder)
+        private void CopyToOutput(string fileName)
         {
-            File.Copy(fileName, $@"{destinationFolder}\{fileName}", true);
-            //string fileName = settings.OutputFolder + "\\" + settings.HtmlStyleSheet;
-            //string fileContents = File.ReadAllText(settings.HtmlStyleSheet);
-            //File.WriteAllText(fileName, fileContents);
+            File.Copy(fileName, $@"{vs.OutputFolder}\{Path.GetFileName(fileName)}", true);
         }
 
         private ProcessList ParseFile(string sprockitFilePath)

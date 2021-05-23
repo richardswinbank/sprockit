@@ -1,0 +1,75 @@
+<Processes>
+	<!-- 
+****************************************************************************
+* 
+*  Process group 3 (Sample test process set)
+*
+****************************************************************************
+
+	-->
+	<Process Path="Wait/ProcessA" Group="3" Type="ADF">
+		<Produces>
+			<Output Path="[Reporting].[sprockitTest].[Table1]"/>
+		</Produces>
+	</Process>
+	<Process Path="Wait/ProcessB" Group="3" Type="ADF">
+		<Produces>
+			<Output Path="[Reporting].[sprockitTest].[Table2]"/>
+		</Produces>
+	</Process>
+	<Process Path="Wait/ProcessC" Group="3" Type="ADF">
+		<Produces>
+			<Output Path="[Reporting].[sprockitTest].[Table3]"/>
+		</Produces>
+	</Process>
+	<Process Path="Wait/ProcessD" Group="3" Type="ADF">
+		<Requires>
+			<Input Path="[Reporting].[sprockitTest].[Table1]"/>
+		</Requires>
+	</Process>
+	<Process Path="Wait/ProcessE" Group="3" Type="ADF">
+		<Produces>
+			<Output Path="[Reporting].[sprockitTest].[Table4]"/>
+		</Produces>
+	</Process>
+	<Process Path="Wait/ProcessF" Group="3" Type="ADF">
+		<Requires>
+			<Input Path="[Reporting].[sprockitTest].[Table2]"/>
+		</Requires>
+		<Produces>
+			<Output Path="[Reporting].[sprockitTest].[Table5]"/>
+		</Produces>
+	</Process>
+	<Process Path="Wait/ProcessG" Group="3" Type="ADF">
+		<Requires>
+			<Input Path="[Reporting].[sprockitTest].[Table2]"/>
+			<Input Path="[Reporting].[sprockitTest].[Table3]"/>
+		</Requires>
+		<Produces>
+			<Output Path="[Reporting].[sprockitTest].[Table6]"/>
+		</Produces>
+	</Process>
+	<Process Path="Wait/ProcessH" Group="3" Type="ADF">
+		<Requires>
+			<Input Path="[Reporting].[sprockitTest].[Table3]"/>
+		</Requires>
+	</Process>
+	<Process Path="Wait/ProcessI" Group="3" Type="ADF">
+		<Requires>
+			<Input Path="[Reporting].[sprockitTest].[Table4]"/>
+			<Input Path="[Reporting].[sprockitTest].[Table5]"/>
+		</Requires>
+	</Process>
+	<Process Path="Wait/ProcessJ" Group="3" Type="ADF">
+		<Requires>
+			<Input Path="[Reporting].[sprockitTest].[Table6]"/>
+		</Requires>
+	</Process>
+	<Process Path="[Reporting].[sprockitTest].[Table1]" Group="3" Type="TABLE" />
+	<Process Path="[Reporting].[sprockitTest].[Table2]" Group="3" Type="TABLE" />
+	<Process Path="[Reporting].[sprockitTest].[Table3]" Group="3" Type="TABLE" />
+	<Process Path="[Reporting].[sprockitTest].[Table4]" Group="3" Type="TABLE" />
+	<Process Path="[Reporting].[sprockitTest].[Table5]" Group="3" Type="TABLE" />
+	<Process Path="[Reporting].[sprockitTest].[Table6]" Group="3" Type="TABLE" />
+
+</Processes>

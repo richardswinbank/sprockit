@@ -1,0 +1,7 @@
+{
+  "SourceFile": "path-to-SprockitProcesses.xml",
+  "OutputFolder": "path-to-output-folder",
+  "GraphvizAppFolder": "C:\\Program Files\\Graphviz\\bin",
+  "DeleteWorkingFiles": true,
+  "Verbose": true
+}

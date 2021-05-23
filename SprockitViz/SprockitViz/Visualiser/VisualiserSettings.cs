@@ -1,26 +1,19 @@
 ﻿using FireFive.SprockitViz.PipelineGraph;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace FireFive.SprockitViz.Visualiser
 {
     public class VisualiserSettings
     {
-        private Dictionary<string, string> settings;
+        #region JSON settings properties
 
-        public VisualiserSettings(Dictionary<string, string> settings)
-        {
-            this.settings = settings;
-        }
+        public string SourceFile { get; set; }
+        public string OutputFolder { get; set; }
+        public string GraphvizAppFolder { get; set; }
+        public bool DeleteWorkingFiles { get; set; }
+        public bool Verbose { get; set; }
 
-        public string OutputFolder
-        {
-            get
-            {
-                return settings["OutputFolder"];
-            }
-        }
+        #endregion
 
         public Size MaxSize
         {
@@ -30,32 +23,8 @@ namespace FireFive.SprockitViz.Visualiser
             }
         }
 
-        public bool Verbose
-        {
-            get
-            {
-                return bool.Parse(settings["Verbose"]);
-            }
-        }
-
-        public string GraphvizAppFolder
-        {
-            get
-            {
-                return settings["GraphvizAppFolder"];
-            }
-        }
-
         // timeout in seconds
         public int GraphvizTimeout { get { return 5; } }
-
-        public bool DeleteWorkingFiles
-        {
-            get
-            {
-                return bool.Parse(settings["DeleteWorkingFiles"]);
-            }
-        }
 
         public int SubgraphRadius { get { return 2; } }
     }
