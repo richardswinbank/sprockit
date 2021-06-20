@@ -129,6 +129,26 @@ BEGIN
 
 END;
 
+-- update batch status if complete
+WITH cte AS (
+  SELECT
+    b.BatchId
+  , MAX(p.LastStatusUpdate) AS EndDateTime
+  FROM sprockit.Process p
+    INNER JOIN sprockit.Batch b ON b.ProcessGroup = p.ProcessGroup
+  WHERE b.BatchId = @batchId
+  GROUP BY b.BatchId
+  HAVING MIN(p.[Status]) = MAX(p.[Status])
+  AND MIN(p.[Status]) = 'Done'
+)
+UPDATE b
+SET [Status] = 'Complete'
+  , LastStatusUpdate = GETUTCDATE()
+  , EndDateTime = cte.EndDateTime
+FROM sprockit.Batch b
+  INNER JOIN cte ON cte.BatchId = b.BatchId
+;
+
 /*
  * return execution details to the process manager
  */

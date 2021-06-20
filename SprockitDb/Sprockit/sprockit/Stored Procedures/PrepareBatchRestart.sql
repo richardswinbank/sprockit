@@ -31,7 +31,10 @@ EXEC sprockit.LogEvent
 , @eventSource = '[sprockit].[PrepareBatchRestart]';
 
 UPDATE b
-SET ExternalManagerId = @externalManagerId
+SET [Status] = 'Incomplete'
+  , LastStatusUpdate = GETUTCDATE()
+  , NumberOfStarts += 1
+  , ExternalManagerId = @externalManagerId
 FROM sprockit.Batch b
 WHERE BatchId = @batchId;
 

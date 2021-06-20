@@ -13,6 +13,53 @@ AS
 
 SET NOCOUNT ON;
 
+DECLARE @errors TABLE (
+  ProcessId INT
+, BatchId INT
+, Retry BIT
+);
+
+-- Determine retryability of errors
+INSERT INTO @errors (
+  ProcessId
+, BatchId
+, Retry
+)
+SELECT
+  p.ProcessId
+, x.BatchId
+, MAX(
+    CASE
+      WHEN re.ProcessType IS NOT NULL THEN 1
+      ELSE 0
+    END
+  )
+FROM sprockit.Process p
+  INNER JOIN sprockit.Execution x ON x.ExecutionId = p.LastExecutionId
+  LEFT JOIN sprockit.[Event] e
+    ON e.ExecutionId = x.ExecutionId
+    AND e.Severity >= 200
+  LEFT JOIN sprockit.RetryableError re
+    ON p.ProcessType LIKE re.ProcessType
+    AND p.ProcessPath LIKE re.ProcessPathPattern
+    AND e.EventSource LIKE re.EventSourcePattern
+    AND e.[Message] LIKE re.MessagePattern
+    AND p.ErrorCount <= re.MaximumRetries
+WHERE p.[Status] = 'Errored'
+GROUP BY
+  x.BatchId
+, p.ProcessId
+;
+
+-- Set batch status to 'Errored' where non-retryable errors exist
+UPDATE b
+SET [Status] = 'Errored'
+  , LastStatusUpdate = GETUTCDATE()
+FROM sprockit.Batch b
+  INNER JOIN @errors r ON r.BatchId = b.BatchId
+WHERE b.[Status] <> 'Errored'
+AND r.Retry = 0;
+
 -- Set 'Not ready' processes to 'Ready' when predecessors are all 'Done'
 UPDATE p
 SET [Status] = 'Ready'
@@ -33,15 +80,8 @@ UPDATE p
 SET [Status] = 'Ready'
   , LastStatusUpdate = GETUTCDATE()
 FROM sprockit.Process p
-  INNER JOIN sprockit.[Event] e ON e.ExecutionId = p.LastExecutionId
-  INNER JOIN sprockit.RetryableError re 
-    ON p.ProcessType LIKE re.ProcessType
-    AND p.ProcessPath LIKE re.ProcessPathPattern
-    AND e.EventSource LIKE re.EventSourcePattern
-    AND e.[Message] LIKE re.MessagePattern
-WHERE p.[Status] = 'Errored' 
-AND e.Severity >= 200
-AND p.ErrorCount <= re.MaximumRetries;
+  INNER JOIN @errors r ON r.ProcessId = p.ProcessId
+WHERE r.Retry = 1;
 
 -- Set successors of 'Errored' processes to 'Blocked'
 UPDATE succ

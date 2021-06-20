@@ -1,6 +1,6 @@
 ﻿/*
  * [sprockit].[ManageLogs]
- * Copyright (c) 2017-2020 Richard Swinbank (richard@richardswinbank.net) 
+ * Copyright (c) 2017-2021 Richard Swinbank (richard@richardswinbank.net) 
  * http://richardswinbank.net/sprockit
  *
  * Manage Sprockit logs.
@@ -9,11 +9,11 @@
 CREATE PROCEDURE sprockit.ManageLogs
 AS
 
-DECLARE @cutoff DATETIME = (
-  SELECT MIN(StartDateTime)
-  FROM sprockit.Batch b
-  WHERE StartDateTime > GETUTCDATE() - 90
-);
+DECLARE @cutoff DATETIME = 
+  CASE sprockit.GetProperty('LogRetentionPeriod')
+    WHEN 0 THEN '1900-01-01'
+    ELSE DATEADD(DAY, -sprockit.GetProperty('LogRetentionPeriod'), GETUTCDATE())
+  END;
 
 DELETE e
 FROM sprockit.Batch b

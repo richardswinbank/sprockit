@@ -28,23 +28,6 @@ FROM sprockit.Process p
   LEFT JOIN sprockit.ProcessDependency pd ON pd.ProcessId = p.ProcessId
 WHERE p.ProcessGroup = @processGroup;
 
--- set last batch end time
-WITH lastBatch AS (
-  SELECT TOP 1
-    b.BatchId
-  , COALESCE(MAX(e.EndDateTime), GETUTCDATE()) AS EndDateTime
-  FROM sprockit.Batch b
-    LEFT JOIN sprockit.Execution e ON e.BatchId = b.BatchId
-  WHERE b.ProcessGroup = @processGroup
-  GROUP BY b.BatchId
-  ORDER BY b.BatchId DESC
-)
-UPDATE b
-SET EndDateTime = lastBatch.EndDateTime
-FROM sprockit.Batch b
-  INNER JOIN lastBatch ON lastBatch.BatchId = b.BatchId
-WHERE b.EndDateTime IS NULL;
-
 WAITFOR DELAY '00:00:01';  -- enforce batch gap
 
 -- register the new batch
