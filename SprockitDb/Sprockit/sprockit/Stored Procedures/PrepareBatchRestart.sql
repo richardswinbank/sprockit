@@ -22,7 +22,7 @@ SELECT TOP 1
     + COALESCE(' (external ID ' + @externalManagerId + ')', '')
 FROM sprockit.Batch
 WHERE ProcessGroup = @processGroup
-ORDER BY StartDateTime DESC;
+ORDER BY [CreatedDateTime] DESC;
 
 -- Log restart
 EXEC sprockit.LogEvent 

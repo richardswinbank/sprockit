@@ -44,6 +44,7 @@ IF OBJECT_ID('[sprockit].[ReportExecution]') IS NOT NULL DROP VIEW [sprockit].[R
 IF OBJECT_ID('[sprockit].[ReportEvent]') IS NOT NULL DROP VIEW [sprockit].[ReportEvent]
 IF OBJECT_ID('[sprockit].[ReportBatch]') IS NOT NULL DROP VIEW [sprockit].[ReportBatch]
 IF OBJECT_ID('[sprockit].[ReportParallelism]') IS NOT NULL DROP VIEW [sprockit].[ReportParallelism]
+IF OBJECT_ID('[sprockit].[ReportProcessMetric]') IS NOT NULL DROP VIEW [sprockit].[ReportProcessMetric]
 
 IF OBJECT_ID('[sprockit].[Property]') IS NOT NULL DROP TABLE [sprockit].[Property]
 IF OBJECT_ID('[sprockit].[RetryableError]') IS NOT NULL DROP TABLE [sprockit].[RetryableError]

@@ -10,19 +10,19 @@ CREATE PROCEDURE sprockit.ManageLogs
 AS
 
 DECLARE @cutoff DATETIME = (
-  SELECT MIN(StartDateTime)
+  SELECT MIN([CreatedDateTime])
   FROM sprockit.Batch b
-  WHERE StartDateTime > GETUTCDATE() - 90
+  WHERE [CreatedDateTime] > GETUTCDATE() - 90
 );
 
 DELETE e
 FROM sprockit.Batch b
   INNER JOIN sprockit.Execution e ON e.BatchId = b.BatchId
-WHERE b.StartDateTime < @cutoff;
+WHERE b.[CreatedDateTime] < @cutoff;
 
 DELETE b
 FROM sprockit.Batch b
-WHERE b.StartDateTime < @cutoff;
+WHERE b.[CreatedDateTime] < @cutoff;
 
 DELETE e
 FROM sprockit.[Event] e
