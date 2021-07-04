@@ -70,6 +70,8 @@
     <Folder Include="sprockit_Execution" />
     <Folder Include="sprockit_Event" />
     <Folder Include="sprockit_Batch" />
+    <Folder Include="sprockit_UninstallSprockit" />
+    <Folder Include="_Utilities" />
   </ItemGroup>
   <ItemGroup>
     <ArtifactReference Include="..\tSQLt.dacpac">
@@ -119,9 +121,7 @@
     <Build Include="sprockit_Event\test If table sprockit.Event has the correct indexes.sql" />
     <Build Include="sprockit_Event\test If index PK__sprockit_Event has the correct columns.sql" />
     <Build Include="sprockit_Execution\test If index IX__sprockit_Execution__StartDateTime has the correct columns.sql" />
-    <Build Include="sprockit_Batch\test If index PK__sprockit_Batch has the correct columns.sql" />
-    <Build Include="sprockit_Batch\test If table sprockit.Batch has the correct columns.sql" />
-    <Build Include="sprockit_Batch\test If table sprockit.Batch has the correct indexes.sql" />
+    <Build Include="sprockit_Batch\test Assert sprockit.Batch has the correct columns.sql" />
     <Build Include="sprockit_ProcessDependency\test If index PK__sprockit_ProcessDependency has the correct columns.sql" />
     <Build Include="_TestClasses\sprockit_Batch.sql" />
     <Build Include="_TestClasses\sprockit_Event.sql" />
@@ -133,6 +133,16 @@
     <Build Include="_TestClasses\sprockit_Reservation.sql" />
     <Build Include="_TestClasses\sprockit_RetryableError.sql" />
     <Build Include="_TestClasses\sprockit_ProcessParameter.sql" />
+    <Build Include="_TestClasses\sprockit_UninstallSprockit.sql" />
+    <Build Include="sprockit_UninstallSprockit\test Assert uninstall removes all objects.sql" />
+    <Build Include="sprockit_UninstallSprockit\test Assert uninstall removes sprockit schema.sql" />
+    <Build Include="sprockit_Batch\test Validate sprockit.Batch BatchId.sql" />
+    <Build Include="_Utilities\sprockit_test_utils.sql" />
+    <Build Include="_Utilities\TableColumnAttributes.sql" />
+    <Build Include="sprockit_Batch\test Validate sprockit.Batch ProcessGroup.sql" />
+    <Build Include="sprockit_Batch\test Validate sprockit.Batch ExternalManagerId.sql" />
+    <Build Include="sprockit_Batch\test Validate sprockit.Batch CreatedDateTime.sql" />
+    <Build Include="sprockit_Batch\test Validate sprockit.Batch EndDateTime.sql" />
   </ItemGroup>
   <ItemGroup>
     <SqlCmdVariable Include="Sprockit">

@@ -12,8 +12,8 @@ AS
 SELECT 
   BatchId
 , ProcessGroup
-, CONVERT(NVARCHAR, batch.StartDateTime, 120) + ' - Group ' + CAST(batch.ProcessGroup AS NVARCHAR) + ' - Batch ' + CAST(batch.BatchId AS NVARCHAR) AS BatchName
-, StartDateTime
+, CONVERT(NVARCHAR, batch.[CreatedDateTime], 120) + ' - Group ' + CAST(batch.ProcessGroup AS NVARCHAR) + ' - Batch ' + CAST(batch.BatchId AS NVARCHAR) AS BatchName
+, [CreatedDateTime]
 , COALESCE(EndDateTime, GETUTCDATE()) AS EndDateTime
 FROM sprockit.Batch
-WHERE DATEADD(DAY, 14, StartDateTime) > GETUTCDATE()
+WHERE DATEADD(DAY, 14, [CreatedDateTime]) > GETUTCDATE()

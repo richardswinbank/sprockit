@@ -16,11 +16,11 @@ WITH [24h] AS (
 )
 SELECT
   b.BatchId
-, DATEADD(MINUTE, [24h].[Minute], b.StartDateTime) AS PollDateTime
+, DATEADD(MINUTE, [24h].[Minute], b.[CreatedDateTime]) AS PollDateTime
 , SUM(CASE WHEN e.BatchId IS NULL THEN 0 ELSE 1 END) AS RunningProcesses
 FROM sprockit.ReportBatch b
-  INNER JOIN [24h] ON DATEADD(MINUTE, [24h].[Minute], b.StartDateTime) < b.EndDateTime
-  LEFT JOIN sprockit.Execution e ON DATEADD(MINUTE, [24h].[Minute], b.StartDateTime) BETWEEN e.StartDateTime AND COALESCE(e.EndDateTime, b.EndDateTime)
+  INNER JOIN [24h] ON DATEADD(MINUTE, [24h].[Minute], b.[CreatedDateTime]) < b.EndDateTime
+  LEFT JOIN sprockit.Execution e ON DATEADD(MINUTE, [24h].[Minute], b.[CreatedDateTime]) BETWEEN e.StartDateTime AND COALESCE(e.EndDateTime, b.EndDateTime)
 GROUP BY 
   b.BatchId
-, DATEADD(MINUTE, [24h].[Minute], b.StartDateTime)
+, DATEADD(MINUTE, [24h].[Minute], b.[CreatedDateTime])
