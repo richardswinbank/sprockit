@@ -57,9 +57,20 @@
   <ItemGroup>
     <Folder Include="Properties" />
     <Folder Include="_Scripts" />
-    <Folder Include="_TestClasses" />
     <Folder Include="dbo" />
     <Folder Include="dbo\StoredProcedures" />
+    <Folder Include="_TestClasses" />
+    <Folder Include="sprockit_db" />
+    <Folder Include="sprockit_RetryableError" />
+    <Folder Include="sprockit_Reservation" />
+    <Folder Include="sprockit_Property" />
+    <Folder Include="sprockit_ProcessType" />
+    <Folder Include="sprockit_ProcessParameter" />
+    <Folder Include="sprockit_ProcessDependency" />
+    <Folder Include="sprockit_Process" />
+    <Folder Include="sprockit_Execution" />
+    <Folder Include="sprockit_Event" />
+    <Folder Include="sprockit_Batch" />
   </ItemGroup>
   <ItemGroup>
     <ArtifactReference Include="..\tSQLt.dacpac">
@@ -82,6 +93,49 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\StoredProcedures\InsertExec.sql" />
+    <Build Include="sprockit_RetryableError\test If table sprockit.RetryableError has the correct columns.sql" />
+    <Build Include="sprockit_Reservation\test If table sprockit.Reservation has the correct columns.sql" />
+    <Build Include="sprockit_Reservation\test If table sprockit.Reservation has the correct indexes.sql" />
+    <Build Include="sprockit_Property\test If table sprockit.Property has the correct columns.sql" />
+    <Build Include="sprockit_Property\test If table sprockit.Property has the correct indexes.sql" />
+    <Build Include="sprockit_ProcessType\test If table sprockit.ProcessType has the correct columns.sql" />
+    <Build Include="sprockit_ProcessType\test If table sprockit.ProcessType has the correct indexes.sql" />
+    <Build Include="sprockit_ProcessParameter\test If table sprockit.ProcessParameter has the correct columns.sql" />
+    <Build Include="sprockit_ProcessParameter\test If table sprockit.ProcessParameter has the correct indexes.sql" />
+    <Build Include="sprockit_ProcessDependency\test If table sprockit.ProcessDependency has the correct columns.sql" />
+    <Build Include="sprockit_ProcessDependency\test If table sprockit.ProcessDependency has the correct indexes.sql" />
+    <Build Include="sprockit_ProcessDependency\test If index UQ__sprockit_ProcessDependency has the correct columns.sql" />
+    <Build Include="sprockit_Reservation\test If index PK__sprockit_Reservation has the correct columns.sql" />
+    <Build Include="sprockit_ProcessType\test If index PK__sprockit_ProcessType has the correct columns.sql" />
+    <Build Include="sprockit_ProcessParameter\test If index PK__sprockit_ProcessParameter has the correct columns.sql" />
+    <Build Include="sprockit_Property\test If index PK__sprockit_Property has the correct columns.sql" />
+    <Build Include="sprockit_Process\test If index PK__sprockit_Process has the correct columns.sql" />
+    <Build Include="sprockit_Process\test If table sprockit.Process has the correct columns.sql" />
+    <Build Include="sprockit_Process\test If table sprockit.Process has the correct indexes.sql" />
+    <Build Include="sprockit_Process\test If index UQ__sprockit_Process__ProcessPath has the correct columns.sql" />
+    <Build Include="sprockit_Execution\test If table sprockit.Execution has the correct columns.sql" />
+    <Build Include="sprockit_Execution\test If table sprockit.Execution has the correct indexes.sql" />
+    <Build Include="sprockit_Execution\test If index PK__sprockit_Execution has the correct columns.sql" />
+    <Build Include="sprockit_Event\test If table sprockit.Event has the correct columns.sql" />
+    <Build Include="sprockit_Event\test If table sprockit.Event has the correct indexes.sql" />
+    <Build Include="sprockit_Event\test If index PK__sprockit_Event has the correct columns.sql" />
+    <Build Include="sprockit_Execution\test If index IX__sprockit_Execution__StartDateTime has the correct columns.sql" />
+    <Build Include="sprockit_db\test If database has correct collation.sql" />
+    <Build Include="sprockit_Batch\test If index PK__sprockit_Batch has the correct columns.sql" />
+    <Build Include="sprockit_Batch\test If table sprockit.Batch has the correct columns.sql" />
+    <Build Include="sprockit_Batch\test If table sprockit.Batch has the correct indexes.sql" />
+    <Build Include="sprockit_ProcessDependency\test If index PK__sprockit_ProcessDependency has the correct columns.sql" />
+    <Build Include="_TestClasses\sprockit_Batch.sql" />
+    <Build Include="_TestClasses\sprockit_Event.sql" />
+    <Build Include="_TestClasses\sprockit_Execution.sql" />
+    <Build Include="_TestClasses\sprockit_Process.sql" />
+    <Build Include="_TestClasses\sprockit_ProcessDependency.sql" />
+    <Build Include="_TestClasses\sprockit_ProcessType.sql" />
+    <Build Include="_TestClasses\sprockit_Property.sql" />
+    <Build Include="_TestClasses\sprockit_Reservation.sql" />
+    <Build Include="_TestClasses\sprockit_RetryableError.sql" />
+    <Build Include="_TestClasses\sprockit_ProcessParameter.sql" />
+    <Build Include="_TestClasses\sprockit_db.sql" />
   </ItemGroup>
   <ItemGroup>
     <SqlCmdVariable Include="Sprockit">
