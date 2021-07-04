@@ -19,7 +19,6 @@ INSERT INTO @properties (
 ) VALUES
   ('ProcessSchedulerSpName', 'sprockit.EnqueueProcesses', 'NVARCHAR(255)', 'Name of SP to set processes Ready')
 , ('MaximumParallelProcesses', '20', 'INT', 'Maximum number of processes allow to run simultaneously')
-, ('LogRetentionPeriod', '0', 'INT', 'Number of days for which to retain log records (0 = forever)')
 
 DECLARE @propertyName NVARCHAR(128)
 
