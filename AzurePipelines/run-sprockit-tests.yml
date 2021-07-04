@@ -30,7 +30,7 @@ steps:
   displayName: 'Deploy $(TestingProjectName) SSDT project to $(TestingDbName) DB'
   inputs:
     TaskType: 'dacpac'
-    DacpacFile: 'vs\**\$(TestingProjectName).dacpac'
+    DacpacFile: '**\$(TestingProjectName).dacpac'
     TargetMethod: server
     ServerName: $(SqlServerInstance)
     DatabaseName: $(TestingDbName)
