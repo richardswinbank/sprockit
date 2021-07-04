@@ -5,7 +5,7 @@ trigger: none
 variables:
   SqlServerInstance: '(localdb)\MSSQLLocalDB'
   TestingDbName: Sprockit
-  TestingProjectName: SprockitSqlAgent.Tests
+  TestingProjectName: Sprockit.Tests
 
 pool:
   vmImage: 'windows-2019'
@@ -30,7 +30,7 @@ steps:
   displayName: 'Deploy $(TestingProjectName) SSDT project to $(TestingDbName) DB'
   inputs:
     TaskType: 'dacpac'
-    DacpacFile: 'vs\**\$(TestingProjectName).dacpac'
+    DacpacFile: '**\$(TestingProjectName).dacpac'
     TargetMethod: server
     ServerName: $(SqlServerInstance)
     DatabaseName: $(TestingDbName)
