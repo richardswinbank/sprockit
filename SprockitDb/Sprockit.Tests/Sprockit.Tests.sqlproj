@@ -60,7 +60,6 @@
     <Folder Include="dbo" />
     <Folder Include="dbo\StoredProcedures" />
     <Folder Include="_TestClasses" />
-    <Folder Include="sprockit_db" />
     <Folder Include="sprockit_RetryableError" />
     <Folder Include="sprockit_Reservation" />
     <Folder Include="sprockit_Property" />
@@ -120,7 +119,6 @@
     <Build Include="sprockit_Event\test If table sprockit.Event has the correct indexes.sql" />
     <Build Include="sprockit_Event\test If index PK__sprockit_Event has the correct columns.sql" />
     <Build Include="sprockit_Execution\test If index IX__sprockit_Execution__StartDateTime has the correct columns.sql" />
-    <Build Include="sprockit_db\test If database has correct collation.sql" />
     <Build Include="sprockit_Batch\test If index PK__sprockit_Batch has the correct columns.sql" />
     <Build Include="sprockit_Batch\test If table sprockit.Batch has the correct columns.sql" />
     <Build Include="sprockit_Batch\test If table sprockit.Batch has the correct indexes.sql" />
@@ -135,7 +133,6 @@
     <Build Include="_TestClasses\sprockit_Reservation.sql" />
     <Build Include="_TestClasses\sprockit_RetryableError.sql" />
     <Build Include="_TestClasses\sprockit_ProcessParameter.sql" />
-    <Build Include="_TestClasses\sprockit_db.sql" />
   </ItemGroup>
   <ItemGroup>
     <SqlCmdVariable Include="Sprockit">
