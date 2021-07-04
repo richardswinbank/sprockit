@@ -3,7 +3,7 @@ name: $(BuildDefinitionName).$(Date:yyyyMMdd)$(Rev:.r)
 trigger:
   branches:
     include:
-      - '*'
+      - 'main'
   paths:
     include: 
       - 'vs/*'
