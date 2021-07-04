@@ -1,5 +1,5 @@
 ﻿  CREATE TABLE sprockit.[Property] (
-	[PropertyName] NVARCHAR(128) PRIMARY KEY
+	[PropertyName] NVARCHAR(128) CONSTRAINT PK__sprockit_Property PRIMARY KEY 
   , [PropertyValue] NVARCHAR(4000) NOT NULL
   , [DataType] NVARCHAR(128) NOT NULL
   , [Description] NVARCHAR(512) NOT NULL
