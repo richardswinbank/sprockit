@@ -7,10 +7,6 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Sprockit", "Sprockit\Sprock
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Sprockit.Tests", "Sprockit.Tests\Sprockit.Tests.sqlproj", "{A2B47FFD-A176-4D44-AB59-C6F6F406E617}"
 EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "SprockitSqlAgent", "SprockitSqlAgent\SprockitSqlAgent.sqlproj", "{2D9EF994-8DEE-430F-9CE3-6B807774B543}"
-EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "SprockitSqlAgent.Tests", "SprockitSqlAgent.Tests\SprockitSqlAgent.Tests.sqlproj", "{D22648D5-0A67-4085-80C2-D070398FD91C}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{95186050-C5A7-493C-8E3C-E848C5A0424F}"
 EndProject
 Global
@@ -31,25 +27,12 @@ Global
 		{A2B47FFD-A176-4D44-AB59-C6F6F406E617}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A2B47FFD-A176-4D44-AB59-C6F6F406E617}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A2B47FFD-A176-4D44-AB59-C6F6F406E617}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{2D9EF994-8DEE-430F-9CE3-6B807774B543}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2D9EF994-8DEE-430F-9CE3-6B807774B543}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2D9EF994-8DEE-430F-9CE3-6B807774B543}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{2D9EF994-8DEE-430F-9CE3-6B807774B543}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2D9EF994-8DEE-430F-9CE3-6B807774B543}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2D9EF994-8DEE-430F-9CE3-6B807774B543}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{D22648D5-0A67-4085-80C2-D070398FD91C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D22648D5-0A67-4085-80C2-D070398FD91C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D22648D5-0A67-4085-80C2-D070398FD91C}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{D22648D5-0A67-4085-80C2-D070398FD91C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D22648D5-0A67-4085-80C2-D070398FD91C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D22648D5-0A67-4085-80C2-D070398FD91C}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A2B47FFD-A176-4D44-AB59-C6F6F406E617} = {95186050-C5A7-493C-8E3C-E848C5A0424F}
-		{D22648D5-0A67-4085-80C2-D070398FD91C} = {95186050-C5A7-493C-8E3C-E848C5A0424F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E90319C5-23D8-4252-8467-5941C838A226}

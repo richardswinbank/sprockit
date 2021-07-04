@@ -237,12 +237,16 @@ namespace FireFive.SprockitViz.PipelineGraph
             foreach (Node n in Nodes)
                 if (n.Name == startId)
                     start = n;
+            if (start == null)
+                throw new Exception($"Node {startId} not found");
 
             // find the end node from its Id
             Node end = null;
             foreach (Node n in Nodes)
                 if (n.Name == endId)
                     end = n;
+            if (end == null)
+                throw new Exception($"Node {endId} not found");
 
             // add an edge from start -> end
             Edges.Add(new DirectedEdge(start, end));
