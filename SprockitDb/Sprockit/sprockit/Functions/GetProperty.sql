@@ -13,19 +13,19 @@ RETURNS NVARCHAR(4000)
 AS
 BEGIN
 
-  DECLARE @propertyValue NVARCHAR(4000)
+  DECLARE @propertyValue NVARCHAR(4000);
 
   SELECT 
     @propertyValue = PropertyValue 
   FROM sprockit.Property
-  WHERE PropertyName = @propertyName
+  WHERE PropertyName = @propertyName;
 
   IF @propertyValue IS NULL 
   BEGIN 
     DECLARE @errorMsg NVARCHAR(255) = 'Property ''' + @propertyName + ''' is not defined.'
     DECLARE @i INT = CAST(@errorMsg AS INT) -- dirty trick to throw a fatal error
-  END
+  END;
 
-  RETURN @propertyValue
+  RETURN @propertyValue;
 
 END

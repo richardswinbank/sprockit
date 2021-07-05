@@ -99,8 +99,7 @@
     <Build Include="sprockit_RetryableError\test If table sprockit.RetryableError has the correct columns.sql" />
     <Build Include="sprockit_Reservation\test If table sprockit.Reservation has the correct columns.sql" />
     <Build Include="sprockit_Reservation\test If table sprockit.Reservation has the correct indexes.sql" />
-    <Build Include="sprockit_Property\test If table sprockit.Property has the correct columns.sql" />
-    <Build Include="sprockit_Property\test If table sprockit.Property has the correct indexes.sql" />
+    <Build Include="sprockit_Property\test Assert sprockit.Property has the correct columns.sql" />
     <Build Include="sprockit_ProcessType\test If table sprockit.ProcessType has the correct columns.sql" />
     <Build Include="sprockit_ProcessType\test If table sprockit.ProcessType has the correct indexes.sql" />
     <Build Include="sprockit_ProcessParameter\test If table sprockit.ProcessParameter has the correct columns.sql" />
@@ -111,7 +110,6 @@
     <Build Include="sprockit_Reservation\test If index PK__sprockit_Reservation has the correct columns.sql" />
     <Build Include="sprockit_ProcessType\test If index PK__sprockit_ProcessType has the correct columns.sql" />
     <Build Include="sprockit_ProcessParameter\test If index PK__sprockit_ProcessParameter has the correct columns.sql" />
-    <Build Include="sprockit_Property\test If index PK__sprockit_Property has the correct columns.sql" />
     <Build Include="sprockit_Process\test If index PK__sprockit_Process has the correct columns.sql" />
     <Build Include="sprockit_Process\test If table sprockit.Process has the correct columns.sql" />
     <Build Include="sprockit_Process\test If table sprockit.Process has the correct indexes.sql" />
@@ -172,6 +170,23 @@
     <Build Include="sprockit_GetProperty\test WHEN property name not exists THEN exception thrown.sql" />
     <Build Include="sprockit__internal_ManageLogs\test Verify sprockit.Batch setup.sql" />
     <Build Include="sprockit__internal_ManageLogs\test Verify sprockit.Execution setup.sql" />
+    <Build Include="sprockit__internal_ManageLogs\test GIVEN retention period zero THEN no events deleted.sql" />
+    <Build Include="sprockit__internal_ManageLogs\test GIVEN retention period negative THEN no events deleted.sql" />
+    <Build Include="sprockit__internal_ManageLogs\test GIVEN retention period maximum THEN no events deleted.sql" />
+    <Build Include="sprockit__internal_ManageLogs\test GIVEN retention period in range THEN events deleted.sql" />
+    <Build Include="sprockit__internal_ManageLogs\test GIVEN retention period in range THEN executions deleted.sql" />
+    <Build Include="sprockit__internal_ManageLogs\test GIVEN retention period maximum THEN no executions deleted.sql" />
+    <Build Include="sprockit__internal_ManageLogs\test GIVEN retention period negative THEN no executions deleted.sql" />
+    <Build Include="sprockit__internal_ManageLogs\test GIVEN retention period zero THEN no executions deleted.sql" />
+    <Build Include="sprockit__internal_ManageLogs\test GIVEN retention period in range THEN batches deleted.sql" />
+    <Build Include="sprockit__internal_ManageLogs\test GIVEN retention period maximum THEN no batches deleted.sql" />
+    <Build Include="sprockit__internal_ManageLogs\test GIVEN retention period negative THEN no batches deleted.sql" />
+    <Build Include="sprockit__internal_ManageLogs\test GIVEN retention period zero THEN no batches deleted.sql" />
+    <Build Include="sprockit_Property\test Validate sprockit.Property PropertyName.sql" />
+    <Build Include="sprockit_Property\test Validate sprockit.Property PropertyValue.sql" />
+    <Build Include="sprockit_Property\test Validate sprockit.Property DataType.sql" />
+    <Build Include="sprockit_Property\test Validate sprockit.Property Description.sql" />
+    <Build Include="sprockit_Property\test GIVEN.sql" />
   </ItemGroup>
   <ItemGroup>
     <SqlCmdVariable Include="Sprockit">

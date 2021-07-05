@@ -9,9 +9,12 @@
 CREATE PROCEDURE sprockit._internal_ManageLogs
 AS
 
-DECLARE @cutoff DATETIME = '1900-01-01';
 DECLARE @retentionPeriod INT = sprockit.GetProperty('LogRetentionPeriod');
-IF @retentionPeriod > 0 AND @retentionPeriod < DATEDIFF(DAY, '1900-01-01', GETUTCDATE())
+IF @retentionPeriod <= 0
+  RETURN ;
+
+DECLARE @cutoff DATETIME = '1900-01-01';  -- delete nothing by default
+IF @retentionPeriod < DATEDIFF(DAY, '1900-01-01', GETUTCDATE())
   SET @cutoff = DATEADD(DAY, -@retentionPeriod, GETUTCDATE());
 
 SELECT 
