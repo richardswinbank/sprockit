@@ -102,7 +102,7 @@
     <Build Include="sprockit\Views\ReportParallelism.sql" />
     <Build Include="sprockit\Tables\ProcessParameter.sql" />
     <Build Include="sprockit\Stored Procedures\UninstallSprockit.sql" />
-    <Build Include="sprockit\Stored Procedures\ManageLogs.sql" />
+    <Build Include="sprockit\Stored Procedures\_internal_ManageLogs.sql" />
     <Build Include="sprockit\Views\ReportExecutionParameter.sql" />
     <Build Include="sprockit\Views\ReportProcessMetric.sql" />
   </ItemGroup>

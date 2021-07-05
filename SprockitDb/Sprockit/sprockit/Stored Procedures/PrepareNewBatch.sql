@@ -12,7 +12,7 @@ CREATE PROCEDURE [sprockit].[PrepareNewBatch] (
 AS
 
 -- update scheduling & control metrics
-EXEC sprockit.ManageLogs
+EXEC sprockit._internal_ManageLogs
 EXEC sprockit.UpdateMetrics @processGroup
 
 -- set initial process status
