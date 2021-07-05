@@ -72,6 +72,8 @@
     <Folder Include="sprockit_Batch" />
     <Folder Include="sprockit_UninstallSprockit" />
     <Folder Include="_Utilities" />
+    <Folder Include="sprockit__internal_ManageLogs" />
+    <Folder Include="sprockit_GetProperty" />
   </ItemGroup>
   <ItemGroup>
     <ArtifactReference Include="..\tSQLt.dacpac">
@@ -114,13 +116,8 @@
     <Build Include="sprockit_Process\test If table sprockit.Process has the correct columns.sql" />
     <Build Include="sprockit_Process\test If table sprockit.Process has the correct indexes.sql" />
     <Build Include="sprockit_Process\test If index UQ__sprockit_Process__ProcessPath has the correct columns.sql" />
-    <Build Include="sprockit_Execution\test If table sprockit.Execution has the correct columns.sql" />
-    <Build Include="sprockit_Execution\test If table sprockit.Execution has the correct indexes.sql" />
-    <Build Include="sprockit_Execution\test If index PK__sprockit_Execution has the correct columns.sql" />
-    <Build Include="sprockit_Event\test If table sprockit.Event has the correct columns.sql" />
-    <Build Include="sprockit_Event\test If table sprockit.Event has the correct indexes.sql" />
-    <Build Include="sprockit_Event\test If index PK__sprockit_Event has the correct columns.sql" />
-    <Build Include="sprockit_Execution\test If index IX__sprockit_Execution__StartDateTime has the correct columns.sql" />
+    <Build Include="sprockit_Execution\test Assert sprockit.Execution has the correct columns.sql" />
+    <Build Include="sprockit_Event\test Assert sprockit.Event has the correct columns.sql" />
     <Build Include="sprockit_Batch\test Assert sprockit.Batch has the correct columns.sql" />
     <Build Include="sprockit_ProcessDependency\test If index PK__sprockit_ProcessDependency has the correct columns.sql" />
     <Build Include="_TestClasses\sprockit_Batch.sql" />
@@ -143,6 +140,38 @@
     <Build Include="sprockit_Batch\test Validate sprockit.Batch ExternalManagerId.sql" />
     <Build Include="sprockit_Batch\test Validate sprockit.Batch CreatedDateTime.sql" />
     <Build Include="sprockit_Batch\test Validate sprockit.Batch EndDateTime.sql" />
+    <Build Include="sprockit_Event\test Validate sprockit.Event EventId.sql" />
+    <Build Include="sprockit_Event\test Validate sprockit.Event EventDateTime.sql" />
+    <Build Include="sprockit_Event\test Validate sprockit.Event Severity.sql" />
+    <Build Include="sprockit_Event\test Validate sprockit.Event ExecutionId.sql" />
+    <Build Include="sprockit_Event\test Validate sprockit.Event EventSource.sql" />
+    <Build Include="sprockit_Event\test Validate sprockit.Event Message.sql" />
+    <Build Include="sprockit_Event\test Validate sprockit.Event MetricValue.sql" />
+    <Build Include="sprockit_Execution\test Validate sprockit.Execution ExecutionId.sql" />
+    <Build Include="sprockit_Execution\test Validate sprockit.Execution ProcessId.sql" />
+    <Build Include="sprockit_Execution\test Validate sprockit.Execution BatchId.sql" />
+    <Build Include="sprockit_Execution\test Validate sprockit.Execution ExternalHandlerId.sql" />
+    <Build Include="sprockit_Execution\test Validate sprockit.Execution ExecutionParameters.sql" />
+    <Build Include="sprockit_Execution\test Validate sprockit.Execution ExecutionProperties.sql" />
+    <Build Include="sprockit_Execution\test Validate sprockit.Execution StartDateTime.sql" />
+    <Build Include="sprockit_Execution\test Validate sprockit.Execution EndDateTime.sql" />
+    <Build Include="sprockit_Execution\test Validate sprockit.Execution ProcessType.sql" />
+    <Build Include="sprockit_Execution\test Validate sprockit.Execution EndStatus.sql" />
+    <Build Include="sprockit_Execution\test Validate sprockit.Execution AvgDuration.sql" />
+    <Build Include="sprockit_Execution\test Validate sprockit.Execution InitialWatermark.sql" />
+    <Build Include="sprockit_Execution\test Validate sprockit.Execution UpdatedWatermark.sql" />
+    <Build Include="sprockit_Execution\test Validate sprockit.Execution BranchWeight.sql" />
+    <Build Include="sprockit_Execution\test Validate sprockit.Execution IsEnabled.sql" />
+    <Build Include="sprockit_Execution\test Validate sprockit.Execution Priority.sql" />
+    <Build Include="_TestClasses\sprockit__internal_ManageLogs.sql" />
+    <Build Include="sprockit__internal_ManageLogs\setup.sql" />
+    <Build Include="sprockit__internal_ManageLogs\test Verify sprockit.Event setup.sql" />
+    <Build Include="_TestClasses\sprockit_GetProperty.sql" />
+    <Build Include="sprockit_GetProperty\test WHEN property name exists THEN property value returned.sql" />
+    <Build Include="sprockit_GetProperty\setup.sql" />
+    <Build Include="sprockit_GetProperty\test WHEN property name not exists THEN exception thrown.sql" />
+    <Build Include="sprockit__internal_ManageLogs\test Verify sprockit.Batch setup.sql" />
+    <Build Include="sprockit__internal_ManageLogs\test Verify sprockit.Execution setup.sql" />
   </ItemGroup>
   <ItemGroup>
     <SqlCmdVariable Include="Sprockit">

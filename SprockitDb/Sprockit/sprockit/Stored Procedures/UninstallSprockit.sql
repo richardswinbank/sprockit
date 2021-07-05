@@ -23,7 +23,6 @@ IF OBJECT_ID('[sprockit].[GetProperty]') IS NOT NULL DROP FUNCTION [sprockit].[G
 IF OBJECT_ID('[sprockit].[DependencyStatus]') IS NOT NULL DROP FUNCTION [sprockit].[DependencyStatus]
 IF OBJECT_ID('[sprockit].[GetExecutionProperty]') IS NOT NULL DROP FUNCTION [sprockit].[GetExecutionProperty]
 
-IF OBJECT_ID('[sprockit].[ManageLogs]') IS NOT NULL DROP PROCEDURE [sprockit].ManageLogs
 IF OBJECT_ID('[sprockit].[LogEvent]') IS NOT NULL DROP PROCEDURE [sprockit].[LogEvent]
 IF OBJECT_ID('[sprockit].[ResolveProcessId]') IS NOT NULL DROP PROCEDURE [sprockit].[ResolveProcessId]
 IF OBJECT_ID('[sprockit].[RethrowError]') IS NOT NULL DROP PROCEDURE [sprockit].[RethrowError]
@@ -36,6 +35,8 @@ IF OBJECT_ID('[sprockit].[PrepareBatchRestart]') IS NOT NULL DROP PROCEDURE [spr
 IF OBJECT_ID('[sprockit].[ReleaseProcess]') IS NOT NULL DROP PROCEDURE [sprockit].[ReleaseProcess]
 IF OBJECT_ID('[sprockit].[PrepareNewBatch]') IS NOT NULL DROP PROCEDURE [sprockit].[PrepareNewBatch]
 IF OBJECT_ID('[sprockit].[ReserveProcess]') IS NOT NULL DROP PROCEDURE [sprockit].[ReserveProcess]
+
+IF OBJECT_ID('[sprockit].[_internal_ManageLogs]') IS NOT NULL DROP PROCEDURE [sprockit]._internal_ManageLogs
 
 IF OBJECT_ID('[sprockit].[ReportFinalStatus]') IS NOT NULL DROP VIEW [sprockit].[ReportFinalStatus]
 IF OBJECT_ID('[sprockit].[ReportExecutionProperty]') IS NOT NULL DROP VIEW [sprockit].[ReportExecutionProperty]
