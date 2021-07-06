@@ -186,7 +186,6 @@
     <Build Include="sprockit_Property\test Validate sprockit.Property PropertyValue.sql" />
     <Build Include="sprockit_Property\test Validate sprockit.Property DataType.sql" />
     <Build Include="sprockit_Property\test Validate sprockit.Property Description.sql" />
-    <Build Include="sprockit_Property\test GIVEN.sql" />
   </ItemGroup>
   <ItemGroup>
     <SqlCmdVariable Include="Sprockit">
