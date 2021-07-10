@@ -28,7 +28,6 @@ IF OBJECT_ID('[sprockit].[ResolveProcessId]') IS NOT NULL DROP PROCEDURE [sprock
 IF OBJECT_ID('[sprockit].[RethrowError]') IS NOT NULL DROP PROCEDURE [sprockit].[RethrowError]
 IF OBJECT_ID('[sprockit].[Rewind]') IS NOT NULL DROP PROCEDURE [sprockit].[Rewind]
 IF OBJECT_ID('[sprockit].[SetExecutionProperty]') IS NOT NULL DROP PROCEDURE [sprockit].[SetExecutionProperty]
-IF OBJECT_ID('[sprockit].[UpdateMetrics]') IS NOT NULL DROP PROCEDURE [sprockit].[UpdateMetrics]
 IF OBJECT_ID('[sprockit].[EnqueueProcesses]') IS NOT NULL DROP PROCEDURE [sprockit].[EnqueueProcesses]
 IF OBJECT_ID('[sprockit].[DeserialiseProcesses]') IS NOT NULL DROP PROCEDURE [sprockit].[DeserialiseProcesses]
 IF OBJECT_ID('[sprockit].[PrepareBatchRestart]') IS NOT NULL DROP PROCEDURE [sprockit].[PrepareBatchRestart]
@@ -37,6 +36,7 @@ IF OBJECT_ID('[sprockit].[PrepareNewBatch]') IS NOT NULL DROP PROCEDURE [sprocki
 IF OBJECT_ID('[sprockit].[ReserveProcess]') IS NOT NULL DROP PROCEDURE [sprockit].[ReserveProcess]
 
 IF OBJECT_ID('[sprockit].[_internal_ManageLogs]') IS NOT NULL DROP PROCEDURE [sprockit]._internal_ManageLogs
+IF OBJECT_ID('[sprockit].[_internal_UpdateMetrics]') IS NOT NULL DROP PROCEDURE [sprockit]._internal_UpdateMetrics
 
 IF OBJECT_ID('[sprockit].[ReportFinalStatus]') IS NOT NULL DROP VIEW [sprockit].[ReportFinalStatus]
 IF OBJECT_ID('[sprockit].[ReportExecutionProperty]') IS NOT NULL DROP VIEW [sprockit].[ReportExecutionProperty]

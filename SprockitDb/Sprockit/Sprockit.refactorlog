@@ -91,4 +91,11 @@
     <Property Name="ParentElementType" Value="SqlSchema" />
     <Property Name="NewName" Value="_internal_ManageLogs" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="573155e0-aefa-4411-a9a0-66ffe4db9fe1" ChangeDateTime="07/10/2021 16:29:06">
+    <Property Name="ElementName" Value="[sprockit].[UpdateMetrics]" />
+    <Property Name="ElementType" Value="SqlProcedure" />
+    <Property Name="ParentElementName" Value="[sprockit]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="[_internal_UpdateMetrics]" />
+  </Operation>
 </Operations>

@@ -1,12 +1,12 @@
 ﻿/*
- * sprockit.[UpdateMetrics]
- * Copyright (c) 2015-2020 Richard Swinbank (richard@richardswinbank.net) 
+ * sprockit.[_internal_UpdateMetrics]
+ * Copyright (c) 2015-2021 Richard Swinbank (richard@richardswinbank.net) 
  * http://richardswinbank.net/sprockit
  *
  * Recalculate scheduling metrics using the most recent execution history data.
  */
 
-CREATE PROCEDURE [sprockit].[UpdateMetrics] (
+CREATE PROCEDURE [sprockit].[_internal_UpdateMetrics] (
   @processGroup INT
 )
 AS
@@ -56,7 +56,7 @@ SELECT
 FROM sprockit.Process p
   LEFT JOIN sprockit.DependencyStatus(@processGroup) pd ON pd.PredecessorId = p.ProcessId
 WHERE p.ProcessGroup = @processGroup
-AND pd.PredecessorPath IS NULL  -- no dependants
+AND pd.PredecessorId IS NULL  -- no dependants
 
 -- assemble paths to all processes from leaves
 WHILE @@ROWCOUNT > 0

@@ -13,7 +13,7 @@ AS
 
 -- update scheduling & control metrics
 EXEC sprockit._internal_ManageLogs
-EXEC sprockit.UpdateMetrics @processGroup
+EXEC sprockit.[_internal_UpdateMetrics] @processGroup
 
 -- set initial process status
 UPDATE p

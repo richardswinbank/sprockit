@@ -74,6 +74,7 @@
     <Folder Include="_Utilities" />
     <Folder Include="sprockit__internal_ManageLogs" />
     <Folder Include="sprockit_GetProperty" />
+    <Folder Include="sprockit__internal_UpdateMetrics" />
   </ItemGroup>
   <ItemGroup>
     <ArtifactReference Include="..\tSQLt.dacpac">
@@ -195,6 +196,14 @@
     <Build Include="sprockit_Property\test WHEN property deleted THEN event logged.sql" />
     <Build Include="sprockit_Property\test WHEN property updated THEN event logged.sql" />
     <Build Include="sprockit_Property\test WHEN property created THEN event logged.sql" />
+    <Build Include="_TestClasses\sprockit__internal_UpdateMetrics.sql" />
+    <Build Include="sprockit__internal_UpdateMetrics\test GIVEN execution failed THEN excluded from average.sql" />
+    <Build Include="sprockit__internal_UpdateMetrics\setup.sql" />
+    <Build Include="sprockit__internal_UpdateMetrics\test GIVEN execution older than 7 days THEN excluded from average.sql" />
+    <Build Include="sprockit__internal_UpdateMetrics\test GIVEN process in different group THEN average not updated.sql" />
+    <Build Include="sprockit__internal_UpdateMetrics\test Verify setup.sql" />
+    <Build Include="sprockit__internal_UpdateMetrics\test GIVEN process is disabled THEN average set to zero.sql" />
+    <Build Include="sprockit__internal_UpdateMetrics\test GIVEN revised dependencies THEN branch weight changes.sql" />
   </ItemGroup>
   <ItemGroup>
     <SqlCmdVariable Include="Sprockit">
