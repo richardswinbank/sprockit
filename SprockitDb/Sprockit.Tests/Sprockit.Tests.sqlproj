@@ -186,6 +186,15 @@
     <Build Include="sprockit_Property\test Validate sprockit.Property PropertyValue.sql" />
     <Build Include="sprockit_Property\test Validate sprockit.Property DataType.sql" />
     <Build Include="sprockit_Property\test Validate sprockit.Property Description.sql" />
+    <Build Include="sprockit_Property\test WHEN two rows inserted THEN update fails.sql" />
+    <Build Include="sprockit_Property\test WHEN two rows deleted THEN update fails.sql" />
+    <Build Include="sprockit_Property\test WHEN updated with invalid value THEN update fails.sql" />
+    <Build Include="sprockit_Property\test WHEN updated with invalid type THEN update fails.sql" />
+    <Build Include="sprockit_Property\test WHEN property name changed THEN update fails.sql" />
+    <Build Include="sprockit_Property\test WHEN two rows updated THEN update fails.sql" />
+    <Build Include="sprockit_Property\test WHEN property deleted THEN event logged.sql" />
+    <Build Include="sprockit_Property\test WHEN property updated THEN event logged.sql" />
+    <Build Include="sprockit_Property\test WHEN property created THEN event logged.sql" />
   </ItemGroup>
   <ItemGroup>
     <SqlCmdVariable Include="Sprockit">
