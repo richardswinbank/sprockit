@@ -75,7 +75,7 @@
     <Build Include="sprockit\Functions\DependencyStatus.sql" />
     <Build Include="sprockit\Stored Procedures\ReserveProcess.sql" />
     <Build Include="sprockit\Stored Procedures\EnqueueProcesses.sql" />
-    <Build Include="sprockit\Stored Procedures\UpdateMetrics.sql" />
+    <Build Include="sprockit\Stored Procedures\_internal_UpdateMetrics.sql" />
     <Build Include="sprockit\Stored Procedures\PrepareNewBatch.sql" />
     <Build Include="sprockit\Stored Procedures\PrepareBatchRestart.sql" />
     <Build Include="sprockit\Stored Procedures\SetExecutionProperty.sql" />
