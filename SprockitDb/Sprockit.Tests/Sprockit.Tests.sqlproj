@@ -57,8 +57,6 @@
   <ItemGroup>
     <Folder Include="Properties" />
     <Folder Include="_Scripts" />
-    <Folder Include="dbo" />
-    <Folder Include="dbo\StoredProcedures" />
     <Folder Include="_TestClasses" />
     <Folder Include="sprockit_RetryableError" />
     <Folder Include="sprockit_Reservation" />
@@ -75,6 +73,7 @@
     <Folder Include="sprockit__internal_ManageLogs" />
     <Folder Include="sprockit_GetProperty" />
     <Folder Include="sprockit__internal_UpdateMetrics" />
+    <Folder Include="sprockit_PrepareNewBatch" />
   </ItemGroup>
   <ItemGroup>
     <ArtifactReference Include="..\tSQLt.dacpac">
@@ -96,7 +95,6 @@
     <PostDeploy Include="_Scripts\PostDeployment.sql" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\StoredProcedures\InsertExec.sql" />
     <Build Include="sprockit_RetryableError\test If table sprockit.RetryableError has the correct columns.sql" />
     <Build Include="sprockit_Reservation\test If table sprockit.Reservation has the correct columns.sql" />
     <Build Include="sprockit_Reservation\test If table sprockit.Reservation has the correct indexes.sql" />
@@ -204,6 +202,11 @@
     <Build Include="sprockit__internal_UpdateMetrics\test Verify setup.sql" />
     <Build Include="sprockit__internal_UpdateMetrics\test GIVEN process is disabled THEN average set to zero.sql" />
     <Build Include="sprockit__internal_UpdateMetrics\test GIVEN revised dependencies THEN branch weight changes.sql" />
+    <Build Include="_Utilities\InsertExec.sql" />
+    <Build Include="_TestClasses\sprockit_PrepareNewBatch.sql" />
+    <Build Include="sprockit_PrepareNewBatch\test WHEN run THEN _internal_ManageLogs called once.sql" />
+    <Build Include="sprockit_PrepareNewBatch\test WHEN run THEN _internal_UpdateMetrics called once.sql" />
+    <Build Include="sprockit_PrepareNewBatch\test WHEN run THEN _internal_ManageLogs called with parameter.sql" />
   </ItemGroup>
   <ItemGroup>
     <SqlCmdVariable Include="Sprockit">
@@ -229,6 +232,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="dbo\StoredProcedures\ClrStoredProcedures.cs" />
+    <Compile Include="_Utilities\ClrStoredProcedures.cs" />
   </ItemGroup>
 </Project>
