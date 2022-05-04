@@ -12,7 +12,7 @@ namespace FireFive.SprockitViz.Xml
         public string Type { get; set; }
 
         [XmlAttribute(AttributeName = "Group")]
-        public int Group { get; set; }
+        public string Group { get; set; }
 
         [XmlAttribute(AttributeName = "DefaultWatermark")]
         public string DefaultWatermark { get; set; }

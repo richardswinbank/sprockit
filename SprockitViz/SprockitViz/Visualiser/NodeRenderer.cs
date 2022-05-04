@@ -41,6 +41,11 @@ namespace FireFive.SprockitViz.Visualiser
 
         public virtual string GetTooltip(Node n)
         {
+            return GetBasicTooltip(n);
+        }
+
+        protected string GetBasicTooltip(Node n)
+        {
             return n.Name + " (group " + (n.HasProperty("Group") ? n.GetProperty("Group") : "1") + ")";
         }
 

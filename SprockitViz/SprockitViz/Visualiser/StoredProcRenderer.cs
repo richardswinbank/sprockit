@@ -6,7 +6,7 @@ namespace FireFive.SprockitViz.Visualiser
     {
         public override string GetTooltip(Node n)
         {
-            return $"{base.GetTooltip(n)} -- Azure SQL Database stored procedure";
+            return $"{GetBasicTooltip(n)} -- Azure SQL Database stored procedure";
         }
     }
 }
