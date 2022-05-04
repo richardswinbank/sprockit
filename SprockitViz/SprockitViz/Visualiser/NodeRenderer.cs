@@ -41,7 +41,7 @@ namespace FireFive.SprockitViz.Visualiser
 
         public virtual string GetTooltip(Node n)
         {
-            return n.Name;
+            return n.Name + " (group " + (n.HasProperty("Group") ? n.GetProperty("Group") : "1") + ")";
         }
 
         private string GetFullStyle(Node n, bool isCentre)

@@ -1,5 +1,4 @@
 ﻿using FireFive.SprockitViz.PipelineGraph;
-using System.Collections.Generic;
 
 namespace FireFive.SprockitViz.Visualiser
 {
@@ -12,6 +11,7 @@ namespace FireFive.SprockitViz.Visualiser
         public string GraphvizAppFolder { get; set; }
         public bool DeleteWorkingFiles { get; set; }
         public bool Verbose { get; set; }
+        public bool Interactive { get; set; }
 
         #endregion
 
@@ -22,10 +22,10 @@ namespace FireFive.SprockitViz.Visualiser
                 return new Size() { Width = 4, Height = 6 };
             }
         }
+        public int SubgraphRadius { get { return 2; } }
 
         // timeout in seconds
         public int GraphvizTimeout { get { return 5; } }
 
-        public int SubgraphRadius { get { return 2; } }
     }
 }

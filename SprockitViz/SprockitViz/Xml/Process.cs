@@ -11,6 +11,9 @@ namespace FireFive.SprockitViz.Xml
         [XmlAttribute(AttributeName = "Type")]
         public string Type { get; set; }
 
+        [XmlAttribute(AttributeName = "Group")]
+        public int Group { get; set; }
+
         [XmlAttribute(AttributeName = "DefaultWatermark")]
         public string DefaultWatermark { get; set; }
 

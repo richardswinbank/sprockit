@@ -5,14 +5,14 @@ namespace FireFive.SprockitViz.PipelineGraph
 {
     /*
      * Node class
-     * Copyright (c) 2018-2021 Richard Swinbank (richard@richardswinbank.net) 
+     * Copyright (c) 2018-2022 Richard Swinbank (richard@richardswinbank.net) 
      * http://richardswinbank.net/
      *
      * Class representing a node (some kind of database object) in an ETL pipeline graph.
      */
     public class Node
     {
-        private Dictionary<string, string> properties;
+        private readonly Dictionary<string, string> properties;
 
         public Node(string id)
         {
@@ -43,10 +43,10 @@ namespace FireFive.SprockitViz.PipelineGraph
             }
         }
 
-        //public bool HasProperty(string propertyName)
-        //{
-        //   return properties.ContainsKey(propertyName);
-        //}
+        public bool HasProperty(string propertyName)
+        {
+            return properties.ContainsKey(propertyName);
+        }
 
         public string GetProperty(string propertyName)
         {

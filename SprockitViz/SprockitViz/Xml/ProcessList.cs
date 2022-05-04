@@ -28,6 +28,7 @@ namespace FireFive.SprockitViz.Xml
                 n.SetProperty("Priority", p.Priority);
                 n.SetProperty("LogPropertyUpdates", p.LogPropertyUpdates);
                 n.SetProperty("DefaultWatermark", p.DefaultWatermark);
+                n.SetProperty("Group", p.Group.ToString());
 
                 if (p.Parameters != null)
                     for (int i = 0; i < p.Parameters.Length; i++)

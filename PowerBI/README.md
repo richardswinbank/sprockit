@@ -16,10 +16,10 @@ The dashboard contains six components. The performance of underlying queries isn
 The donut is based on the **current** set of processes defined in `sprockit.Process`, so processes may appear "not run", usually because either:
    * the process batch is incomplete
    * you are looking at an older batch (since which more new processes have been defined)
-* The **Errors/Warnings** table (top left) shows errors (red) and warnings (orange) raised during the batch. 
-   * Errors are reported in red and **include** retried errors. In the example you can see two error entries -- one corresponds to the fatal error reported in the donut, the other to a retryable error (after which the failed process was automatically retried and subsequently succeeded).
-   * Warnings are reported in orange
-* The **Batch profile** line chart (beneath the batch selector) shows the number of processes running in parallel at intervals during the batch
+* The **Errors/Warnings** table (top left) shows errors and warnings raised during the batch.
+   * Errors are reported in red and **include** retried errors.
+   * Warnings are reported in orange.
+* The **Batch profile** line chart (beneath the batch selector) shows the number of processes running in parallel at intervals during the batch.
 * The bottom half of the page lists all executions attempted during the batch, including failures and subsequent retries -- retried/restarted processes will cause multiple attempts to appear here for the same process.
 
 Right click on an entry in the list of executions, then *Drill through* -> *Execution detail* to access further detail about an execution.
