@@ -34,7 +34,7 @@ Errors occur when your `SprockitvizSettings.json`/`SprockitvizSettings.local.jso
       .\SprockitViz.exe
       pause
       ```
-      Typical setting errors are invalid paths to Sprockit processes, output folders or Graphviz. Note that backslashes must be escaped with a predceding backslash, e.g.:
+      Typical setting errors are invalid paths to Sprockit processes, output folders or Graphviz. Note that backslashes must be escaped with a preceding backslash, e.g.:
       ```
       "SourceFile": "C:\\SprockitViz\\SprockitProcesses.xml",
       ```
