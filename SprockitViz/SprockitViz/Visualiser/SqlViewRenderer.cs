@@ -6,7 +6,7 @@ namespace FireFive.SprockitViz.Visualiser
     {
         public override string GetTooltip(Node n)
         {
-            return $"{n.Name} -- Azure SQL Database view";
+            return $"{base.GetTooltip(n)} -- Azure SQL Database view";
         }
 
         public override string GetStyle(Node n, bool isCentre)

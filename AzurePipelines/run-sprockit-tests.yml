@@ -1,6 +1,12 @@
 name: $(BuildDefinitionName).$(Date:yyyyMMdd)$(Rev:.r)
 
-trigger: none
+pr:
+  branches:
+    include:
+    - main
+  paths:
+    include:
+    - SprockitDb
 
 variables:
   SqlServerInstance: '(localdb)\MSSQLLocalDB'

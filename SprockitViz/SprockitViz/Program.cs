@@ -2,7 +2,6 @@
 using FireFive.SprockitViz.Xml;
 using Microsoft.Extensions.Configuration;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading;
@@ -12,7 +11,7 @@ namespace FireFive.SprockitViz
 {
     class Program
     {
-        private VisualiserSettings vs;
+        private readonly VisualiserSettings vs;
 
         public Program(VisualiserSettings settings)
         {
@@ -24,7 +23,7 @@ namespace FireFive.SprockitViz
             Console.WriteLine(@"
   ****************************************************************************
   *  Sprockit Pipeline Visualiser                                            *
-  *  Copyright (c) 2018-2021 Richard Swinbank (richard@richardswinbank.net)  *
+  *  Copyright (c) 2018-2022 Richard Swinbank (richard@richardswinbank.net)  *
   *  http://richardswinbank.net/sprockitviz                                  *
   ****************************************************************************
 ");
@@ -32,7 +31,7 @@ namespace FireFive.SprockitViz
 
             var builder = new ConfigurationBuilder()
                 .AddJsonFile($"SprockitvizSettings.json", true, true)
-                .AddJsonFile($"SprockitvizSettings.Dev.json", true, true);
+                .AddJsonFile($"SprockitvizSettings.local.json", true, true);
             var config = builder.Build();
 
             GraphvizVisualiser.AddRenderer("ADF", new AdfPipelineRenderer());
@@ -55,6 +54,14 @@ namespace FireFive.SprockitViz
             {
                 Console.WriteLine(e);
                 Console.WriteLine(e.StackTrace);
+            }
+            finally
+            {
+                if (p.vs.Interactive)
+                {
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadKey();
+                }
             }
 
         }

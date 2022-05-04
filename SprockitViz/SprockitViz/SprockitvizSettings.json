@@ -3,5 +3,6 @@
   "OutputFolder": "path-to-output-folder",
   "GraphvizAppFolder": "C:\\Program Files\\Graphviz\\bin",
   "DeleteWorkingFiles": true,
-  "Verbose": true
+  "Verbose": true,
+  "Interactive": true
 }
