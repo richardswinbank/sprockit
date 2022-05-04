@@ -6,7 +6,7 @@ namespace FireFive.SprockitViz.Visualiser
     {
         public override string GetTooltip(Node n)
         {
-            return $"{base.GetTooltip(n)} -- Azure Data Factory pipeline";
+            return $"{GetBasicTooltip(n)} -- Azure Data Factory pipeline";
         }
 
         public override string GetLabel(Node n)

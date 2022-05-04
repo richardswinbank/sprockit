@@ -6,7 +6,7 @@ namespace FireFive.SprockitViz.Visualiser
     {
         public override string GetTooltip(Node n)
         {
-            return $"{base.GetTooltip(n)} -- Azure Data Lake Storage location";
+            return $"{GetBasicTooltip(n)} -- Azure Data Lake Storage location";
         }
 
         public override string GetLabel(Node n)
