@@ -7,7 +7,7 @@ namespace FireFive.SprockitViz
     {
         public override string GetTooltip(Node n)
         {
-            return $"{n.Name} -- Power BI shared dataset";
+            return $"{base.GetTooltip(n)} -- Power BI shared dataset";
         }
 
         public override string GetLabel(Node n)
